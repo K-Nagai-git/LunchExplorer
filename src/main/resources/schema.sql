@@ -1,6 +1,6 @@
 --テーブルが存在したら削除する
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS store;
+DROP TABLE IF EXISTS stores;
 DROP TABLE IF EXISTS detail;
 
 
@@ -12,13 +12,13 @@ CREATE TABLE users(
 	user_password 	VARCHAR NOT NULL
 );
 --店舗テーブル
-CREATE TABLE store(
+CREATE TABLE stores(
 	store_id 		serial PRIMARY KEY,
 	store_name 		VARCHAR NOT NULL,
 	store_tel 		VARCHAR NOT NULL,
-	store_address 	VARCHAR,
+	store_address 		VARCHAR,
 	store_url 		VARCHAR,
-	Registration_id INTEGER NOT NULL
+	user_mail 		VARCHAR NOT NULL
 );
 
 --詳細テーブル
