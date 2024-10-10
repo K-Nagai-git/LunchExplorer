@@ -9,5 +9,4 @@ public class LunchexplorerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LunchexplorerApplication.class, args);
 	}
-
 }
