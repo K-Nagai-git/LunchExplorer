@@ -8,3 +8,6 @@ CREATE TABLE users(
 	user_nickname VARCHAR NOT NULL,
 	user_password VARCHAR NOT NULL
 );
+--店舗テーブル
+
+--詳細テーブル
