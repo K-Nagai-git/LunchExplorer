@@ -36,17 +36,17 @@ VALUES
 --店舗登録
 
 -- 1件目のデータ登録 
-INSERT INTO stores (store_id,store_name,store_tel,store_address,store_url,user_mail)
+INSERT INTO stores (store_name,store_tel,store_address,store_url,user_mail)
 VALUES
 ('oniku','0667558329','兵庫県1','https://www.seria-group.com','kiwad@gmail.com');
 -- 2件目のデータ登録
-INSERT INTO stores (store_id,store_name,store_tel,store_address,store_url,user_mail)
+INSERT INTO stores (store_name,store_tel,store_address,store_url,user_mail)
 VALUES
 ('肉じゃが','0665248924','兵庫県2','https://www.saria-group.com','kiwakiwa@gmail.com');
 -- 3件目のデータ登録 
-INSERT INTO stores (store_id,store_name,store_tel,store_address,store_url,user_mail)
+INSERT INTO stores (store_name,store_tel,store_address,store_url,user_mail)
 VALUES
-('jyagaimo','肉','0632582142','兵庫3','https://www.siria-group.com','oowada@gmail.com');
+('肉','0632582142','兵庫3','https://www.siria-group.com','oowada@gmail.com');
 
 
 

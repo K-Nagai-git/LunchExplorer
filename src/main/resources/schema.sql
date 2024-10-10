@@ -26,7 +26,7 @@ CREATE TABLE detail(
 	detail_id 			serial,
 	store_id 			INTEGER NOT NULL,
 	detail_postdt 		DATE NOT NULL,
-	user_id 			INTEGER NOT NULL,
+	user_mail 			VARCHAR NOT NULL,
 	detail_menu 		VARCHAR NOT NULL,
 	detail_price 		INTEGER NOT NULL,
 	detail_rating 		VARCHAR NOT NULL,
