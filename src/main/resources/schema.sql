@@ -16,14 +16,15 @@ CREATE TABLE stores(
 	store_id 		serial PRIMARY KEY,
 	store_name 		VARCHAR NOT NULL,
 	store_tel 		VARCHAR NOT NULL,
-	store_address 		VARCHAR,
+	store_address 	VARCHAR,
 	store_url 		VARCHAR,
 	user_mail 		VARCHAR NOT NULL
 );
 
 --詳細テーブル
+--detail_idにPRIMARY KEYの設定を追加　2024/10/11：糸山
 CREATE TABLE detail(
-	detail_id 			serial,
+	detail_id 			serial PRIMARY KEY,
 	store_id 			INTEGER NOT NULL,
 	detail_postdt 		DATE NOT NULL,
 	user_mail 			VARCHAR NOT NULL,
