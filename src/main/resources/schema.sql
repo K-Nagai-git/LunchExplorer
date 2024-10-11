@@ -22,8 +22,9 @@ CREATE TABLE stores(
 );
 
 --詳細テーブル
+--detail_idにPRIMARY KEY設定を追加：2024/10/11：糸山
 CREATE TABLE detail(
-	detail_id 			serial,
+	detail_id 			serial PRIMARY KEY,
 	store_id 			INTEGER NOT NULL,
 	detail_postdt 		DATE NOT NULL,
 	user_id 			INTEGER NOT NULL,
