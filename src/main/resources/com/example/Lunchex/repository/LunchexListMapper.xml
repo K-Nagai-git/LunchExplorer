@@ -1,3 +1,10 @@
+<!-- /***********************/ -->
+<!-- /** XXXXXX           	*/ -->
+<!-- /** 作成日：24/10/15 		*/ -->
+<!-- /** 作成者：NNNN     		*/ -->
+<!-- /** 更新日：24/10/15 		*/ -->
+<!-- /** 更新者：NNNN　　 		*/ -->
+<!-- /***********************/ -->
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.Lunchex.repository.LunchexListMapper">
