@@ -6,11 +6,11 @@ import lombok.Data;
 
 	@Data
 	public class Stores {
-	    private int storeId;        // 店舗ID（主キー）
-	    private String storeName;   // 店舗名(NULL不可)
-	    private String storeTel;    // 店舗電話番号(NULL不可)
-	    private String storeAddress; // 店舗住所（NULL可）
-	    private String storeUrl;    // 店舗URL（NULL可）
-	    private String userMail;    // 登録者のメールアドレス(NULL不可)
+	    private int store̠id;        // 店舗ID（主キー）
+	    private String store̠name;   // 店舗名(NULL不可)
+	    private String store̠tel;    // 店舗電話番号(NULL不可)
+	    private String store̠address; // 店舗住所（NULL可）
+	    private String store̠url;    // 店舗URL（NULL可）
+	    private String user̠mail;    // 登録者のメールアドレス(NULL不可)
 	}
 
