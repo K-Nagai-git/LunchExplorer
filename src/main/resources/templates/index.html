@@ -5,5 +5,28 @@
 </head>
 <body>
     <h1>Welcome to LunchExplorer!</h1>
+    <h2>店舗一覧</h2>
+    <div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>店舗名</th>
+                    <th>電話番号</th>
+                    <th>住所</th>
+                    <th>URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="store : ${stores}">
+                    <td th:text="${store.storeName}">店舗名</td>
+                    <td th:text="${store.storeTel}">電話番号</td>
+                    <td th:text="${store.storeAddress}">住所</td>
+                    <td>
+                        <a th:href="${store.storeUrl}" th:text="${store.storeUrl}">URL</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

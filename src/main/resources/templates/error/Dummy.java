@@ -1,5 +1,5 @@
 package templates.error;
 
-public class LcnchError {
+public class Dummy {
 
 }

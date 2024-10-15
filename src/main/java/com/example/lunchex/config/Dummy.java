@@ -1,5 +1,5 @@
 package com.example.lunchex.config;
 
-public class LunchexConfig {
+public class Dummy {
 
 }
