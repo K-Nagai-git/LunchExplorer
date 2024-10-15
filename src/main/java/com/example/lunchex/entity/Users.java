@@ -2,7 +2,9 @@
 
 package com.example.lunchex.entity;
 
-@Date
+import lombok.Data;
+
+@Data
 public class Users {
 	
 	    private String user_mail;        //ユーザーメールアドレス（PK）

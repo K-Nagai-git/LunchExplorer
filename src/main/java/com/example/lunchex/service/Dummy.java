@@ -1,5 +1,5 @@
 package com.example.lunchex.service;
 
-public class LunchexService {
+public class Dummy {
 
 }

@@ -1,3 +1,4 @@
+// 更新　川口　1015　メモ：調子がいい
 package com.example.lunchex.controller;
 
 import org.springframework.stereotype.Controller;
