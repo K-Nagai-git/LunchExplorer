@@ -1,13 +1,13 @@
 // 更新　川口　1015　メモ：調子がいい
 package com.example.lunchex.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
-@Controller
-public class HomeController {
-    @GetMapping("/lunchexplorer")
-    public String home() {
-        return "index";
-    }
-}
+//import org.springframework.stereotype.Controller;
+//import org.springframework.web.bind.annotation.GetMapping;
+//
+//@Controller
+//public class HomeController {
+//    @GetMapping("/lunchexplorer")
+//    public String home() {
+//        return "index";
+//    }
+//}
