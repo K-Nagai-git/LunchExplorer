@@ -1,5 +1,5 @@
 package com.example.lunchex.repository;
-
-public class Dummy {
-
-}
+//
+//public class Dummy {
+//
+//}
