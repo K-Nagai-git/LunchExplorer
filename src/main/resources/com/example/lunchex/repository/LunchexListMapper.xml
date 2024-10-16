@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.lunchex.repository.LunchexListMapper">
-<!-- 一覧検索 -->
-	<select id = "selectStoreListAll" resultType ="com.example.lunchex.entity.Lunchex">
-		SELECT 
-			d.detail_id ,
-			d.store_id ,
-			s.store_name,
-			s.store_tel,
-			s.store_address,
-			s.store_url,
-			d.detail_postdt,
-			d.user_mail,
-			u.user_nickname,
-			d.detail_menu ,
-			d.detail_price ,
-			d.detail_rating ,
-			d.detail_review_flag ,
-			d.detail_review ,
-			d.detail_image ,
-			d.detail_memo ,
-			d.detail_usedt ,
-			d.detail_visits 
-		FROM detail AS d
-		INNER JOIN stores AS s ON d.store_id = s.store_id
-		INNER JOIN users AS u ON d.user_mail = u.user_mail
-		ORDER BY d.detail_usedt;
-	</select>
+
+<!-- 全件検索 -->
+    <select id="selectStoreListAll" resultType="com.example.lunchex.entity.Stores">
+        SELECT store_id,store_name,store_tel,store_address,store_url,user_mail
+         FROM stores
+    </select> 
 </mapper>
+
+<!-- 一覧検索 -->
+<!--	<select id = "selectStoreListAll" resultType ="com.example.lunchex.entity.Stores">-->
+<!--		SELECT -->
+<!--			d.detail_id ,-->
+<!--			d.store_id ,-->
+<!--			s.store_name,-->
+<!--			s.store_tel,-->
+<!--			s.store_address,-->
+<!--			s.store_url,-->
+<!--			d.detail_postdt,-->
+<!--			d.user_mail,-->
+<!--			u.user_nickname,-->
+<!--			d.detail_menu ,-->
+<!--			d.detail_price ,-->
+<!--			d.detail_rating ,-->
+<!--			d.detail_review_flag ,-->
+<!--			d.detail_review ,-->
+<!--			d.detail_image ,-->
+<!--			d.detail_memo ,-->
+<!--			d.detail_usedt ,-->
+<!--			d.detail_visits -->
+<!--		FROM detail AS d-->
+<!--		INNER JOIN stores AS s ON d.store_id = s.store_id-->
+<!--		INNER JOIN users AS u ON d.user_mail = u.user_mail-->
+<!--		ORDER BY d.detail_usedt;-->
+<!--	</select>-->
+<!--</mapper> -->
