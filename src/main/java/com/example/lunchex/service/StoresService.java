@@ -1,11 +1,13 @@
 //作成 木和田 1016
+//更新 深田   1017 メモ：クラス名が「StoreService」→「StoresService」に更新
+
 package com.example.lunchex.service;
 
 import java.util.List;
 
 import com.example.lunchex.entity.Stores;
 
-public interface StoreService {
+public interface StoresService {
     
     // 全店舗を取得する
     List<Stores> getAllStores();
