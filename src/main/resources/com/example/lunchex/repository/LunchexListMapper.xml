@@ -8,11 +8,32 @@
 		resultType="com.example.lunchex.entity.Stores">
 		SELECT
 		store_id,store_name,store_tel,store_address,store_url,user_mail
-		FROM
-		stores
+		FROM stores
 	</select>
+   <!-- １件検索 -->
+    <select id="findById" resultType="com.example.webapp.entity.Stores">
+        SELECT store_id,store_name,store_tel,store_address,store_url,user_mail 
+        FROM stores WHERE store_id = #{id}
+    </select>
+    <!-- 登録 -->
+    <insert id="insert">
+	    INSERT INTO stores (store_name,store_tel,store_address,store_url,user_mail) 
+	    VALUES 
+	    (#{store_name},#{store_tel},#{store_address},#{store_url},#{user_mail})
+    </insert>
+    <!-- 更新 -->
+    <update id="update">
+	    UPDATE stores SET store_id= #{store_id}, store_name= #{store_name},
+	    store_tel= #{store_tel}, store_address= #{store_address},
+	    store_url= #{store_url}, user_mail= #{user_mail} 
+	    WHERE store_id = #{id}
+    </update>
+    <!-- 削除 -->
+    <delete id="delete">
+        DELETE FROM stores WHERE store_id = #{id}
+    </delete>
 
-
+</mapper>
 
 
 <!--	 店舗情報とユーザー情報と詳細情報の関係設定 -->
