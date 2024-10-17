@@ -8,58 +8,50 @@
          FROM stores
     </select> 
 
-     <!-- １件検索 -->
-    <select id="findById" resultType="com.example.lunchex.entity.Stores">
-        SELECT store_id,store_name,store_tel,store_address,store_url,user_mail
-         FROM stores WHERE store_id = #{id}
-    </select>
-
-        <!-- 登録 -->
-    <insert id="insert">
-	    INSERT INTO stores (store_name,store_tel,store_address,store_url,user_mail) 
-	     VALUES 
-	    (#{store_name}, #{store_tel}, #{store_address}, #{store_url}, #{user_mail})
-    </insert>
-
-    <!-- 更新 -->
-    <update id="update">
-	    UPDATE stores SET store_name = #{store_name}, store_tel = #{store_tel},store_address = #{store_address},store_url = #{store_url},user_mail = #{user_mail} 
-	    WHERE store_id = #{store_id}
-    </update>
-
-     <!-- 削除 -->
-    <delete id="delete">
-        DELETE FROM stores WHERE store_id = #{id}
-    </delete>
-    
+<!-- 店舗情報とユーザー情報と詳細情報の関係設定 -->
+	<resultMap id="StoresListResult" type="com.example.lunchex.entity.Stores">
+    <!-- Storesテーブルのフィールドをマッピング -->
+    <id property="id" column="store_id"/>
+    <result property="storeName" column="store_name"/>
+    <result property="storeTel" column="store_tel"/>
+    <result property="storeAddress" column="store_address"/>
+    <result property="storeUrl" column="store_url"/>
+    <result property="userMail" column="user_mail"/>
     
     
 </mapper>
 
 <!-- 一覧検索 -->
-<!--	<select id = "selectStoreListAll" resultType ="com.example.lunchex.entity.Stores">-->
-<!--		SELECT -->
-<!--			d.detail_id ,-->
-<!--			d.store_id ,-->
-<!--			s.store_name,-->
-<!--			s.store_tel,-->
-<!--			s.store_address,-->
-<!--			s.store_url,-->
-<!--			d.detail_postdt,-->
-<!--			d.user_mail,-->
-<!--			u.user_nickname,-->
-<!--			d.detail_menu ,-->
-<!--			d.detail_price ,-->
-<!--			d.detail_rating ,-->
-<!--			d.detail_review_flag ,-->
-<!--			d.detail_review ,-->
-<!--			d.detail_image ,-->
-<!--			d.detail_memo ,-->
-<!--			d.detail_usedt ,-->
-<!--			d.detail_visits -->
-<!--		FROM detail AS d-->
-<!--		INNER JOIN stores AS s ON d.store_id = s.store_id-->
-<!--		INNER JOIN users AS u ON d.user_mail = u.user_mail-->
-<!--		ORDER BY d.detail_usedt;-->
-<!--	</select>-->
+	<select id = "selectStoreListPickDt" resultMap="StoresListResult">
+		SELECT 
+			d.detail_id ,
+			s.store_id ,
+			s.store_name,
+			s.store_tel,
+			s.store_address,
+			s.store_url,
+			d.detail_postdt,
+			d.user_mail,
+			u.user_nickname,
+			d.detail_menu ,
+			d.detail_price ,
+			d.detail_rating ,
+			d.detail_review_flag ,
+			d.detail_review ,
+			d.detail_image ,
+			d.detail_memo ,
+			d.detail_usedt ,
+			d.detail_visits 
+		FROM detail AS d
+		INNER JOIN stores AS s ON s.store_id = d.store_id
+		INNER JOIN users AS u ON d.user_mail = u.user_mail
+		WHERE 
+    			d.detail_postdt = (
+        		SELECT MAX(d2.detail_postdt)
+        		FROM detail AS d2
+        		WHERE d2.store_id = d.store_id
+    			)
+		ORDER BY s.store_id;
+	</select>
+</mapper>
 <!--</mapper> -->

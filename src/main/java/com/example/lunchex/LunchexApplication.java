@@ -21,34 +21,50 @@ public class LunchexApplication {
 	private final LunchexListMapper mapper;
 	//    
 	public void exe() {
+		System.out.println("★★ mapperまでの動作確認");
 //		// ★全件検索
 		System.out.println("=== 全件検索 ===");
 		for (Stores row : mapper.selectStoreListAll()) {
 			System.out.println(row);
-		}   
+		}
+		System.out.println();
+		
         // ★１件検索
         System.out.println("=== １件検索 ===");
         System.out.println(mapper.findById(1));
-//        // ★登録
-//        // 登録データ作成
-//        ToDo todo = new ToDo();
-//        todo.setTodo("リポジトリのテスト");
-//        todo.setDetail("DBへの登録処理");
-//        mapper.insert(todo);
-//        System.out.println("=== 登録確認 ===");
-//        System.out.println(mapper.selectById(4));
-//        // ★更新
-//        ToDo target = mapper.selectById(4);
-//        target.setTodo("リポジトリのテスト：更新");
-//        target.setDetail("DBへの更新処理");        
-//        mapper.update(target);
-//        System.out.println("=== 更新確認 ===");
-//        System.out.println(mapper.selectById(4));
-//        // ★削除
-//        mapper.delete(4);
-//        System.out.println("=== 削除確認 ===");
-//        for (ToDo row : mapper.selectAll()) {
-//            System.out.println(row);
-//        }        
+        System.out.println();
+        
+        // ★登録
+        // 登録データ作成
+        Stores stores = new Stores();
+        stores.setStore_name("俺のフレンチ");
+        stores.setStore_tel("9876-5732");
+        stores.setStore_address("京都市～");
+        stores.setStore_url("www.abc.com");
+        stores.setUser_mail("xyz@lmn.co.jp");           
+        mapper.insert(stores);
+        System.out.println("=== 登録確認 ===");
+        System.out.println(mapper.findById(4));
+        System.out.println();
+        
+        // ★更新
+        Stores target = mapper.findById(4);
+        target.setStore_name("あたいのイタリアン");
+        target.setStore_tel("0000-0000");
+        target.setStore_address("心斎橋～");
+        target.setStore_url("www.def.com");
+        target.setUser_mail("opq@rsl.co.jp");          
+        mapper.update(target);
+        System.out.println("=== 更新確認 ===");
+        System.out.println(mapper.findById(4));
+        System.out.println();
+        
+        // ★削除
+        mapper.delete(4);
+        System.out.println("=== 削除確認 ===");
+        for (Stores row : mapper.selectStoreListAll()) {
+            System.out.println(row);        
+        }     
+        System.out.println();
     }
 }
