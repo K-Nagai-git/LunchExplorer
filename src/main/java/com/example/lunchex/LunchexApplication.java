@@ -23,7 +23,10 @@ public class LunchexApplication {
 	public void exe() {
 //		// ★全件検索
 		System.out.println("=== 全件検索 ===");
-		for (Stores row : mapper.selectStoreListAll()) {
+//		for (Stores row : mapper.selectStoreListAll()) {
+//			System.out.println(row);
+//		}   
+		for (Stores row : mapper.selectStoreListPickDt()) {
 			System.out.println(row);
 		}   
         // ★１件検索

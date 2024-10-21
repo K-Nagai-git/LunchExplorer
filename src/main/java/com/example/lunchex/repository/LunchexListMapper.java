@@ -19,7 +19,8 @@ public interface LunchexListMapper {
     /** 全ての店舗情報を取得します。 */
     /** トップページ全店舗一覧表示用 */
 //    @Select("SELECT * FROM stores")
-    List<Stores> selectStoreListAll();
+//    List<Stores> selectStoreListAll();
+	List<Stores> selectStoreListPickDt();	//一覧表示用SQL用に変更　2024/10/21：糸山
 
     /** 指定したIDの店舗を取得する */
     @Select("SELECT * FROM stores WHERE store_id = #{store_id}")
