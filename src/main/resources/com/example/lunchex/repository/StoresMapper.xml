@@ -3,7 +3,7 @@
 <mapper namespace="com.example.lunchex.repository.StoresMapper">
 <!-- 詳細ページ --><!-- 24/10/21 ：糸山 -->
 <!-- 対象店舗一覧検索 -->
-<!-- <select id = "selectPickStoreList" resultMap="StoresListResult">
+<select id = "selectPickStoreList" resultMap="StoresListResult">
 		SELECT 
 			d.detail_id ,
 			s.store_id ,
@@ -33,7 +33,7 @@
 	
 	<!-- 店舗登録 --><!-- 24/10/21 ：糸山 -->
 	<!-- 店舗検索 -->
-<!--	<select id="selectStore" resultType="com.example.lunchex.entity.Stores">
+	<select id="selectStore" resultType="com.example.lunchex.entity.Stores">
         SELECT 
         	store_id,store_name,
         	store_tel,
@@ -45,7 +45,7 @@
     		store_id = #{store_id};
     </select> 
     <!-- 店舗登録 -->
-<!--	<INSERT id="insertStore" resultType="com.example.lunchex.entity.Stores">
+	<INSERT id="insertStore" resultType="com.example.lunchex.entity.Stores">
 		INSERT INTO 
 			stores(store_name,
 				store_tel,
@@ -59,7 +59,7 @@
 				#{user_mail};	
 	</INSERT>
 	<!-- 店舗更新 -->
-<!--	<UPDATE id="updateStore" resultType="com.example.lunchex.entity.Stores">
+	<UPDATE id="updateStore" resultType="com.example.lunchex.entity.Stores">
 		UPDATE stores
 		SET store_name = #{store_name},
 			store_tel = #{store_tel},
@@ -69,8 +69,8 @@
 		WHERE store_id = #{store_id};
 	</UPDATE>
 	<!-- 店舗削除 -->
-<!--	<DELETE id="deleteStore" resultType="com.example.lunchex.entity.Stores">
+	<DELETE id="deleteStore" resultType="com.example.lunchex.entity.Stores">
 		DELETE FROM stores
 		WHERE store_id = #{store_id}
-	</DELETE> -->
+	</DELETE>
 </mapper>
