@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--作成日：2024/10/17  -->
+<!--作成者：糸山  -->
+<!--更新日：2024/10/21  -->
+<!--更新者：糸山  -->
 <mapper namespace="com.example.lunchex.repository.LunchexListMapper">
 
-<!-- 全件検索 -->
+<!-- Storeｓ全件検索 -->
     <select id="selectStoreListAll" resultType="com.example.lunchex.entity.Stores">
         SELECT store_id,store_name,store_tel,store_address,store_url,user_mail
          FROM stores
@@ -43,7 +47,8 @@
     </association>
 	</resultMap>
 
-<!-- 一覧検索 -->
+<!-- トップページ -->
+<!-- 一覧表示 -->
 	<select id = "selectStoreListPickDt" resultMap="StoresListResult">
 		SELECT 
 			d.detail_id ,
@@ -75,5 +80,6 @@
     			)
 		ORDER BY s.store_id;
 	</select>
+
 </mapper>
 <!--</mapper> -->
