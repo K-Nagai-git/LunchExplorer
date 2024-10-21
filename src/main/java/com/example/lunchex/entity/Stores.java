@@ -3,8 +3,6 @@
 package com.example.lunchex.entity;
 import java.util.List;
 
-import org.apache.catalina.User;
-
 import lombok.Data;
 
 
@@ -17,7 +15,7 @@ import lombok.Data;
 	    private String store_address; 	// 店舗住所（NULL可）
 	    private String store_url;    	// 店舗URL（NULL可）
 	    private String user_mail;    	// 登録者のメールアドレス(NULL不可)
-	    private List<User> users;		// ユーザー情報　※店舗情報とユーザー情報は1対多：糸山
+	    private List<Users> users;		// ユーザー情報　※店舗情報とユーザー情報は1対多：糸山
 	    private List<Detail> detail;	// 詳細情報　※店舗情報と詳細情報は１対多：糸山
 	
 	}
