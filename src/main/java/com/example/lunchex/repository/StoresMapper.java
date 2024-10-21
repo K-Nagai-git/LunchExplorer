@@ -1,5 +1,9 @@
 package com.example.lunchex.repository;
 
-public class StoresMapper {
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
+public interface StoresMapper {
+
+	
 }
