@@ -1,11 +1,19 @@
 //作成　木和田　1021
+//更新　深田　1021
+//メモ：
+//深田が「entity」の「Userクラス」を当初、「Users」と名前をつけ。クラスを作成していたため、
+//「User」に変更し、それにともないコードを修正
+
+
+
+
 package com.example.lunchex.helper;
 
 import java.util.Optional;
 
 import com.example.lunchex.entity.Detail;
 import com.example.lunchex.entity.Stores;
-import com.example.lunchex.entity.Users;
+import com.example.lunchex.entity.User;
 import com.example.lunchex.form.StoresForm.AccountRegisterForm;
 import com.example.lunchex.form.StoresForm.ReviewForm;
 import com.example.lunchex.form.StoresForm.StoreRegisterForm;
@@ -39,9 +47,9 @@ public class StoresHelper {
     }
 
     // --- AccountRegisterForm から Users エンティティへの変換 ---
-    public static Users convertToUsers(AccountRegisterForm accountRegisterForm) {
+    public static User convertToUsers(AccountRegisterForm accountRegisterForm) {
         return Optional.ofNullable(accountRegisterForm).map(form -> {
-            Users users = new Users();
+            User users = new User();
             users.setUser_mail(form.getUserId());
             users.setUser_password(form.getPassword());
             return users;
@@ -75,7 +83,7 @@ public class StoresHelper {
     }
 
     // --- Users エンティティから AccountRegisterForm への変換 ---
-    public static AccountRegisterForm convertToAccountRegisterForm(Users users) {
+    public static AccountRegisterForm convertToAccountRegisterForm(User users) {
         return Optional.ofNullable(users).map(user -> {
             AccountRegisterForm accountRegisterForm = new AccountRegisterForm();
             accountRegisterForm.setUserId(user.getUser_mail());
