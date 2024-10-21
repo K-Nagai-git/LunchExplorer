@@ -11,7 +11,7 @@
 <!-- 店舗情報とユーザー情報と詳細情報の関係設定 -->
 	<resultMap id="StoresListResult" type="com.example.lunchex.entity.Stores">
     <!-- Storesテーブルのフィールドをマッピング -->
-    <id property="id" column="store_id"/>
+    <id property="StoreId" column="store_id"/>
     <result property="storeName" column="store_name"/>
     <result property="storeTel" column="store_tel"/>
     <result property="storeAddress" column="store_address"/>
@@ -19,7 +19,26 @@
     <result property="userMail" column="user_mail"/>
     
     
+
 </mapper>
+=======
+    <!-- Detailエンティティをマッピング -->
+    <association property="detail" javaType="com.example.lunchex.entity.Detail">
+        <id property="detailId" column="detail_id"/>
+        <result property="storeId" column="store_id"/>
+        <result property="detailPostdt" column="detail_postdt"/>
+        <result property="userMail" column="user_mail"/>
+        <result property="detailMenu" column="detail_menu"/>
+        <result property="detailPrice" column="detail_price"/>
+        <result property="detailRating" column="detail_rating"/>
+        <result property="detailReviewFlag" column="detail_review_flag"/>
+        <result property="detailReview" column="detail_review"/>
+        <result property="detailImage" column="detail_image"/>
+        <result property="detailMemo" column="detail_memo"/>
+        <result property="detailUsedt" column="detail_usedt"/>
+        <result property="detailVisits" column="detail_visits"/>
+    </association>
+	</resultMap>
 
 <!-- 一覧検索 -->
 	<select id = "selectStoreListPickDt" resultMap="StoresListResult">

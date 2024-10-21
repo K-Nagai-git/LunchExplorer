@@ -24,7 +24,10 @@ public class LunchexApplication {
 		System.out.println("★★ mapperまでの動作確認");
 //		// ★全件検索
 		System.out.println("=== 全件検索 ===");
-		for (Stores row : mapper.selectStoreListAll()) {
+//		for (Stores row : mapper.selectStoreListAll()) {
+//			System.out.println(row);
+//		}   
+		for (Stores row : mapper.selectStoreListPickDt()) {
 			System.out.println(row);
 		}
 		System.out.println();
