@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--作成日：2024/10/21  -->
+<!--作成者：糸山  -->
+<!--更新日：  -->
+<!--更新者：  -->
 <mapper namespace="com.example.lunchex.repository.StoresMapper">
-<!-- 詳細ページ --><!-- 24/10/21 ：糸山 -->
-
-	
 	<!-- 店舗登録 --><!-- 24/10/21 ：糸山 -->
 	<!-- 店舗検索 -->
-	<select id="selectStore" resultType="com.example.lunchex.entity.Stores">
+	<select id="getStoreById" resultType="com.example.lunchex.entity.Stores">
         SELECT 
         	store_id,store_name,
         	store_tel,
@@ -18,7 +19,7 @@
     		store_id = #{store_id};
     </select> 
     <!-- 店舗登録 -->
-	<INSERT id="insertStore" resultType="com.example.lunchex.entity.Stores">
+	<insert id="addStore" parameterType="com.example.lunchex.entity.Stores">
 		INSERT INTO 
 			stores(store_name,
 				store_tel,
@@ -29,10 +30,10 @@
 				#{store_tel},
 				#{store_address},
 				#{store_url},
-				#{user_mail};	
-	</INSERT>
+				#{user_mail});
+	</insert>
 	<!-- 店舗更新 -->
-	<UPDATE id="updateStore" resultType="com.example.lunchex.entity.Stores">
+	<update id="updateStore" parameterType="com.example.lunchex.entity.Stores">
 		UPDATE stores
 		SET store_name = #{store_name},
 			store_tel = #{store_tel},
@@ -40,10 +41,10 @@
 			store_url = #{store_url},
 			user_mail = #{user_mail}
 		WHERE store_id = #{store_id};
-	</UPDATE>
+	</update>
 	<!-- 店舗削除 -->
-	<DELETE id="deleteStore" resultType="com.example.lunchex.entity.Stores">
+	<delete id="deleteStore" parameterType="com.example.lunchex.entity.Stores">
 		DELETE FROM stores
 		WHERE store_id = #{store_id}
-	</DELETE>
+	</delete>
 </mapper>
