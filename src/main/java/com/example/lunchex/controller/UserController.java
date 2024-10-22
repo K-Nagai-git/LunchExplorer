@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.lunchex.entity.User;
+import com.example.lunchex.entity.Users;
 import com.example.lunchex.form.StoresForm.AccountRegisterForm;
 import com.example.lunchex.service.UserService;
 
@@ -42,14 +42,14 @@ import jakarta.validation.Valid;
 	        }
 
 	        // 既存のユーザーがいるか確認
-	        User existingUser = userService.getUserByMail(accountRegisterForm.getUserId());
+	        Users existingUser = userService.getUserByMail(accountRegisterForm.getUserId());
 	        if (existingUser != null) {
 	            model.addAttribute("errorMessage", "このメールアドレスは既に使用されています");
 	            return "user_registration";
 	        }
 
 	        // 新しいユーザーを登録
-	        User newUser = new User();
+	        Users newUser = new Users();
 	        newUser.setUser_mail(accountRegisterForm.getUserId());
 	        newUser.setUser_password(accountRegisterForm.getPassword());
 	        userService.addUser(newUser);
@@ -67,7 +67,7 @@ import jakarta.validation.Valid;
 	    @PostMapping("/user/login")
 	    public String loginUser(@RequestParam("userId") String userId, 
 	                            @RequestParam("password") String password, Model model) {
-	        User user = userService.getUserByMail(userId);
+	        Users user = userService.getUserByMail(userId);
 
 	        // ユーザーが存在するか、パスワードが一致するかチェック
 	        if (user == null || !user.getUser_password().equals(password)) {
@@ -82,7 +82,7 @@ import jakarta.validation.Valid;
 	    // ユーザー情報取得（詳細情報）
 	    @GetMapping("/user/detail")
 	    public String userDetail(@RequestParam("userId") String userId, Model model) {
-	        User user = userService.getUserByMail(userId);
+	        Users user = userService.getUserByMail(userId);
 	        if (user == null) {
 	            model.addAttribute("errorMessage", "ユーザーが見つかりません");
 	            return "error"; // ユーザーが見つからなかった場合はエラーページを表示
