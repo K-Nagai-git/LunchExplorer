@@ -1,11 +1,6 @@
-/** 作成日：10/15			*/
-/** 作成者：川口     		*/
-/** 更新日：10/16				*/
-/** 更新者：糸山　「home」の修正	　　 		*/
-/** 更新日：10/23				*/
-/** 更新者：川口　トップページの表示確認用home.htmlからindex.htmlへ	　　 		*/
-/************************/
-
+// 更新　川口　1015　メモ：調子がいい
+// 更新　糸山　1016　メモ：「home」の修正
+//					他メソッド追加
 package com.example.lunchex.controller;
 
 import java.util.List;
@@ -21,7 +16,7 @@ import com.example.lunchex.repository.LunchexListMapper;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/lunchexplorer")
+@RequestMapping("/lunchex")
 @RequiredArgsConstructor
 
 public class HomeController {
@@ -36,9 +31,26 @@ public class HomeController {
 		
 		 model.addAttribute("stores", storeList);
 		
+		
 		return "index";
+
 	}
+
 }
+
+//import org.springframework.stereotype.Controller;
+//import org.springframework.web.bind.annotation.GetMapping;
+//
+//@Controller
+//@RequiredArgsConstructor
+//public class HomeController {
+/**DI*/
+//private final LunchexListMapper lunchexListMapper;
+
+//    @GetMapping("/lunchexplorer")
+//    public String home() {
+//        return "index";
+//    }
 //@GetMapping("/lunchexplorer")
 //public String home(Model model) {
 //	model.addAttribute("lunchexList" , lunchexListMapper.selectStoreListAll());

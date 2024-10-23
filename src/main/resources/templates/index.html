@@ -1,3 +1,6 @@
+<!--更新　深田　1023　テスト用に3行目以降を更新-->
+<!--元のコード-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -15,25 +18,95 @@
             </ul>
         </nav>
     </header>
-	<main>
-	     <section>
-	         <div class="search-bar">
-	             <input type="text" placeholder="店舗名で検索">
-	             <button type="button">検索</button>
-	         </div>
-	         <div class="store-cards">
-	             <div th:each="store : ${stores}" class="store-card">
-	                 <h3 th:text="${store_name}">サンプル店舗名</h3>
-					 <p><strong>住所:</strong> <span th:text="${store_address}">サンプル住所</span></p>
-	                 <p><strong>メール:</strong> <span th:text="${user_mail}">サンプル住所</span></p>
-	                 <p><strong>電話番号:</strong> <span th:text="${store_tel}">000-0000-0000</span></p>
-	                 <p><strong>URL:</strong> <span th:text="${store_url}">3.5</span></p>
-	             </div>
-	         </div>
-	     </section>
-	 </main>
+    <main>
+        <section>
+            <div class="search-bar">
+                <input type="text" placeholder="店舗名で検索">
+                <button type="button">検索</button>
+            </div>
+            <div class="store-cards">
+                <div th:each="store : ${stores}" class="store-card">
+                    <h3 th:text="${store.store_name}">サンプル店舗名</h3>
+                    <p><strong>住所:</strong> <span th:text="${store.store_address}">サンプル住所</span></p>
+                    <p><strong>電話番号:</strong> <span th:text="${store.store_tel}">000-0000-0000</span></p>
+                    <p><strong>URL:</strong> <a th:href="${store.store_url}" th:text="${store.store_url}">店舗のURL</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
     <footer>
         <p>&copy; 2024 LunchExplorer</p>
     </footer>
 </body>
 </html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>店舗一覧</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>店舗一覧</h1>-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <th>店舗名</th>-->
+<!--            <th>電話番号</th>-->
+<!--            <th>住所</th>-->
+<!--            <th>URL</th>-->
+<!--        </tr>-->
+<!--        <tr th:each="store : ${stores}">-->
+<!--            <td th:text="${store.store_name}"></td>-->
+<!--            <td th:text="${store.store_tel}"></td>-->
+<!--            <td th:text="${store.store_address}"></td>-->
+<!--            <td><a th:href="${store.store_url}" th:text="${store.store_url}"></a></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>LunchExplorer - トップページ</title>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--    <header>-->
+<!--        <h1>LunchExplorer</h1>-->
+<!--        <nav>-->
+<!--            <ul>-->
+<!--                <li><a th:href="@{/login}">ログイン</a></li>-->
+<!--                <li><a th:href="@{/register}">ユーザー登録</a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </header>-->
+<!--	<main>-->
+<!--	     <section>-->
+<!--	         <div class="search-bar">-->
+<!--	             <input type="text" placeholder="店舗名で検索">-->
+<!--	             <button type="button">検索</button>-->
+<!--	         </div>-->
+<!--	         <div class="store-cards">-->
+<!--	             <div th:each="store : ${stores}" class="store-card">-->
+<!--	                 <h3 th:text="${store_name}">サンプル店舗名</h3>-->
+<!--					 <p><strong>住所:</strong> <span th:text="${store_address}">サンプル住所</span></p>-->
+<!--	                 <p><strong>メール:</strong> <span th:text="${user_mail}">サンプル住所</span></p>-->
+<!--	                 <p><strong>電話番号:</strong> <span th:text="${store_tel}">000-0000-0000</span></p>-->
+<!--	                 <p><strong>URL:</strong> <span th:text="${store_url}">3.5</span></p>-->
+<!--	             </div>-->
+<!--	         </div>-->
+<!--	     </section>-->
+<!--	 </main>-->
+<!--    <footer>-->
+<!--        <p>&copy; 2024 LunchExplorer</p>-->
+<!--    </footer>-->
+<!--</body>-->
+<!--</html>-->

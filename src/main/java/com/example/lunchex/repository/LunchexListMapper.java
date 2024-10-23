@@ -1,9 +1,14 @@
 /** 作成日：10/15			*/
 /** 作成者：糸山     		*/
-/** 更新日：10/23				*/
-/** 更新者：川口　トップページの動作確認用修正		　　 		*/
+/** 更新日：1015				*/
+/** 更新者：木和田		　　 		*/
 /************************/
 /**StoresList:リポジトリ		*/
+
+
+
+
+
 package com.example.lunchex.repository;
 
 import java.util.List;
@@ -18,9 +23,9 @@ import com.example.lunchex.entity.Stores;
 public interface LunchexListMapper {
     /** 全ての店舗情報を取得します。 */
     /** トップページ全店舗一覧表示用 */
-//    @Select("SELECT * FROM stores")
+  //一旦ね　深田 @Select("SELECT * FROM stores")
     List<Stores> selectStoreListAll();
-//	List<Stores> selectStoreListPickDt();	//一覧表示用SQL用に変更　2024/10/21：糸山
+	//List<Stores> selectStoreListPickDt();	//一覧表示用SQL用に変更　2024/10/21：糸山
 
     /** 指定したIDの店舗を取得する */
     @Select("SELECT * FROM stores WHERE store_id = #{store_id}")
@@ -39,3 +44,6 @@ public interface LunchexListMapper {
 //    @Delete("DELETE FROM stores WHERE store_id = #{store_id}")
     void delete(int id); 
 }
+
+
+

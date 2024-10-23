@@ -1,11 +1,9 @@
 //更新　永井　10/22 10:19
+//更新　深田　10/23　動作確認のためコメントアウト、コードは15行目の「args）」の後ろに「;」を追記　
 package com.example.lunchex;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.example.lunchex.entity.Stores;
-import com.example.lunchex.repository.LunchexListMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,29 +12,29 @@ import lombok.RequiredArgsConstructor;
 //@MapperScan("com.example.lunchex.repository")
 public class LunchexApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(LunchexApplication.class, args)
-		.getBean(LunchexApplication.class).exe();
-	}
-
-	//    /** DI */
-	private final LunchexListMapper mapper;
-	//    
-	public void exe() {
-		System.out.println("★★ mapperまでの動作確認");
-//		// ★全件検索
-		System.out.println("=== 全件検索 ===");
-		for (Stores row : mapper.selectStoreListPickDt()) {
-			System.out.println(row);
-		}
-		System.out.println();
-
-//		// ★対象店舗一覧検索
-		System.out.println("=== 対象店舗一覧検索 ===");
-		for (Stores row : mapper.selectPickStoreList(2)) {
-			System.out.println(row);
-		}
-//		System.out.println(mapper.selectPickStoreList(2));
-		System.out.println();		
+		SpringApplication.run(LunchexApplication.class, args);
+//		.getBean(LunchexApplication.class).exe();
+//	}
+//
+//	//    /** DI */
+//	private final LunchexListMapper mapper;
+//	//    
+//	public void exe() {
+//		System.out.println("★★ mapperまでの動作確認");
+////		// ★全件検索
+//		System.out.println("=== 全件検索 ===");
+//		for (Stores row : mapper.selectStoreListPickDt()) {
+//			System.out.println(row);
+//		}
+//		System.out.println();
+//
+////		// ★対象店舗一覧検索
+//		System.out.println("=== 対象店舗一覧検索 ===");
+//		for (Stores row : mapper.selectPickStoreList(2)) {
+//			System.out.println(row);
+//		}
+////		System.out.println(mapper.selectPickStoreList(2));
+//		System.out.println();		
 		
 		
 //        // ★１件検索
@@ -76,9 +74,9 @@ public class LunchexApplication {
 //            System.out.println(row);        
 //        }     
 //        System.out.println();
-    }
+//    }
 }
 
 //for (Stores row : mapper.selectStoreListAll()) {
 //System.out.println(row);
-//}   
+}   
