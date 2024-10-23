@@ -5,7 +5,7 @@
 <!--更新日：  -->
 <!--更新者：  -->
 <mapper namespace="com.example.lunchex.repository.StoresMapper">
-	<!-- 店舗登録 --><!-- 24/10/21 ：糸山 -->
+	<!-- 店舗登録機能用 --><!-- 24/10/21 ：糸山 -->
 	<!-- 店舗検索 -->
 	<select id="getStoreById" resultType="com.example.lunchex.entity.Stores">
         SELECT 

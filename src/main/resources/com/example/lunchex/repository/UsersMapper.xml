@@ -1,3 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.lunchex.repository.UsersMapper"></mapper>
+<!--作成日：2024/10/22  -->
+<!--作成者：糸山  -->
+<!--更新日：  -->
+<!--更新者：  -->
+<mapper namespace="com.example.lunchex.repository.UsersMapper">
+	<!-- ユーザー登録機能用 --><!-- 24/10/21 ：糸山 -->
+	<!-- ユーザー検索 -->
+	<select id="getUserByMail" resultType="com.example.lunchex.entity.Users">
+        SELECT 
+        	user_mail,
+        	user_nickname,
+        	user_password,
+         FROM users
+         WHERE 
+    		store_id = #{user_mail};
+    </select> 
+    <!-- 店舗登録 -->
+	<insert id="addUser" parameterType="com.example.lunchex.entity.Users">
+		INSERT INTO 
+			users(user_mail,
+        		user_nickname,
+        		user_password)
+			VALUES(#{user_mail},
+				#{user_nickname},
+				#{user_password})
+	</insert>
+	<!-- 店舗更新 -->
+	<update id="updateUser" parameterType="com.example.lunchex.entity.Users">
+		UPDATE users
+		SET user_mail = #{user_mail},
+			user_nickname = #{user_nickname},
+			user_password = #{user_password},
+		WHERE store_id = #{user_mail};
+	</update>
+	<!-- 店舗削除 -->
+	<delete id="deleteUser" parameterType="com.example.lunchex.entity.Users">
+		DELETE FROM users
+		WHERE store_id = #{user_mail}
+	</delete>
+</mapper>

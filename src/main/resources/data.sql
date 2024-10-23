@@ -43,5 +43,10 @@ INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_pric
 ) 
 VALUES 
 (2, '2024-10-03', 'keitaro.window@gmail.com', 'ラーメン', 400, 3, TRUE, 'コスパいい', NULL, '早い', '2024-10-02', 2);
+-- 4件目のデータ登録
+INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits
+) 
+VALUES 
+(2, '2024-10-05', 'kiwada@gmail.com', 'ラーメン', 400, 4, TRUE, 'まじうま', NULL, '野菜も多い', '2024-10-05', 2);
 
 
