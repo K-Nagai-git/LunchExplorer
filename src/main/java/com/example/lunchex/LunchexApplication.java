@@ -1,41 +1,50 @@
+/** 更新日：10/23				*/
+/** 更新者：川口　トップページの動作確認用修正		　　 		*/
+/************************/
+
+
 package com.example.lunchex;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.lunchex.entity.Stores;
-import com.example.lunchex.repository.LunchexListMapper;
 
-import lombok.RequiredArgsConstructor;
-
+@MapperScan("com.example.lunchex.repository")
 @SpringBootApplication
-@RequiredArgsConstructor
-//@MapperScan("com.example.lunchex.repository")
 public class LunchexApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(LunchexApplication.class, args)
-		.getBean(LunchexApplication.class).exe();
-	}
+
+    public static void main(String[] args) {
+        SpringApplication.run(LunchexApplication.class, args);
+    }
+
+
+
+//public class LunchexApplication {
+//	public static void main(String[] args) {
+//		SpringApplication.run(LunchexApplication.class, args)
+//		.getBean(LunchexApplication.class).exe();
+//	}
 
 	//    /** DI */
-	private final LunchexListMapper mapper;
+//	private final LunchexListMapper mapper;
 	//    
-	public void exe() {
-		System.out.println("★★ mapperまでの動作確認");
-//		// ★全件検索
-		System.out.println("=== 全件検索 ===");
-//		for (Stores row : mapper.selectStoreListAll()) {
+//	public void exe() {
+//		System.out.println("★★ mapperまでの動作確認");
+////		// ★全件検索
+//		System.out.println("=== 全件検索 ===");
+////		for (Stores row : mapper.selectStoreListAll()) {
+////			System.out.println(row);
+////		}   
+//		for (Stores row : mapper.selectStoreListPickDt()) {
 //			System.out.println(row);
-//		}   
-		for (Stores row : mapper.selectStoreListPickDt()) {
-			System.out.println(row);
-		}
-		System.out.println();
-		
-        // ★１件検索
-        System.out.println("=== １件検索 ===");
-        System.out.println(mapper.findById(1));
-        System.out.println();
+//		}
+//		System.out.println();
+//		
+//        // ★１件検索
+//        System.out.println("=== １件検索 ===");
+//        System.out.println(mapper.findById(1));
+//        System.out.println();
         
 //        // ★登録
 //        // 登録データ作成
@@ -70,4 +79,3 @@ public class LunchexApplication {
 //        }     
 //        System.out.println();
     }
-}
