@@ -6,6 +6,8 @@
 //「User」に変更し、それにともないコードを修正
 
 package com.example.lunchex.entity;
+import java.util.List;
+
 import lombok.Data;
 
 
@@ -19,7 +21,7 @@ import lombok.Data;
 	    private String store_url;    	// 店舗URL（NULL可）
 	    private String user_mail;    	// 登録者のメールアドレス(NULL不可)
 	    private Users users;		// ユーザー情報　※店舗情報とユーザー情報は1対多：糸山
-	    private Detail detail;	// 詳細情報　※店舗情報と詳細情報は１対多：糸山
+	    private List<Detail> detailList;	// 詳細情報　※店舗情報と詳細情報は１対多：糸山
 	
 	}
 

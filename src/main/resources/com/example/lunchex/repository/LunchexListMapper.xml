@@ -30,7 +30,7 @@
     </association>
     
     <!-- Detailエンティティをマッピング -->
-    <collection property="detail" ofType="com.example.lunchex.entity.Detail">
+    <collection property="detailList" ofType="com.example.lunchex.entity.Detail">
         <id property="detail_id" column="detail_id"/>
         <result property="store_id" column="store_id"/>
         <result property="detail_postdt" column="detail_postdt"/>

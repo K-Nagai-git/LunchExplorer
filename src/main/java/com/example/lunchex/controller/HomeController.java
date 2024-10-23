@@ -8,37 +8,25 @@
 
 package com.example.lunchex.controller;
 
-import java.util.List;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.lunchex.entity.Stores;
-import com.example.lunchex.repository.LunchexListMapper;
-
-import lombok.RequiredArgsConstructor;
-
-@Controller
-@RequestMapping("/lunchexplorer")
-@RequiredArgsConstructor
-
-public class HomeController {
-
-	/** DI */
-	private final LunchexListMapper mapper;
-
-	@GetMapping()
-	public String showIndex(Model model) {
-		
-		List<Stores> storeList = mapper.selectStoreListAll();
-		
-		 model.addAttribute("stores", storeList);
-		
-		return "index";
-	}
-}
+//@Controller
+//@RequestMapping("/lunchexplorer")
+//@RequiredArgsConstructor
+//
+//public class HomeController {
+//
+//	/** DI */
+//	private final LunchexListMapper mapper;
+//
+//	@GetMapping()
+//	public String showIndex(Model model) {
+//		
+//		List<Stores> storeList = mapper.selectStoreListAll();
+//		
+//		 model.addAttribute("stores", storeList);
+//		
+//		return "index";
+//	}
+//}
 //@GetMapping("/lunchexplorer")
 //public String home(Model model) {
 //	model.addAttribute("lunchexList" , lunchexListMapper.selectStoreListAll());
