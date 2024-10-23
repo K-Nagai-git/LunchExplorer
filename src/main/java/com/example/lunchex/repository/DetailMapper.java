@@ -13,7 +13,7 @@ public interface DetailMapper {
 	/**店舗IDで１件取得*/
 	Detail getDetailsByUser(Detail ditail);
 	/**登録*/
-	Detail addStore(Detail ditail);
+	Detail addDetail(Detail ditail);
 	/**更新*/
 	Detail updateDetail(Detail ditail);
 	/**削除*/

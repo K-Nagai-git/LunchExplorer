@@ -30,7 +30,7 @@
     </association>
     
     <!-- Detailエンティティをマッピング -->
-    <association property="detail" javaType="com.example.lunchex.entity.Detail">
+    <collection property="detail" ofType="com.example.lunchex.entity.Detail">
         <id property="detail_id" column="detail_id"/>
         <result property="store_id" column="store_id"/>
         <result property="detail_postdt" column="detail_postdt"/>
@@ -44,7 +44,7 @@
         <result property="detail_memo" column="detail_memo"/>
         <result property="detail_usedt" column="detail_usedt"/>
         <result property="detail_visits" column="detail_visits"/>
-    </association>
+    </collection>
 	</resultMap>
 
 <!-- トップページ -->
