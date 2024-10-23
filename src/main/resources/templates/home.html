@@ -109,7 +109,7 @@ nav a:hover {
     background-size: cover;
     background-position: center;
     z-index: 0;
-    background-image: url('file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/default_menu_icon.svg');
+    background-image: url('/icons/default_menu_icon.svg'); /* 修正 */
     transition: transform 0.3s ease;
 }
 
@@ -179,7 +179,7 @@ nav a:hover {
     display: inline-block;
     margin-top: 10px;
     padding: 5px 20px;
-    background-color: 	#a86929;
+    background-color: #a86929;
     color: #fff;
     text-decoration: none;
     border-radius: 8px;
@@ -187,7 +187,7 @@ nav a:hover {
 }
 
 .store-card a:hover {
-    background-color: 	#7f4f1f;
+    background-color: #7f4f1f;
 }
 
 .review .review-text {
@@ -239,82 +239,64 @@ footer p {
             <div class="store-cards">
                 <!-- Store 1 -->
                 <div class="store-card">
-                    <h3>サンプル店舗名1 <img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/rating_icon.svg" width="16" height="16"> 3.5</h3>
-                    <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/address_icon.svg" width="16" height="16"> サンプル住所1</p>
-                    <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/phone_icon.svg" width="16" height="16"> 000-0000-0001</p>
+                    <h3>サンプル店舗名1 <img src="/icons/rating_icon.svg" width="16" height="16"> 3.5</h3> <!-- 修正 -->
+					<img src="/images/IMG_3339.jpeg" alt="サンプル店舗画像1" style="width:100%; height:auto;">
+					<p><img src="/icons/address_icon.svg" width="16" height="16"> サンプル住所1</p> <!-- 修正 -->
+                    <p><img src="/icons/phone_icon.svg" width="16" height="16"> 000-0000-0001</p> <!-- 修正 -->
                     <!-- Multiple Reviews with Scroll -->
                     <div class="review-container">
                         <div class="review">
                             <div class="review-text">
-                                <p style="font-size: 1.8em;"><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/menu_icon.svg" width="16" height="16"> カレーライス</p>
-                                <div style="display: flex; gap: 10px;"><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/price_icon.svg" width="16" height="16"> 500円</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/rating_icon.svg" width="16" height="16"> 3</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/user_icon.svg" width="16" height="16"> ユーザー1</p></div>
-                                <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/comment_icon.svg" width="16" height="16"> 辛さが絶妙でとても美味しかったです！</p>
+                                <p style="font-size: 1.8em;"><img src="/icons/menu_icon.svg" width="16" height="16"> カレーライス</p> <!-- 修正 -->
+                                <div style="display: flex; gap: 10px;">
+                                    <p><img src="/icons/price_icon.svg" width="16" height="16"> 500円</p> <!-- 修正 -->
+                                    <p><img src="/icons/rating_icon.svg" width="16" height="16"> 3</p> <!-- 修正 -->
+                                    <p><img src="/icons/user_icon.svg" width="16" height="16"> ユーザー1</p> <!-- 修正 -->
+                                </div>
+                                <p><img src="/icons/review_icon.svg" width="16" height="16"> 美味しかった！</p> <!-- 修正 -->
                             </div>
                         </div>
                         <div class="review">
                             <div class="review-text">
-                                <p style="font-size: 1.8em;"><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/menu_icon.svg" width="16" height="16"> ラーメン</p>
-                                <div style="display: flex; gap: 10px;"><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/price_icon.svg" width="16" height="16"> 600円</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/rating_icon.svg" width="16" height="16"> 4</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/user_icon.svg" width="16" height="16"> ユーザー2</p></div>
-                                <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/comment_icon.svg" width="16" height="16"> 普通でした。</p>
+                                <p style="font-size: 1.8em;"><img src="/icons/menu_icon.svg" width="16" height="16"> ラーメン</p> <!-- 修正 -->
+                                <div style="display: flex; gap: 10px;">
+                                    <p><img src="/icons/price_icon.svg" width="16" height="16"> 600円</p> <!-- 修正 -->
+                                    <p><img src="/icons/rating_icon.svg" width="16" height="16"> 4</p> <!-- 修正 -->
+                                    <p><img src="/icons/user_icon.svg" width="16" height="16"> ユーザー2</p> <!-- 修正 -->
+                                </div>
+                                <p><img src="/icons/review_icon.svg" width="16" height="16"> 最高でした！</p> <!-- 修正 -->
                             </div>
                         </div>
                     </div>
-                    <a href="#">詳細を見る</a>
                 </div>
                 <!-- Store 2 -->
                 <div class="store-card">
-                    <h3>サンプル店舗名2 <img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/rating_icon.svg" width="16" height="16"> 3.0</h3>
-                    <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/address_icon.svg" width="16" height="16"> サンプル住所2</p>
-                    <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/phone_icon.svg" width="16" height="16"> 000-0000-0002</p>
+                    <h3>サンプル店舗名2 <img src="/icons/rating_icon.svg" width="16" height="16"> 4.0</h3> <!-- 修正 -->
+					<img src="/images/IMG_3340.jpeg" alt="サンプル店舗画像2" style="width:100%; height:auto;">
+					<p><img src="/icons/address_icon.svg" width="16" height="16"> サンプル住所2</p> <!-- 修正 -->
+                    <p><img src="/icons/phone_icon.svg" width="16" height="16"> 000-0000-0002</p> <!-- 修正 -->
                     <!-- Multiple Reviews with Scroll -->
                     <div class="review-container">
                         <div class="review">
                             <div class="review-text">
-                                <p style="font-size: 1.8em;"><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/menu_icon.svg" width="16" height="16"> パスタ</p>
-                                <div style="display: flex; gap: 10px;"><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/price_icon.svg" width="16" height="16"> 800円</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/rating_icon.svg" width="16" height="16"> 4</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/user_icon.svg" width="16" height="16"> ユーザー3</p></div>
-                                <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/comment_icon.svg" width="16" height="16"> 美味しかったです！</p>
-                            </div>
-                        </div>
-                        <div class="review">
-                            <div class="review-text">
-                                <p style="font-size: 1.8em;"><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/menu_icon.svg" width="16" height="16"> サラダ</p>
-                                <div style="display: flex; gap: 10px;"><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/price_icon.svg" width="16" height="16"> 300円</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/rating_icon.svg" width="16" height="16"> 5</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/user_icon.svg" width="16" height="16"> ユーザー4</p></div>
-                                <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/comment_icon.svg" width="16" height="16"> 新鮮で美味しかったです！</p>
+                                <p style="font-size: 1.8em;"><img src="/icons/menu_icon.svg" width="16" height="16"> サンドイッチ</p> <!-- 修正 -->
+                                <div style="display: flex; gap: 10px;">
+                                    <p><img src="/icons/price_icon.svg" width="16" height="16"> 400円</p> <!-- 修正 -->
+                                    <p><img src="/icons/rating_icon.svg" width="16" height="16"> 5</p> <!-- 修正 -->
+                                    <p><img src="/icons/user_icon.svg" width="16" height="16"> ユーザー3</p> <!-- 修正 -->
+                                </div>
+                                <p><img src="/icons/review_icon.svg" width="16" height="16"> 最高！</p> <!-- 修正 -->
                             </div>
                         </div>
                     </div>
-                    <a href="#">詳細を見る</a>
-                </div>
-                <!-- Store 3 -->
-                <div class="store-card">
-                    <h3>サンプル店舗名3 <img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/rating_icon.svg" width="16" height="16"> 4.5</h3>
-                    <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/address_icon.svg" width="16" height="16"> サンプル住所3</p>
-                    <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/phone_icon.svg" width="16" height="16"> 000-0000-0003</p>
-                    <!-- Multiple Reviews with Scroll -->
-                    <div class="review-container">
-                        <div class="review">
-                            <div class="review-text">
-                                <p style="font-size: 1.8em;"><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/menu_icon.svg" width="16" height="16"> ピザ</p>
-                                <div style="display: flex; gap: 10px;"><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/price_icon.svg" width="16" height="16"> 1000円</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/rating_icon.svg" width="16" height="16"> 5</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/user_icon.svg" width="16" height="16"> ユーザー5</p></div>
-                                <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/comment_icon.svg" width="16" height="16"> とても美味しかったです！</p>
-                            </div>
-                        </div>
-                        <div class="review">
-                            <div class="review-text">
-                                <p style="font-size: 1.8em;"><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/menu_icon.svg" width="16" height="16"> ステーキ</p>
-                                <div style="display: flex; gap: 10px;"><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/price_icon.svg" width="16" height="16"> 1500円</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/rating_icon.svg" width="16" height="16"> 4</p><p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/user_icon.svg" width="16" height="16"> ユーザー6</p></div>
-                                <p><img src="file:///C:/Users/3030824/git/LunchExplorer/src/main/resources/static/icons/comment_icon.svg" width="16" height="16"> ボリュームがあって満足です！</p>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#">詳細を見る</a>
                 </div>
             </div>
-            </div>
+          </div>
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 LunchExplorer</p>
+        <p>&copy; 2024 LunchExplorer. All rights reserved.</p>
     </footer>
 </body>
 </html>
+
