@@ -35,14 +35,15 @@ public class LunchexApplication {
 		for (Stores row : mapper.selectPickStoreList(2)) {
 			System.out.println(row);
 		}
+//		System.out.println(mapper.selectPickStoreList(2));
 		System.out.println();		
 		
 		
-        // ★１件検索
-        System.out.println("=== １件検索 ===");
-        System.out.println(mapper.findById(1));
-        System.out.println();
-        
+//        // ★１件検索
+//        System.out.println("=== １件検索 ===");
+//        System.out.println(mapper.findById(1));
+//        System.out.println();
+//        
 //        // ★登録
 //        // 登録データ作成
 //        Stores stores = new Stores();

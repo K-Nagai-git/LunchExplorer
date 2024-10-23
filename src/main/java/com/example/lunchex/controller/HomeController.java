@@ -1,21 +1,44 @@
-// 更新　川口　1015　メモ：調子がいい
-// 更新　糸山　1016　メモ：「home」の修正
-//					他メソッド追加
+/** 作成日：10/15			*/
+/** 作成者：川口     		*/
+/** 更新日：10/16				*/
+/** 更新者：糸山　「home」の修正	　　 		*/
+/** 更新日：10/23				*/
+/** 更新者：川口　トップページの表示確認用home.htmlからindex.htmlへ	　　 		*/
+/************************/
+
 package com.example.lunchex.controller;
 
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.GetMapping;
-//
-//@Controller
-//@RequiredArgsConstructor
-//public class HomeController {
-/**DI*/
-//private final LunchexListMapper lunchexListMapper;
+import java.util.List;
 
-//    @GetMapping("/lunchexplorer")
-//    public String home() {
-//        return "index";
-//    }
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.lunchex.entity.Stores;
+import com.example.lunchex.repository.LunchexListMapper;
+
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequestMapping("/lunchexplorer")
+@RequiredArgsConstructor
+
+public class HomeController {
+
+	/** DI */
+	private final LunchexListMapper mapper;
+
+	@GetMapping()
+	public String showIndex(Model model) {
+		
+		List<Stores> storeList = mapper.selectStoreListAll();
+		
+		 model.addAttribute("stores", storeList);
+		
+		return "index";
+	}
+}
 //@GetMapping("/lunchexplorer")
 //public String home(Model model) {
 //	model.addAttribute("lunchexList" , lunchexListMapper.selectStoreListAll());

@@ -9,7 +9,7 @@
 <!-- Storeｓ全件検索 -->
     <select id="selectStoreListAll" resultType="com.example.lunchex.entity.Stores">
         SELECT store_id,store_name,store_tel,store_address,store_url,user_mail
-         FROM stores
+        FROM stores
     </select> 
     
 <!-- 店舗情報とユーザー情報と詳細情報の関係設定 -->
