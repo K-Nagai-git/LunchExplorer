@@ -1,6 +1,6 @@
 package com.example.lunchex.entity;
 // 永井 241015
-
+//　糸山　241022　メモ：StoresとUsersの追加
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
@@ -40,6 +40,12 @@ public class Detail {
 	private LocalDate detail_usedt;  	
 	/** 来店回数 */
 	private Integer detail_visits;   
+	/** 店舗情報 */
+    private Stores stores;		//2024/10/22　追加：糸山
+	/** ユーザー情報 */
+    private Users users;		//2024/10/22　追加：糸山
+
+
 }
 //詳細ID（主キー）	detail_id	INTEGER	NOT NULL
 //店舗ID	store_id	INTEGER	NOT NULL
