@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--作成日：2024/10/17  -->
 <!--作成者：糸山  -->
-<!--更新日：2024/10/21  -->
+<!--更新日：2024/10/22  -->
 <!--更新者：糸山  -->
 <mapper namespace="com.example.lunchex.repository.LunchexListMapper">
 
@@ -80,7 +80,7 @@
     			)
 		ORDER BY s.store_id;
 	</select>
-<!-- 対象店舗一覧検索 -->
+<!-- 対象店舗一覧検索 --><!-- 24/10/22：ditail主のSQLからStores主のSQLへ修正 -->
 	<select id = "selectPickStoreList" resultMap="StoresListResult">
 		SELECT 
 			s.store_id ,
