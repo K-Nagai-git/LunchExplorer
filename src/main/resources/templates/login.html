@@ -11,7 +11,9 @@
     </header>
     <main>
         <section>
-            <form th:action="@{/login}" method="post">
+			<!-- ログイン後トップページに戻る処理追加 2024/10/24　糸山> -->
+			<!-- "@{/login}"→"@{/lunchexplorer}"へ変更 -->
+            <form th:action="@{/lunchexplorer}" method="get">
                 <div>
                     <label for="username">ユーザー名:</label>
                     <input type="text" id="username" name="username" required>

@@ -12,10 +12,10 @@ public interface StoresMapper {
 	/**店舗IDで１件取得*/
 	Stores getStoreById(int id);
 	/**登録*/
-	Stores addStore(Stores stores);
+	void  addStore(Stores stores);
 	/**更新*/
-	Stores updateStore(Stores stores);
+	void updateStore(Stores stores);
 	/**削除*/
-	Stores deleteStore(int id);
+	void  deleteStore(int id);
 	
 }

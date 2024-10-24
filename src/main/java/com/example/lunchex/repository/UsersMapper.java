@@ -9,9 +9,9 @@ public interface UsersMapper {
 	/**ユーザーIDで１件取得*/
 	Users getUserByMail(String userMail);
 	/**ユーザー登録*/
-	Users addUser(Users users);
+	void addUser(Users users);
 	/**ユーザー更新*/
-	Users updateUser(Users users);
+	void updateUser(Users users);
 	/**ユーザー削除*/
-	Users deleteUser(String userMail);
+	void deleteUser(String userMail);
 }

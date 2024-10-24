@@ -36,6 +36,8 @@ public class SecurityConfig {
 			.authorizeHttpRequests(authz -> authz
 			//「/login」へのアクセスは認証を必要としない
 			.requestMatchers("/login").permitAll()
+			// 認証が必要なページ(htmlが出来次第設定）
+			//.requestMatchers("/admin/**", "/secure/**", "/home", "/").authenticated() 
 			//その他のリクエストは認証が必要
 			//.anyRequest().authenticated())
 			//その他のページは認証不要
