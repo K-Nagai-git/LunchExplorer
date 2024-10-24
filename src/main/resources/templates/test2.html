@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>詳細情報一覧</title>
+</head>
+<body>
+    <h1>詳細情報一覧</h1>
+    <table>
+		<th:block th:each="store : ${stores}">
+		                    
+								<div class="store-card">
+		                        
+		                        <th:block th:each="detail : ${store.detailList}">
+		                            <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/images/default_menu_img.svg);background-position: center;background-size: cover;'">
+										<div class="review-text">
+										<p class="icon-text"><img src="/icons/menu_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_menu}">メニュー</span>
+										<p class="icon-text"><img src="/icons/price_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_price} + '円'">価格</span>
+										<p class="icon-text"><img src="/icons/rating_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_rating}">評価</span>
+										<p class="icon-text"><img src="/icons/comment_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_review}">レビュー</span>
+											<p class="icon-text"><img src="/icons/user_icon_w.svg" width="16" height="16"><span th:text="${detail.user_mail}">投稿者</span>
+											<p class="icon-text"><img src="/icons/cal_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_postdt}">投稿日時</span>
+																			
+		<!--                                <img th:src="@{'/images/' + ${detail.detail_image}}" alt="レビュー画像" />-->
+										</div>
+		                            </div>
+		                        </th:block>
+		                    </div>
+		                </th:block>
+    </table>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="ja">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>LunchExplorer - 店舗詳細</title>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
+<!--    <style>-->
+<!--        /* 必要に応じて追加のスタイルを定義 */-->
+<!--        .store-details {-->
+<!--            max-width: 800px;-->
+<!--            margin: 0 auto;-->
+<!--            padding: 20px;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 8px;-->
+<!--        }-->
+<!--        .store-header {-->
+<!--            text-align: center;-->
+<!--        }-->
+<!--        .store-info {-->
+<!--            margin: 20px 0;-->
+<!--        }-->
+<!--        .review-card {-->
+<!--            border: 1px solid #ddd;-->
+<!--            padding: 10px;-->
+<!--            margin: 10px 0;-->
+<!--            border-radius: 5px;-->
+<!--            background-color: #f9f9f9;-->
+<!--        }-->
+<!--        .icon-text {-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            margin: 5px 0;-->
+<!--        }-->
+<!--        .icon-text img {-->
+<!--            margin-right: 5px;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <header>-->
+<!--        <h1>LunchExplorer - 店舗詳細</h1>-->
+<!--        <nav>-->
+<!--            <ul>-->
+<!--                <li><a th:href="@{/login}">ログイン</a></li>-->
+<!--                <li><a th:href="@{/register}">ユーザー登録</a></li>-->
+<!--                <li><a th:href="@{/stores}">店舗一覧に戻る</a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+<!--    </header>-->
+<!--    <main>-->
+<!--        <section class="store-details">-->
+<!--            <div class="store-header">-->
+<!--				<ul>-->
+<!--				    <li th:each="d : ${detail}">-->
+<!--				        <h2 th:text="${d.store_name}">店舗名</h2>-->
+<!--				        <p class="icon-text">-->
+<!--				            <img src="/icons/phone_icon.svg" width="16" height="16">-->
+<!--				            <span th:text="${d.store_tel}">電話番号</span>-->
+<!--				        </p>-->
+<!--				        <p class="icon-text">-->
+<!--				            <img src="/icons/address_icon.svg" width="16" height="16">-->
+<!--				            <span th:text="${d.store_address}">住所</span>-->
+<!--				        </p>-->
+<!--				        <p class="icon-text">-->
+<!--				            <img src="/icons/url_icon.svg" width="16" height="16">-->
+<!--				            <a th:href="${d.store_url}" target="_blank" th:text="${d.store_url}"></a>-->
+<!--				        </p>-->
+<!--				    </li>-->
+<!--				</ul>-->
+
+<!--                <h2 th:text="${detail.store_name}">店舗名</h2>-->
+<!--                <p class="icon-text">-->
+<!--                    <img src="/icons/phone_icon.svg" width="16" height="16">-->
+<!--                    <span th:text="${detail.store_tel}">電話番号</span>-->
+<!--                </p>-->
+<!--                <p class="icon-text">-->
+<!--                    <img src="/icons/address_icon.svg" width="16" height="16">-->
+<!--                    <span th:text="${detail.store_address}">住所</span>-->
+<!--                </p>-->
+<!--                <p class="icon-text">-->
+<!--                    <img src="/icons/url_icon.svg" width="16" height="16">-->
+<!--                    <a th:href="${detail.store_url}" target="_blank" th:text="${store.store_url}"></a>-->
+<!--                </p>-->
+<!--            </div>-->
+
+<!--            <div class="store-info">-->
+<!--                <h3>レビュー一覧</h3>-->
+				
+<!--                <th:block th:each="detail : ${detail.detailList}">-->
+<!--                    <div class="review-card">-->
+<!--                        <div class="review-text">-->
+<!--                            <p class="icon-text">-->
+<!--                                <img src="/icons/menu_icon_w.svg" width="16" height="16">-->
+<!--                                <span th:text="${detail.detail_menu}">メニュー</span>-->
+<!--                            </p>-->
+<!--                            <p class="icon-text">-->
+<!--                                <img src="/icons/price_icon_w.svg" width="16" height="16">-->
+<!--                                <span th:text="${detail.detail_price} + '円'">価格</span>-->
+<!--                            </p>-->
+<!--                            <p class="icon-text">-->
+<!--                                <img src="/icons/rating_icon_w.svg" width="16" height="16">-->
+<!--                                <span th:text="${detail.detail_rating}">評価</span>-->
+<!--                            </p>-->
+<!--                            <p class="icon-text">-->
+<!--                                <img src="/icons/comment_icon_w.svg" width="16" height="16">-->
+<!--                                <span th:text="${detail.detail_review}">レビュー</span>-->
+<!--                            </p>-->
+<!--                            <p class="icon-text">-->
+<!--                                <img src="/icons/user_icon_w.svg" width="16" height="16">-->
+<!--                                <span th:text="${detail.user_mail}">投稿者</span>-->
+<!--                            </p>-->
+<!--                            <p class="icon-text">-->
+<!--                                <img src="/icons/cal_icon_w.svg" width="16" height="16">-->
+<!--                                <span th:text="${detail.detail_postdt}">投稿日時</span>-->
+<!--                            </p>-->
+<!--                            <div th:if="${detail.detail_image != null}">-->
+<!--                                <img th:src="@{'/images/' + ${detail.detail_image}}" alt="レビュー画像" width="100%" />-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </th:block>-->
+<!--            </div>-->
+<!--        </section>-->
+<!--    </main>-->
+<!--    <footer>-->
+<!--        <p>&copy; 2024 LunchExplorer</p>-->
+<!--    </footer>-->
+<!--</body>-->
+<!--</html>-->
