@@ -72,6 +72,15 @@ nav a:hover {
     background-color: #0056b3;
 }
 
+/* アイコンを行の上下中央に配置するためのスタイル */
+.icon-text {
+    display: flex;
+    align-items: center;
+    }
+.icon-text img {
+    margin-right: 5px; /* アイコンとテキストの間隔 */
+    }
+        
 /* レビューカード */
 .review {
     background-color: #e0e0e0;
@@ -102,7 +111,7 @@ nav a:hover {
     background-size: cover;
     background-position: center;
     z-index: 0;
-    background-image: url('https://tblg.k-img.com/resize/640x432c/restaurant/images/matome/16738/9796ea72cccd047facb58cea43eef5e5.jpg?token=41c983d&api=v2');
+/*    background-image: url("/images/default_menu_img.svg");*/
     transition: transform 0.3s ease;
 }
 
@@ -154,6 +163,7 @@ nav a:hover {
     border-radius: 15px;
     position: relative;
     overflow: hidden;
+    min-width:50%;
 }
 
 .store-card h3 {
@@ -165,10 +175,12 @@ nav a:hover {
 
 .store-card p {
     margin: 0;
-    font-size: 0.8em;
+    font-size: 0.7em;
+    margin-top: 4px;
+
 }
 
-.store-card a {
+.store-card-button {
     display: inline-block;
     margin-top: 10px;
     padding: 5px 20px;
@@ -179,7 +191,7 @@ nav a:hover {
     transition: background-color 0.3s;
 }
 
-.store-card a:hover {
+.store-card-button:hover {
     background-color: #218838;
 }
 
