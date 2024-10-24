@@ -7,11 +7,11 @@ import com.example.lunchex.entity.Users;
 
 public interface UsersMapper {
 	/**ユーザーIDで１件取得*/
-	Users getUserByMail(Users users);
+	Users getUserByMail(String userMail);
 	/**ユーザー登録*/
 	Users addUser(Users users);
 	/**ユーザー更新*/
 	Users updateUser(Users users);
 	/**ユーザー削除*/
-	Users deleteUser(Users users);
+	Users deleteUser(String userMail);
 }

@@ -10,12 +10,12 @@ import com.example.lunchex.entity.Stores;
 @Mapper
 public interface StoresMapper {
 	/**店舗IDで１件取得*/
-	Stores getStoreById(Stores stores);
+	Stores getStoreById(int id);
 	/**登録*/
 	Stores addStore(Stores stores);
 	/**更新*/
 	Stores updateStore(Stores stores);
 	/**削除*/
-	Stores deleteStore(Stores stores);
+	Stores deleteStore(int id);
 	
 }
