@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.lunchex.entity.Stores;
 import com.example.lunchex.repository.StoresMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class TestController {
 
-	/** DI */
+	//** DI *
 	//	private final LunchexListMapper mapper;
 
 	//	 * トップ画面用データの表示
@@ -45,67 +46,68 @@ public class TestController {
 	//		}
 	//**********************************************************************	
 
+	//** DI *	
 	private final StoresMapper storesMapper;
 
-	//		 * 「ランチ」の一覧を表示します。
+//	//** 指定されたIDの店舗を表示
+//	@GetMapping
+//	public String store(Model model) {
+//		model.addAttribute("lunchex", storesMapper.getStoreById(2));
+//		System.out.println();
+//		System.out.println(model);
+//		System.out.println();		
+//		return "test";
+//	}
+
+	
+//	** 新規登録
 	@GetMapping
-	public String list(Model model) {
-//		model.addAttribute("lunches", storesMapper.getStoreById(2));
+	public String newStore(Model model) {
+		Stores stores = new Stores();
+		stores.setStore_name("俺のフレンチ");
+		stores.setStore_tel("9876-5732");
+		stores.setStore_address("京都市～");
+		stores.setStore_url("www.abc.com");
+		stores.setUser_mail("kiwada@gmail.com");           
+		storesMapper.addStore(stores);
+		System.out.println("=== 登録確認 ===");
+		model.addAttribute("lunchex", storesMapper.getStoreById(4));
+		System.out.println(storesMapper.getStoreById(4));
+		System.out.println();
 		return "test";
 	}
-
-	///**
-	// * 指定されたIDの「ランチ」の詳細を表示します。
-	// */
-	//@GetMapping("/{id}")
-	//public String detail(@PathVariable Integer id, Model model,
-	//		RedirectAttributes attributes) {
-	//	// 管理IDに対応する「ランチ」情報を取得
-	//	Lunch Lunch = lunchService.findByIdLunch(id);
-	//	if (Lunch != null) {
-	//		// 対象データがある場合はモデルに格納
-	//		model.addAttribute("lunch", lunchService.findByIdLunch(id));
-	//		return "lunch/detail";
-	//	} else {
-	//		// 対象データがない場合はフラッシュメッセージを設定
-	//		attributes.addFlashAttribute("errorMessage", "対象データがありません");
-	//		// リダイレクト
-	//		return "redirect:/lunches";
-	//	}
-	//}
-	//// ▽▽▽▽▽ 13.7追加 ▽▽▽▽▽
-	//// === 登録・更新処理追加 ===
-	///**
-	// * 新規登録画面を表示します。
-	// */
-	//@GetMapping("/form")
-	//public String newLunch(@ModelAttribute LunchForm form) {
-	//
-	//	// 新規登録画面の設定
-	//	form.setIsNew(true);
-	//	return "lunch/form";
-	//}
-	//
-	///**
-	// * 新規登録を実行します。
-	// */
-	//@PostMapping("/save")
-	//public String create(LunchForm form,RedirectAttributes attributes) {
-	//	// エンティティへの変換
-	//	// 文字列を LocalDate に変換
-	//	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	//	LocalDate date = LocalDate.parse("2024-01-01", formatter);
-	//	// 変換した LocalDate を recentDate にセット
-	//	form.setRecentDate(date);
-	//	form.setTimes(0);
-	//	Lunch Lunch = LunchHelper.convertLunch(form);
-	//	// 登録実行
-	//	lunchService.insertLunch(Lunch);
-	//	// フラッシュメッセージ
-	//	attributes.addFlashAttribute("message", "新しいランチが登録されました");
-	//	// PRGパターン
-	//	return "redirect:/lunches";
-	//}
+	
+	
+//	@GetMapping("/form")
+//	public String newLunch(@ModelAttribute LunchForm form) {
+//	
+//		// 新規登録画面の設定
+//		form.setIsNew(true);
+//		return "lunch/form";
+//	}
+//	
+//	/**
+//	 * 新規登録を実行します。
+//	 */
+//	@PostMapping("/save")
+//	public String create(LunchForm form,RedirectAttributes attributes) {
+//		// エンティティへの変換
+//		// 文字列を LocalDate に変換
+//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//		LocalDate date = LocalDate.parse("2024-01-01", formatter);
+//		// 変換した LocalDate を recentDate にセット
+//		form.setRecentDate(date);
+//		form.setTimes(0);
+//		Lunch Lunch = LunchHelper.convertLunch(form);
+//		// 登録実行
+//		lunchService.insertLunch(Lunch);
+//		// フラッシュメッセージ
+//		attributes.addFlashAttribute("message", "新しいランチが登録されました");
+//		// PRGパターン
+//		return "redirect:/lunches";
+//	}
+	
+	
 	//
 	///**
 	// * 指定されたIDの修正画面を表示します。
