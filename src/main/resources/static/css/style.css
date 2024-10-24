@@ -122,7 +122,7 @@ nav a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0),rgba(0, 0, 0, 0),rgba(85, 40, 0, 0.15), rgba(85, 40, 0, 0.55));
     z-index: 1;
 }
 
@@ -168,9 +168,10 @@ nav a:hover {
 
 .store-card h3 {
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 1px;
     font-size: 20px;
     color: #333;
+    line-height: 1.2em;
 }
 
 .store-card p {
