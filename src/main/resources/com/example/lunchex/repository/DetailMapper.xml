@@ -67,37 +67,58 @@
     WHERE d.user_mail = #{user_mail};
   </select>
 
-  <!-- 詳細追加 -->
- <!-- <insert id="addDetail" parameterType="DetailListResult">--> 
-  <insert id="addDetail" parameterType="com.example.lunchex.entity.Detail">
-    INSERT INTO detail 
-      (store_id, 
-      detail_postdt, 
-      user_mail, 
-      detail_menu, 
-      detail_price, 
-      detail_rating, 
-      detail_review_flag, 
-      detail_review, 
-      detail_image, 
-      detail_memo, 
-      detail_usedt, 
-      detail_visits
-      ) 
+  	<!-- 詳細追加 -->
+  	<insert id="addDetail" parameterType="com.example.lunchex.entity.Detail">
+   	INSERT INTO detail 
+     	 (store_id, 
+      	detail_postdt, 
+      	user_mail, 
+      	detail_menu, 
+      	detail_price, 
+      	detail_rating, 
+      	detail_review_flag, 
+      	detail_review, 
+      	detail_image, 
+      	detail_memo, 
+     	detail_usedt, 
+      	detail_visits
+      	) 
     VALUES 
-      (#{store_id}, 
-      #{detail_postdt}, 
-      #{user_mail},
-      #{detail_menu}, 
-      #{detail_price}, 
-      #{detail_rating}, 
-      #{detail_review_flag}, 
-      #{detail_review}, 
-      #{detail_image}, 
-      #{detail_memo}, 
-      #{detail_usedt}, 
-      #{detail_visits}
+      (
+      	#{store_id}, 
+      	#{detail_postdt}, 
+      	#{user_mail},
+      	#{detail_menu}, 
+      	#{detail_price}, 
+      	#{detail_rating}, 
+      	#{detail_review_flag}, 
+      	#{detail_review}, 
+      	#{detail_image}, 
+      	#{detail_memo}, 
+      	#{detail_usedt}, 
+      	#{detail_visits}
       );
-  </insert>
-
+  	</insert>
+  	<!-- 詳細更新 -->
+    <update id="updateDetail" parameterType="com.example.lunchex.entity.Detail">
+    	UPDATE detail
+   		 SET store_id = #{store_id}, 
+      		detail_postdt = #{detail_postdt}, 
+      		user_mail = #{user_mail}, 
+      		detail_menu = #{detail_menu}, 
+      		detail_price = #{detail_price}, 
+      		detail_rating = #{detail_rating}, 
+      		detail_review_flag = #{detail_review_flag}, 
+      		detail_review = #{detail_review}, 
+      		detail_image = #{detail_image}, 
+      		detail_memo = #{detail_memo}, 
+      		detail_usedt = #{detail_usedt}, 
+      		detail_visits = #{detail_visits}
+   		 WHERE detail_id = #{detail_id};
+ 	</update>
+ 	<!-- 詳細削除 -->
+	<delete id="">
+		DELETE FROM detail
+		WHERE detail_id = #{detail_id};
+	</delete>
 </mapper>

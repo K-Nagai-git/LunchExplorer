@@ -4,117 +4,44 @@
 <!--作成者：糸山  -->
 <!--更新日：  -->
 <!--更新者：  -->
-<mapper namespace="com.example.lunchex.repository.DetailMapper">
+<mapper namespace="com.example.lunchex.repository.UsersMapper">
+  <!-- ユーザー検索 -->
+ 	<select id="getDetailsByUser"  parameterType="com.example.lunchex.entity.UsersMaaper">
+  		SELECT 
+    		user_mail,
+			user_nickname,
+      		user_password
+   		 WHERE d.user_mail = #{user_mail};
+  	</select>
 
-<resultMap id="DetailListResult" type="com.example.lunchex.entity.Detail">
-     <!-- Detailエンティティをマッピング -->
-    <id property="detail_id" column="detail_id"/>
-    <result property="store_id" column="store_id"/>
-    <result property="detail_postdt" column="detail_postdt"/>
-    <result property="user_mail" column="user_mail"/>
-    <result property="detail_menu" column="detail_menu"/>
-    <result property="detail_price" column="detail_price"/>
-    <result property="detail_rating" column="detail_rating"/>
-    <result property="detail_review_flag" column="detail_review_flag"/>
-    <result property="detail_review" column="detail_review"/>
-    <result property="detail_image" column="detail_image"/>
-    <result property="detail_memo" column="detail_memo"/>
-    <result property="detail_usedt" column="detail_usedt"/>
-    <result property="detail_visits" column="detail_visits"/>
+  <!-- ユーザー追加 -->
+  	<insert id="addDetail" parameterType="com.example.lunchex.entity.Detail">
+    	INSERT INTO Users
+     	 (
+      		user_mail,
+			user_nickname,
+      		user_password
+      	) 
+    	VALUES 
+      	(
+      		#{user_mail}, 
+      		#{user_nickname}, 
+      		#{user_password}
+      	);
+  	</insert>
 
-    <!-- Storesテーブルのフィールドをマッピング -->
-<association property="stores" javaType="com.example.lunchex.entity.Stores">
-      <id property="store_id" column="store_id"/>
-      <result property="store_name" column="store_name"/>
-      <result property="store_tel" column="store_tel"/>
-      <result property="store_address" column="store_address"/>
-      <result property="store_url" column="store_url"/>
-      <result property="user_mail" column="user_mail"/>
-    </association>
-
-    <!-- Usersエンティティをマッピング -->
-    <association property="users" javaType="com.example.lunchex.entity.Users">
-      <id property="user_mail" column="user_mail"/>
-      <result property="user_nickname" column="user_nickname"/>
-      <result property="user_password" column="user_password"/>
-    </association>
-  </resultMap>
-
-  <!-- 詳細検索 -->
-  <select id="getDetailsByUser" resultMap="DetailListResult">
-    SELECT 
-      d.detail_id,
-      d.store_id,
-      s.store_name,
-      s.store_tel,
-      s.store_address,
-      s.store_url,
-      d.detail_postdt,
-      d.user_mail,
-      u.user_nickname,
-      d.detail_menu,
-      d.detail_price,
-      d.detail_rating,
-      d.detail_review_flag,
-      d.detail_review,
-      d.detail_image,
-      d.detail_memo,
-      d.detail_usedt,
-      d.detail_visits
-    FROM detail AS d
-    INNER JOIN stores AS s ON d.store_id = s.store_id
-    INNER JOIN users AS u ON d.user_mail = u.user_mail
-    WHERE d.user_mail = #{user_mail};
-  </select>
-
-  <!-- 詳細追加 -->
-  <insert id="addDetail" parameterType="com.example.lunchex.entity.Detail">
-    INSERT INTO detail 
-      (store_id, 
-      detail_postdt, 
-      user_mail, 
-      detail_menu, 
-      detail_price, 
-      detail_rating, 
-      detail_review_flag, 
-      detail_review, 
-      detail_image, 
-      detail_memo, 
-      detail_usedt, 
-      detail_visits
-      ) 
-    VALUES 
-      (#{store_id}, 
-      #{detail_postdt}, 
-      #{user_mail},
-      #{detail_menu}, 
-      #{detail_price}, 
-      #{detail_rating}, 
-      #{detail_review_flag}, 
-      #{detail_review}, 
-      #{detail_image}, 
-      #{detail_memo}, 
-      #{detail_usedt}, 
-      #{detail_visits}
-      );
-  </insert>
-
-  <!-- 詳細更新 -->
-  <update id="updateUser" parameterType="com.example.lunchex.entity.Detail">
-    UPDATE detail
-    SET store_id = #{store_id}, 
-      detail_postdt = #{detail_postdt}, 
-      user_mail = #{user_mail}, 
-      detail_menu = #{detail_menu}, 
-      detail_price = #{detail_price}, 
-      detail_rating = #{detail_rating}, 
-      detail_review_flag = #{detail_review_flag}, 
-      detail_review = #{detail_review}, 
-      detail_image = #{detail_image}, 
-      detail_memo = #{detail_memo}, 
-      detail_usedt = #{detail_usedt}, 
-      detail_visits = #{detail_visits}
-    WHERE detail_id = #{detail_id};
-  </update>
-
+  	<!-- ユーザー更新 -->
+  	<update id="updateUser" parameterType="com.example.lunchex.entity.Users">
+    UPDATE users
+    SET user_mail = #{user_mail}, 
+      	user_nickname = #{user_nickname}, 
+      	user_password = #{user_password}, 
+    WHERE user_mail = #{user_mail};
+  	</update>
+  	
+	<!-- ユーザー削除 -->
+	<delete id="deleteDetail" parameterType="com.example.lunchex.entity.Users">
+		DELETE FROM users
+		WHERE user_mail = #{user_mail};
+	</delete>
 </mapper>
