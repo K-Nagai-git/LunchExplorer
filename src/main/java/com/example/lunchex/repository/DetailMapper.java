@@ -11,11 +11,11 @@ import com.example.lunchex.entity.Detail;
 public interface DetailMapper {
 	/***/
 	/**店舗IDで１件取得*/
-	Detail getDetailsByUser(Detail ditail);
+	Detail getDetailsByUser(int id);
 	/**登録*/
-	Detail addDetail(Detail ditail);
+	Detail addDetail(Detail detail);
 	/**更新*/
-	Detail updateDetail(Detail ditail);
+	Detail updateDetail(Detail detail);
 	/**削除*/
-	Detail deleteDetail(Detail ditail);
+	Detail deleteDetail(int id);
 }
