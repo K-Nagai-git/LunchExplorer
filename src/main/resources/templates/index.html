@@ -8,7 +8,10 @@
     <title>LunchExplorer - 店舗一覧</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"> <!-- 必要に応じてスタイルシートを追加 -->
     <style>
-		
+        .menu-name {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -27,29 +30,28 @@
                 <input type="text" placeholder="店舗名で検索">
                 <button type="button">検索</button>
             </div>
-            <h2>店舗一覧</h2>
-			<div class="store-cards">
+            <div class="store-cards">
                 <!-- 店舗情報をループで表示 -->
                 <th:block th:each="store : ${stores}">
                     
-						<div class="store-card">
+                        <div class="store-card">
                         <h3 th:text="${store.store_name}">店舗名</h3>
-						<p class="icon-text"><img src="/icons/phone_icon.svg" width="16" height="16"><span th:text="${store.store_tel}">電話番号</span>
-						<p class="icon-text"><img src="/icons/address_icon.svg" width="16" height="16"><span th:text="${store.store_address}">住所</span></p>
-						<p class="icon-text"><img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"><a th:href="${store.store_url}" target="_blank" th:text="${store.store_url}"></a></p>
+                        <p class="icon-text"><img src="/icons/phone_icon.svg" width="16" height="16"><span th:text="${store.store_tel}">電話番号</span>
+                        <p class="icon-text"><img src="/icons/address_icon.svg" width="16" height="16"><span th:text="${store.store_address}">住所</span></p>
+                        <p class="icon-text"><img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"><a th:href="${store.store_url}" target="_blank" th:text="${store.store_url}"></a></p>
 
                         <th:block th:each="detail : ${store.detailList}">
                             <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/images/default_menu_img.svg);background-position: center;background-size: cover;'">
-								<div class="review-text">
-								<p class="icon-text"><img src="/icons/menu_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_menu}">メニュー</span>
-								<p class="icon-text"><img src="/icons/price_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_price} + '円'">価格</span>
-								<p class="icon-text"><img src="/icons/rating_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_rating}">評価</span>
-								<p class="icon-text"><img src="/icons/comment_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_review}">レビュー</span>
-									<p class="icon-text"><img src="/icons/user_icon_w.svg" width="16" height="16"><span th:text="${detail.user_mail}">投稿者</span>
-									<p class="icon-text"><img src="/icons/cal_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_postdt}">投稿日時</span>
-																	
+                                <div class="review-text">
+                                <p class="icon-text menu-name"><img src="/icons/menu_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_menu}">メニュー</span></p>
+                                <p class="icon-text"><img src="/icons/price_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_price} + '円'">価格</span>
+									<img src="/icons/rating_icon_w.svg" width="16" height="16" style="margin-left: 10px;"><span th:text="${detail.detail_rating}">評価</span></p>
+                                <p class="icon-text"><img src="/icons/comment_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_review}">レビュー</span></p>
+<!--								<p class="icon-text"><img src="/icons/user_icon_w.svg" width="16" height="16"><span th:text="${detail.user_mail}">投稿者</span>-->
+<!--								<p class="icon-text"><img src="/icons/cal_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_postdt}">投稿日時</span></p>-->
+                                
 <!--                                <img th:src="@{'/images/' + ${detail.detail_image}}" alt="レビュー画像" />-->
-								</div>
+                                </div>
                             </div>
                         </th:block>
                     </div>
@@ -62,6 +64,3 @@
     </footer>
 </body>
 </html>
-
-
-
