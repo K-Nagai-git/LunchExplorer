@@ -8,21 +8,7 @@
     <title>LunchExplorer - 店舗一覧</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"> <!-- 必要に応じてスタイルシートを追加 -->
     <style>
-        .store-list {
-            display: flex;
-            flex-wrap: wrap; /* 複数行に対応 */
-            gap: 20px; /* 店舗カードの間隔 */
-            justify-content: space-between; /* カードの間を均等にする */
-        }
-        .store-card {
-            border: 1px solid #ccc; /* カードの枠線 */
-            border-radius: 5px; /* カードの角を丸める */
-            padding: 10px; /* カード内の余白 */
-            width: calc(33.33% - 20px); /* 横に3件表示（間隔を考慮） */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 影をつけて浮き上がる感じに */
-            background-color: #fff; /* 背景色 */
-            box-sizing: border-box; /* パディングとボーダーを含めたサイズ計算 */
-        }
+		
     </style>
 </head>
 <body>
@@ -42,25 +28,28 @@
                 <button type="button">検索</button>
             </div>
             <h2>店舗一覧</h2>
-            <div class="store-list">
+			<div class="store-cards">
                 <!-- 店舗情報をループで表示 -->
                 <th:block th:each="store : ${stores}">
-                    <div class="store-card">
+                    
+						<div class="store-card">
                         <h3 th:text="${store.store_name}">店舗名</h3>
-                        <p th:text="'電話番号: ' + ${store.store_tel}">電話番号</p>
-                        <p th:text="'住所: ' + ${store.store_address}">住所</p>
-                        <p th:text="'URL: ' + ${store.store_url}">URL</p>
+						<p class="icon-text"><img src="/icons/phone_icon.svg" width="16" height="16"><span th:text="${store.store_tel}">電話番号</span>
+						<p class="icon-text"><img src="/icons/address_icon.svg" width="16" height="16"><span th:text="${store.store_address}">住所</span></p>
+						<p class="icon-text"><img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"><a th:href="${store.store_url}" target="_blank" th:text="${store.store_url}"></a></p>
 
-                        <h4>最新のレビュー:</h4>
                         <th:block th:each="detail : ${store.detailList}">
-                            <div class="review">
-                                <p th:text="'投稿者: ' + ${detail.user_mail}">投稿者</p>
-                                <p th:text="'投稿日時: ' + ${detail.detail_postdt}">投稿日時</p>
-                                <p th:text="'メニュー: ' + ${detail.detail_menu}">メニュー</p>
-                                <p th:text="'価格: ¥' + ${detail.detail_price}">価格</p>
-                                <p th:text="'評価: ' + ${detail.detail_rating}">評価</p>
-                                <p th:text="'レビュー: ' + ${detail.detail_review}">レビュー</p>
-                                <img th:src="@{${detail.detail_image}}" alt="レビュー画像" />
+                            <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/images/default_menu_img.svg);background-position: center;background-size: cover;'">
+								<div class="review-text">
+								<p class="icon-text"><img src="/icons/menu_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_menu}">メニュー</span>
+								<p class="icon-text"><img src="/icons/price_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_price} + '円'">価格</span>
+								<p class="icon-text"><img src="/icons/rating_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_rating}">評価</span>
+								<p class="icon-text"><img src="/icons/comment_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_review}">レビュー</span>
+									<p class="icon-text"><img src="/icons/user_icon_w.svg" width="16" height="16"><span th:text="${detail.user_mail}">投稿者</span>
+									<p class="icon-text"><img src="/icons/cal_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_postdt}">投稿日時</span>
+																	
+<!--                                <img th:src="@{'/images/' + ${detail.detail_image}}" alt="レビュー画像" />-->
+								</div>
                             </div>
                         </th:block>
                     </div>
