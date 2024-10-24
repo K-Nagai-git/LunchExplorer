@@ -13,9 +13,9 @@ public interface DetailMapper {
 	/**店舗IDで１件取得*/
 	Detail getDetailsByUser(int id);
 	/**登録*/
-	Detail addDetail(Detail detail);
+	void addDetail(Detail detail);
 	/**更新*/
-	Detail updateDetail(Detail detail);
+	void updateDetail(Detail detail);
 	/**削除*/
-	Detail deleteDetail(int id);
+	void deleteDetail(int id);
 }
