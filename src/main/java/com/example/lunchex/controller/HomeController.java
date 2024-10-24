@@ -4,7 +4,9 @@
 /** 更新者：糸山　「home」の修正	　　 		*/
 /** 更新日：10/23				*/
 /** 更新者：川口　トップページの表示確認用home.htmlからindex.htmlへ	
- ** 更新者：深田　コードを修正　　 		*/
+ ** 更新者：深田　トップページの用のコードを追記　　 		
+ ** 更新者：深田　詳細画面用のコードを追記
+ */
 /************************/
 
 package com.example.lunchex.controller;
@@ -30,10 +32,11 @@ public class HomeController {
 	/** DI */
 	private final LunchexListMapper mapper;
 
+	//トップページ表示のコントローラー
 	@GetMapping()
 	public String showIndex(Model model) {
 		
-		// 深田　コメントアウト List<Stores> storeList = mapper.selectStoreListAll();
+		
 		List<Stores> storeList = mapper.selectStoreListPickDt();//深田慶太郎　追記
 	
 		
@@ -41,6 +44,36 @@ public class HomeController {
 		
 		return "index";
 	}
+	
+	//詳細画面表示のコントローラー 
+		@GetMapping("/details/2")
+		public String showDetail(  Model model) {
+			
+			System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
+			
+			
+			List<Stores> detailList=mapper.selectPickStoreList(2);
+			
+			model.addAttribute("stores",detailList);
+			System.out.println(detailList);
+			
+			return "test2";
+		}
+
+		
+		//深田　書きかけ　1024
+//	//ログイン後のトップページ表示のコントローラー
+//	    @GetMapping("/logintop")
+//	    public String showLogintop(Model model) {
+//	        List<Stores>  topstoreList= mapper.selectStoreListPickDt();
+//			
+//	        model.addAttribute("top stores",topstoreList);
+//	        return topindex;
+//	        
+//	    }
+	
+	
+	
 }
 //@GetMapping("/lunchexplorer")
 //public String home(Model model) {
