@@ -71,8 +71,8 @@ public class TestController {
 		stores.setUser_mail("kiwada@gmail.com");           
 		storesMapper.addStore(stores);
 		System.out.println("=== 登録確認 ===");
-		model.addAttribute("lunchex", storesMapper.getStoreById(4));
-		System.out.println(storesMapper.getStoreById(4));
+		model.addAttribute("lunchex", storesMapper.getStoreById(9));
+		System.out.println(storesMapper.getStoreById(9));
 		System.out.println();
 		return "test";
 	}
