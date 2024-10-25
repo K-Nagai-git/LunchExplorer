@@ -6,19 +6,23 @@
 /** 更新者：川口　トップページの表示確認用home.htmlからindex.htmlへ	
  ** 更新者：深田　トップページの用のコードを追記　　 		
  ** 更新者：深田　詳細画面用のコードを追記
+ ** 更新者：深田　ログイン時のトップページ画面のコードを追記
  */
 /************************/
 
 package com.example.lunchex.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.lunchex.entity.Stores;
+import com.example.lunchex.entity.Users;
 import com.example.lunchex.repository.LunchexListMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -31,50 +35,97 @@ public class HomeController {
 
 	/** DI */
 	private final LunchexListMapper mapper;
-
-	//トップページ表示のコントローラー
+	
+//	
+//	テストまち！！！！！！！！！！！！！！！！！！！！！！！深田
+//	
+//	//
+	//トップページ表示のコントローラー（このコントローラー内でログインか未ログインか判別してHTMLに渡す
+	//@AuthenticationPrincipalでログインした人の情報をUsersクラスに格納	
 	@GetMapping()
-	public String showIndex(Model model) {
+		public String showIndex(Model model,@AuthenticationPrincipal Users user) {
+			
+		    System.out.println("通過チェック");
+			System.out.println(user);
 		
-		
-		List<Stores> storeList = mapper.selectStoreListPickDt();//深田慶太郎　追記
-	
-		
-		 model.addAttribute("stores", storeList);
-		
-		return "index";
-	}
-	
-	//詳細画面表示のコントローラー 
-		@GetMapping("/details/2")
-		public String showDetail(  Model model) {
+		    List<Stores> storeList;
+			List<Users> userList = new ArrayList<>(); // ユーザー情報を格納するためのリスト
+		   
+			// ユーザー情報が存在するか確認を行う。
+			//ユーザー情報が存在する場合はこちらのListを渡す
+	        if (user != null) {
+	            storeList = mapper.selectStoreListPickDt();
+	            userList.add(user); // ログインしているユーザー情報をリストに追加
+	        } 
+			 // ユーザー情報がない場合はこちらのListを渡す
+	        else {storeList = mapper.selectStoreListPickDt();
+	        }
 			
-			System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
+	        //判別が終了したLisｔををモデルにぶち込む
+			model.addAttribute("stores", storeList);
+			model.addAttribute("users",userList);
+			// HTMLのテンプレートをそっと返す
 			
-			
-			List<Stores> detailList=mapper.selectPickStoreList(2);
-			
-			model.addAttribute("stores",detailList);
-			System.out.println(detailList);
-			
-			return "test2";
+			System.out.println(userList);
+			return "index";
 		}
-
 		
-		//深田　書きかけ　1024
-//	//ログイン後のトップページ表示のコントローラー
-//	    @GetMapping("/logintop")
-//	    public String showLogintop(Model model) {
-//	        List<Stores>  topstoreList= mapper.selectStoreListPickDt();
-//			
-//	        model.addAttribute("top stores",topstoreList);
-//	        return topindex;
-//	        
-//	    }
-	
-	
-	
+		
+            //詳細画面表示のコントローラー 
+			@GetMapping("/details/2")
+			public String showDetail(  Model model) {
+				
+				//コンソールのテスト用　深田
+				System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
+				
+				
+				List<Stores> detailList=mapper.selectPickStoreList(2);
+				
+				model.addAttribute("stores",detailList);
+				
+				//コンソールのテスト用　深田
+				System.out.println(detailList);
+				
+				return "test2";
+			}
+
 }
+
+//	//トップページ表示のコントローラー（一旦非表示　避難用に　実行：深田　）
+//	@GetMapping()
+//	public String showIndex(Model model) {
+//		
+//		
+//		List<Stores> storeList = mapper.selectStoreListPickDt();//深田慶太郎　追記
+//	
+//		
+//		
+//		
+//		 model.addAttribute("stores", storeList);
+//		
+//		return "index";
+//	}
+//	
+//	//詳細画面表示のコントローラー 
+//		@GetMapping("/details/2")
+//		public String showDetail(  Model model) {
+//			
+//			System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
+//			
+//			
+//			List<Stores> detailList=mapper.selectPickStoreList(2);
+//			
+//			model.addAttribute("stores",detailList);
+//			System.out.println(detailList);
+//			
+//			return "test2";
+//		}
+
+	
+	
+	
+	
+
 //@GetMapping("/lunchexplorer")
 //public String home(Model model) {
 //	model.addAttribute("lunchexList" , lunchexListMapper.selectStoreListAll());
