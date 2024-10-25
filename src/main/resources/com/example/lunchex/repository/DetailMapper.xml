@@ -64,7 +64,7 @@
     FROM detail AS d
     INNER JOIN stores AS s ON d.store_id = s.store_id
     INNER JOIN users AS u ON d.user_mail = u.user_mail
-    WHERE d.user_mail = #{user_mail};
+    WHERE d.detail_id = #{detail_id};
   </select>
 
   	<!-- 詳細追加 -->
