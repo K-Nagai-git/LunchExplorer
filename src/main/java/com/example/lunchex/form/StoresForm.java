@@ -1,3 +1,5 @@
+//　作成　キワダさん　1025　
+
 package com.example.lunchex.form;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -23,7 +25,6 @@ public class StoresForm {
 			// TODO 自動生成されたメソッド・スタブ
 			return null;
 		}
-
         // 他のオプションフィールドをここに追加可能
     }
 }
