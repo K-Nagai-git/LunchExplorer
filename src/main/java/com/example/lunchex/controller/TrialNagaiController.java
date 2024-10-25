@@ -5,8 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.lunchex.entity.Stores;
-import com.example.lunchex.repository.StoresMapper;
+import com.example.lunchex.repository.DetailMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -45,81 +44,81 @@ public class TrialNagaiController {
 	//	}
 	//}
 
-//	//***<< Stores関係の動作確認　******************************************	
-//	//
-//	//** DI *	
-//	private final StoresMapper storesMapper;
-//
-//	//	//** 指定されたIDの店舗を表示
-//	//	@GetMapping
-//	//	public String store(Model model) {
-//	//		model.addAttribute("lunchex", storesMapper.getStoreById(2));
-//	//		System.out.println();
-//	//		System.out.println(model);
-//	//		System.out.println();		
-//	//		return "trial_nagai";
-//	//	}
-//	//}
-//
-//	//	** 新規登録
-//	@GetMapping
-//	public String newStore(Model model) {
-//		Stores stores = new Stores();
-//		stores.setStore_name("俺のフレンチ");
-//		stores.setStore_tel("9876-5732");
-//		stores.setStore_address("京都市～");
-//		stores.setStore_url("www.abc.com");
-//		stores.setUser_mail("kiwada@gmail.com");           
-//		storesMapper.addStore(stores);
-//		System.out.println("=== 登録確認 ===");
-//		model.addAttribute("lunchex", storesMapper.getStoreById(9));
-//		System.out.println(storesMapper.getStoreById(9));
-//		System.out.println();
-//		//return "trial_nagai";
-//		//	}
-//		//}
-//		// ★更新
-//		Stores target = storesMapper.getStoreById(9);
-//		target.setStore_name("あたいのイタリアン");
-//		target.setStore_tel("0000-0000");
-//		target.setStore_address("心斎橋～");
-//		target.setStore_url("www.def.com");
-//		target.setUser_mail("kiwada@gmail.com");          
-//		storesMapper.updateStore(target);
-//		System.out.println("=== 更新確認 ===");
-//		System.out.println(storesMapper.getStoreById(9));
-//		System.out.println();
-//		//		return "trial_nagai";
-//		//		}
-//		//	}
-//
-//		//	 ★削除
-//		storesMapper.deleteStore(9);
-//		System.out.println("=== 削除確認 ===");
-//		System.out.println(storesMapper.getStoreById(8));
-//		model.addAttribute("lunchex", storesMapper.getStoreById(8));
-//		System.out.println(storesMapper.getStoreById(9));
-////		model.addAttribute("lunchex", storesMapper.getStoreById(9));
-//		System.out.println();
-//		return "trial_nagai";
-//	}	
-//}
+	//	//***<< Stores関係の動作確認　******************************************	
+	//	//
+	//	//** DI *	
+	//	private final StoresMapper storesMapper;
+	//
+	//	//	//** 指定されたIDの店舗を表示
+	//	//	@GetMapping
+	//	//	public String store(Model model) {
+	//	//		model.addAttribute("lunchex", storesMapper.getStoreById(2));
+	//	//		System.out.println();
+	//	//		System.out.println(model);
+	//	//		System.out.println();		
+	//	//		return "trial_nagai";
+	//	//	}
+	//	//}
+	//
+	//	//	** 新規登録
+	//	@GetMapping
+	//	public String newStore(Model model) {
+	//		Stores stores = new Stores();
+	//		stores.setStore_name("俺のフレンチ");
+	//		stores.setStore_tel("9876-5732");
+	//		stores.setStore_address("京都市～");
+	//		stores.setStore_url("www.abc.com");
+	//		stores.setUser_mail("kiwada@gmail.com");           
+	//		storesMapper.addStore(stores);
+	//		System.out.println("=== 登録確認 ===");
+	//		model.addAttribute("lunchex", storesMapper.getStoreById(9));
+	//		System.out.println(storesMapper.getStoreById(9));
+	//		System.out.println();
+	//		//return "trial_nagai";
+	//		//	}
+	//		//}
+	//		// ★更新
+	//		Stores target = storesMapper.getStoreById(9);
+	//		target.setStore_name("あたいのイタリアン");
+	//		target.setStore_tel("0000-0000");
+	//		target.setStore_address("心斎橋～");
+	//		target.setStore_url("www.def.com");
+	//		target.setUser_mail("kiwada@gmail.com");          
+	//		storesMapper.updateStore(target);
+	//		System.out.println("=== 更新確認 ===");
+	//		System.out.println(storesMapper.getStoreById(9));
+	//		System.out.println();
+	//		//		return "trial_nagai";
+	//		//		}
+	//		//	}
+	//
+	//		//	 ★削除
+	//		storesMapper.deleteStore(9);
+	//		System.out.println("=== 削除確認 ===");
+	//		System.out.println(storesMapper.getStoreById(8));
+	//		model.addAttribute("lunchex", storesMapper.getStoreById(8));
+	//		System.out.println(storesMapper.getStoreById(9));
+	////		model.addAttribute("lunchex", storesMapper.getStoreById(9));
+	//		System.out.println();
+	//		return "trial_nagai";
+	//	}	
+	//}
 
-//***<< Detail関係の動作確認　******************************************	
-//
-//** DI *	
-private final StoresMapper storesMapper;
+	//***<< Detail関係の動作確認　******************************************	
+	//
+	//** DI *	
+	private final DetailMapper detailMapper;
 
-//	//** 指定されたIDの店舗を表示
-//	@GetMapping
-//	public String store(Model model) {
-//		model.addAttribute("lunchex", storesMapper.getStoreById(2));
-//		System.out.println();
-//		System.out.println(model);
-//		System.out.println();		
-//		return "trial_nagai";
-//	}
-//}
+	//	//** 指定されたIDの詳細を表示
+	@GetMapping
+	public String detail(Model model) {
+		model.addAttribute("lunchex", detailMapper.getDetailsByUser(2));
+		System.out.println();
+		System.out.println(model);
+		System.out.println();		
+		return "trial_nagai";
+	}
+}
 
 //	** 新規登録
 //@GetMapping
