@@ -4,33 +4,35 @@
 //全てコメントアウトしている。
 //また「こうなるだろう」という予測の元、名称をつけているので注意
 //本人の理解力が低いため足りてない部分があるかも
+//更新　深田　1025　新規店舗登録のためのコードを記載と修正を行う。あと若干まだ理解不足かも
+
 
 package com.example.lunchex.controller;
 
 import java.time.LocalDate;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.lunchex.form.StoresForm.StoreRegisterForm;
-import com.example.lunchex.service.StoresService;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
+@RequestMapping("/lunchexplorer")
+@RequiredArgsConstructor
 @Controller
 public class StoresController {
 
-    @Autowired
-    private StoresService storesService;
 
     // 新規店舗登録画面の表示
     @GetMapping("/stores/register")
-    public String showStoreRegisterForm(Model model) {
+    public String showStoreRegister(Model model) {
         model.addAttribute("storeForm", new StoreRegisterForm());
         
         // ユーザー名をセッションや認証から取得する場合
@@ -55,7 +57,7 @@ public class StoresController {
         }
 
         // サービスを使って店舗情報を登録
-        storesService.addStore(storeForm);
+ //       storesService.addStore(storeForm);
 
         // 次のページにリダイレクト
         return "redirect:/stores/confirmation";  // 確認ページにリダイレクト
