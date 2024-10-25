@@ -7,6 +7,63 @@
 
 package com.example.lunchex.controller;
 
+import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.example.lunchex.form.StoresForm.StoreRegisterForm;
+import com.example.lunchex.service.StoresService;
+
+import jakarta.validation.Valid;
+
+@Controller
+public class StoresController {
+
+    @Autowired
+    private StoresService storesService;
+
+    // 新規店舗登録画面の表示
+    @GetMapping("/stores/register")
+    public String showStoreRegisterForm(Model model) {
+        model.addAttribute("storeForm", new StoreRegisterForm());
+        
+        // ユーザー名をセッションや認証から取得する場合
+        String username = "サンプルユーザー"; // 実際にはセッションから取得
+        model.addAttribute("username", username);
+
+        // 投稿日（現在の日付）
+        model.addAttribute("currentDate", LocalDate.now().toString());
+
+        return "store_register";  // store_register.htmlに遷移
+    }
+
+    // 新規店舗登録処理
+    @PostMapping("/stores/register")
+    public String registerStore(@Valid @ModelAttribute("storeForm") StoreRegisterForm storeForm, 
+                                BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            // エラーがあればフォームに戻る
+            model.addAttribute("username", "サンプルユーザー"); // 再度ユーザー名を設定
+            model.addAttribute("currentDate", LocalDate.now().toString()); // 日付も再設定
+            return "store_register";
+        }
+
+        // サービスを使って店舗情報を登録
+        storesService.addStore(storeForm);
+
+        // 次のページにリダイレクト
+        return "redirect:/stores/confirmation";  // 確認ページにリダイレクト
+    }
+}
+
+
+
 //import java.util.List;
 //
 //import org.springframework.beans.factory.annotation.Autowired;
