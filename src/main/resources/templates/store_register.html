@@ -1,0 +1,36 @@
+<!--kiwada 1025 -->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飲食店新規登録</title>
+   
+</head>
+<body>
+    <h1>店舗情報と食べたメニューを入力してください</h1>
+
+    <form th:action="@{/stores/register}" th:object="${storeForm}" method="post">
+        <p>ユーザー名: <span th:text="${username}">ユーザー名が未設定です</span></p>
+        <p>投稿日: <span th:text="${#dates.format(new java.util.Date(), 'yyyy/MM/dd')}">日付が未設定です</span></p>
+        
+        <div>
+            <label for="storeName">店舗名（※必須）:</label>
+            <input type="text" id="storeName" th:field="*{storeName}" placeholder="店舗名を入力してください" required />
+        </div>
+
+        <div>
+            <label for="storeTel">電話番号（ハイフン無し、※必須）:</label>
+            <input type="text" id="storeTel" th:field="*{storeTel}" placeholder="電話番号を入力してください" pattern="\d{10,11}" required />
+            <small>※ ハイフン無しで10桁または11桁の数字を入力してください。</small> <!-- ユーザーへの説明追加 -->
+        </div>
+
+        <!-- 次へボタン -->
+        <div>
+            <button type="submit">次へ</button>
+        </div>
+    </form>
+</body>
+</html>
