@@ -41,9 +41,9 @@ public class Detail {
 	/** 来店回数 */
 	private Integer detail_visits;   
 	/** 店舗情報 */
-    //private Stores stores;		//2024/10/22　追加：糸山
+    //private Stores stores;		//2024/10/22　追加：糸山  //コメントアウト永井
 	/** ユーザー情報 */
-    //private Users users;		//2024/10/22　追加：糸山
+    //private Users users;		//2024/10/22　追加：糸山  //コメントアウト永井
 
 
 }
