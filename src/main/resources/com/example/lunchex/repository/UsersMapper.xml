@@ -5,17 +5,34 @@
 <!--更新日：  -->
 <!--更新者：  -->
 <mapper namespace="com.example.lunchex.repository.UsersMapper">
+<!-- ユーザー名で認証情報を検索 -->
+	<select id="selectByUsername" resultType="com.example.lunchex.entity.Users">
+	SELECT user_mail, user_nickname 
+	FROM authentications 
+	WHERE username =
+	#{username}
+	</select>
+  <!-- ユーザー全件検索 -->
+  	<select id="getAllUsers" parameterType="com.example.lunchex.entity.Users">
+ 		SELECT 
+    		user_mail,
+			user_nickname,
+      		user_password
+      	From users
+   		WHERE user_mail = #{user_mail};
+  	</select>
   <!-- ユーザー検索 -->
- 	<select id="getDetailsByUser"  parameterType="com.example.lunchex.entity.UsersMaaper">
+ 	<select id="getUserByMail"  parameterType="com.example.lunchex.entity.Users">
   		SELECT 
     		user_mail,
 			user_nickname,
       		user_password
-   		 WHERE d.user_mail = #{user_mail};
+      	From users
+   		 WHERE user_mail = #{user_mail};
   	</select>
 
   <!-- ユーザー追加 -->
-  	<insert id="addDetail" parameterType="com.example.lunchex.entity.Detail">
+  	<insert id="addUser" parameterType="com.example.lunchex.entity.Users">
     	INSERT INTO Users
      	 (
       		user_mail,

@@ -8,9 +8,13 @@
 
 package com.example.lunchex.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Users {
 	
 	    private String user_mail;        //ユーザーメールアドレス（PK）

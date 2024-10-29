@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <meta charset="UTF-8">
+	    <title>LunchExplorer - ユーザー登録</title>
+	    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	</head>
+<body>
+	<header>
+	    <h1>LunchExplorer - ユーザー登録</h1>
+	</header>
+	<main>
+	    <section>
+			<!--フラッシュメッセージの表示-->
+				<p th:if="${message}" th:text="${message}" 
+				style="color: blue;">完了メッセージ
+				</p>
+				<p th:if="${errorMessage}" th:text="${errorMessage}"
+				style="color: red;">検索エラーメッセージ
+			    </p> 
+			<!--アクション:登録or編集-->
+	<!--		<form th:action="${recorderForm.isNew} ? @{/RecorderController/save}:@{/RecorderController/update}"
+				th:object="${recorderForm}" method="post">		-->
+	        <form th:action="@{/users/usersave}"
+				th:object="${usersForm}" method="post">
+	            <div>
+	                <label for="userMail">ユーザー名(メールアドレス):</label>
+						<input type="text" th:field="*{userMail}" required>
+	              <!--  <input type="text" id="user_mail" name="user_mail" required> -->
+	            </div>
+	            <div>
+	                <label for="userNickname">ニックネーム:</label>
+					<input type="text" th:field="*{userNickname}" required>
+	            <!--    <input type="text" id="user_nickname" name="user_nickname" required> -->
+	            </div>
+				<div>
+				    <label for="userPassword">パスワード:</label>
+					<input type="text" th:field="*{userPassword}" required>
+				 <!--   <input type="password" id="user_password" name="user_password" required>	-->
+				</div>
+	            <button type="submit">登録</button>
+	        </form>
+			
+	    </section>
+	</main>
+	<!--ボタン：一覧へ移動-->
+		<form th:action="@{/lunchexplorer}" method="get">
+			<input type="submit" value="トップページへ" style="width: 150px; height: 30px;">
+		</form>
+	<footer>
+	    <p>&copy; 2024 LunchExplorer</p>
+	</footer>
+</body>
+</html>
