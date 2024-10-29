@@ -16,7 +16,7 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 2;
+            z-index: 3;
             left: 0;
             top: 0;
             width: 100%;
@@ -26,23 +26,28 @@
         }
 
         .modal-content {
-            margin: 10% auto;
-            padding: 20px;
+            margin: 3% auto;
+            padding: 10px;
             background-color: #fff;
             border-radius: 10px;
             max-width: 80%;
+			height: fit-content;
+			width: fit-content;
+            position: relative;
         }
 
         .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+			color: #fff;
+			font-size: 38px;
+			font-weight: bold;
+			position: absolute;
+			top: 10px;
+			right: 20px;
         }
 
         .close:hover,
         .close:focus {
-            color: black;
+            color: #333	;
             text-decoration: none;
             cursor: pointer;
         }
@@ -59,7 +64,7 @@
             width: 100%;
             height: 100%;
             background: rgba(85, 40, 0, 0.3);
-            transition: background 0.3s ease;
+            transition: background 0.5s ease;
         }
 
         .review-text {
@@ -71,6 +76,12 @@
             margin-left: 10px;
             vertical-align: middle;
         }
+
+        .footer-menu {
+            display: none;
+        }
+
+
 	</style>
     <title>詳細情報一覧</title>
 </head>
@@ -84,7 +95,6 @@
 	        </ul>
 	    </nav>
 	</header>
-    <h1>詳細情報一覧</h1>
     <table>
         <div class="store-cards">
             <!-- 店舗情報をループで表示 -->
@@ -96,23 +106,41 @@
                         <button type="button" class="google-map-button">GoogleMap</button>
                     </a>
                     </span>
+					<span style="font-family: system-ui;">
                     <p class="icon-text">
                         <img src="/icons/phone_icon.svg" width="16" height="16">
                         <span th:text="${store.store_tel}">電話番号</span>
                         <img src="/icons/address_icon.svg" width="16" height="16" style="margin-left: 10px;">
                         <span th:text="${store.store_address}">住所</span>
                     </p>
-                    <p class="icon-text"><img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"><a th:href="${store.store_url}" target="_blank" th:text="${store.store_url}"></a></p>
+					</span>
+                    <p class="icon-text"><img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+						<a th:href="${store.store_url}" target="_blank" th:text="WEBサイトを開く"></a></p>
                     <div class="review-container">
                         <th:block th:each="detail : ${store.detailList}">
                             <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/images/default_menu_img.svg);background-position: center;background-size: cover;'" onclick="openModal(this)">
                                 <div class="review-text">
-                                    <p class="icon-text menu-name"><img src="/icons/menu_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_menu}">メニュー</span></p>
-                                    <p class="icon-text"><img src="/icons/price_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_price} + '円'">価格</span>
-                                        <img src="/icons/rating_icon_w.svg" width="16" height="16" style="margin-left: 10px;"><span th:text="${detail.detail_rating}">評価</span></p>
-                                    <p class="icon-text"><img src="/icons/comment_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_review}">レビュー</span></p>
-                                    <p class="icon-text"><img src="/icons/user_icon_w.svg" width="16" height="16"><span th:text="${detail.user_mail}">投稿者</span></p>
-                                    <p class="icon-text"><img src="/icons/cal_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_postdt}">投稿日時</span></p>
+									<p class="icon-text menu-name">
+								<img src="/icons/menu_icon_w.svg" width="16" height="16">
+								<span th:text="${detail.detail_menu}">メニュー</span>
+							</p>
+							<p class="icon-text">
+								<img src="/icons/price_icon_w.svg" width="16" height="16">
+								<span style="font-size:18px" th:text="${detail.detail_price} + '円'">価格</span>
+                            <img src="/icons/rating_icon_w.svg" width="16" height="16" style="margin-left: 10px;">
+								<span style="font-size:18px" th:text="${detail.detail_rating}">評価</span>
+							</p>
+                            <p class="icon-text">
+								<img src="/icons/comment_icon_w.svg" width="16" height="16">
+								<span th:text="${detail.detail_review}">レビュー</span>
+							</p>
+							<p class="icon-text">
+								<img src="/icons/user_icon_w.svg" width="16" height="16">
+								<span th:text="${detail.user_mail}">投稿者</span>
+							</p>
+                                    <p class="icon-text">
+								<img src="/icons/cal_icon_w.svg" width="16" height="16">
+								<span th:text="${detail.detail_postdt}">投稿日時</span></p>
                                 </div>
                             </div>
                         </th:block>
@@ -122,20 +150,41 @@
         </div>
     </table>
 
-    <div id="myModal" class="modal">
+    <div id="myModal" class="modal" onclick="closeModal()">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <img id="modalImage" src="" alt="レビュー画像" style="width: 100%; height: auto;" />
             <div id="modalReviewText" class="review-text">
-                <p class="icon-text menu-name"><img src="/icons/menu_icon_w.svg" width="16" height="16"><span id="modalMenu">メニュー</span></p>
-                <p class="icon-text"><img src="/icons/price_icon_w.svg" width="16" height="16"><span id="modalPrice">価格</span>
-                    <img src="/icons/rating_icon_w.svg" width="16" height="16" style="margin-left: 10px;"><span id="modalRating">評価</span></p>
-                <p class="icon-text"><img src="/icons/comment_icon_w.svg" width="16" height="16"><span id="modalReview">レビュー</span></p>
-                <p class="icon-text"><img src="/icons/user_icon_w.svg" width="16" height="16"><span id="modalUser">投稿者</span></p>
-                <p class="icon-text"><img src="/icons/cal_icon_w.svg" width="16" height="16"><span id="modalPostDate">投稿日時</span></p>
+                <p class="icon-text menu-name">
+					<img src="/icons/menu_icon.svg" width="25" height="25">
+					<span id="modalMenu">メニュー</span></p>
+                <p class="icon-text">
+					<img src="/icons/price_icon.svg" width="16" height="16">
+					<span id="modalPrice">価格</span>
+                    <img src="/icons/rating_icon.svg" width="16" height="16" style="margin-left: 10px;">
+					<span id="modalRating">評価</span></p>
+                <p class="icon-text">
+					<img src="/icons/comment_icon.svg" width="16" height="16">
+					<span id="modalReview">レビュー</span></p>
+                <p class="icon-text">
+					<img src="/icons/user_icon.svg" width="16" height="16">
+					<span id="modalUser">投稿者</span></p>
+                <p class="icon-text">
+					<img src="/icons/cal_icon.svg" width="16" height="16">
+					<span id="modalPostDate">投稿日時</span></p>
             </div>
         </div>
     </div>
+
+    <footer>
+        <div class="button-container">
+            <button onclick="location.href='/lunchexplorer'">トップページに戻る</button>
+        </div>
+        <div class="footer-menu">
+            <button onclick="location.href='/lunchexplorer'">トップページに戻る</button>
+        </div>
+        <p>&copy; 2024 LunchExplorer</p>
+    </footer>
 
     <script>
         function openModal(element) {
