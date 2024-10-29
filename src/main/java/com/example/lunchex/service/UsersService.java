@@ -1,14 +1,12 @@
 //作成 木和田 1016
 package com.example.lunchex.service;
 
-import java.util.List;
-
 import com.example.lunchex.entity.Users;
 
-public interface UserService {
+public interface UsersService {
 
-	    // 全ユーザーを取得する
-	    List<Users> getAllUsers();
+//	    // 全ユーザーを取得する
+//	    List<Users> getAllUsers();
 
 	    // メールアドレスで指定されたユーザー情報を取得する
 	    Users getUserByMail(String user_mail);
