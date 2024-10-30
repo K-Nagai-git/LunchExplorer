@@ -6,12 +6,12 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"> <!-- 必要に応じてスタイルシートを追加 -->
 	<style>
 
-	    .review-container {
-	        display: grid;
-	        grid-template-columns: repeat(2, 1fr);
-	        gap: 10px;
-	        margin-top: 5px;
-	    }
+<!--	    .review-container {-->
+<!--	        display: grid;-->
+<!--	        grid-template-columns: repeat(2, 1fr);-->
+<!--	        gap: 10px;-->
+<!--	        margin-top: 5px;-->
+<!--	    }-->
 
         .modal {
             display: none;
@@ -52,20 +52,20 @@
             cursor: pointer;
         }
 
-        .review {
-            position: relative;
-        }
+<!--        .review {-->
+<!--            position: relative;-->
+<!--        }-->
 
-        .review:hover::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(85, 40, 0, 0.3);
-            transition: background 0.5s ease;
-        }
+<!--        .review:hover::after {-->
+<!--            content: "";-->
+<!--            position: absolute;-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            background: rgba(85, 40, 0, 0.3);-->
+<!--            transition: background 0.5s ease;-->
+<!--        }-->
 
         .review-text {
             position: relative;
@@ -140,7 +140,7 @@
                     <p class="icon-text"><img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"><a th:href="${store.store_url}" target="_blank" th:text="${store.store_url}"></a></p>
                     <div class="review-container">
                         <th:block th:each="detail : ${store.detailList}">
-                            <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/images/default_menu_img.svg);background-position: center;background-size: cover;'" onclick="openModal(this)">
+                            <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/material_img/default_menu_img.svg);background-position: center;background-size: cover;'" onclick="openModal(this)">
                                 <div class="review-text">
                                     <p class="icon-text menu-name">
 								<img src="/icons/menu_icon_w.svg" width="16" height="16">
@@ -176,12 +176,12 @@
     <div class="ad-area">
         <div class="ad">
             <a href="https://cal.co.jp/about/business/education/" target="_blank">
-                <img src="/images/ad_1.png" alt="広告1" style="width: 100%; height: auto;">
+                <img src="/material_img/ad_1.png" alt="広告1" style="width: 100%; height: auto;">
             </a>
         </div>
         <div class="ad">
             <a href="https://www.hellowork.mhlw.go.jp/index.html" target="_blank">
-                <img src="/images/ad_2.png" alt="広告2" style="width: 100%; height: auto;">
+                <img src="/material_img/ad_2.png" alt="広告2" style="width: 100%; height: auto;">
             </a>
         </div>
     </div>
