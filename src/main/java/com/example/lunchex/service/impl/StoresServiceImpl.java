@@ -54,6 +54,11 @@ public class StoresServiceImpl implements StoresService {
     public void deleteStore(int storeId) {
         storeMapper.delete(storeId);  // 削除メソッドを呼び出す
     }
+    
+    
+    
+    
+    
 }
 
 
