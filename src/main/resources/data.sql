@@ -120,3 +120,7 @@ VALUES (7, '2024-10-08', 'honda@gmail.com', '火澄屋定食', 800, 5, TRUE, '�
 -- 11件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
 VALUES (8, '2024-10-08', 'gonda@gmail.com', 'とりマヨ定食', 700, 5, TRUE, 'まじ安い', NULL, '量も多い', '2024-10-08', 1);
+
+-- 12件目のデータ登録
+INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
+VALUES (2, '2024-10-05', 'wada@gmail.com', '日替わりステーキ L', 1200, 3, TRUE, 'がちうま', NULL, 'Sサイズは少し物足りない', '2024-10-05', 1);
