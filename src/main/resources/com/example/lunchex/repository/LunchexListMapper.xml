@@ -4,6 +4,7 @@
 <!--作成者：糸山  -->
 <!--更新日：2024/10/22  -->
 <!--更新者：糸山  -->
+<!-- 更新　2024/10/30　永井　nickname表示関係、対象店舗一覧検索のINNER JOIN修正、u.user_nickname追加、Detailエンティティをマッピングにnicknameを追加 -->
 <mapper namespace="com.example.lunchex.repository.LunchexListMapper">
 
 <!-- Storeｓ全件検索 -->
@@ -35,6 +36,7 @@
         <result property="store_id" column="store_id"/>
         <result property="detail_postdt" column="detail_postdt"/>
         <result property="user_mail" column="user_mail"/>
+        <result property="user_nickname" column="user_nickname"/>
         <result property="detail_menu" column="detail_menu"/>
         <result property="detail_price" column="detail_price"/>
         <result property="detail_rating" column="detail_rating"/>
@@ -59,7 +61,7 @@
 			s.store_url,
 			d.detail_postdt,
 			d.user_mail,
-			u.user_nickname,
+			d.user_nickname,
 			d.detail_menu ,
 			d.detail_price ,
 			d.detail_rating ,
@@ -103,7 +105,7 @@
 			d.detail_visits 
 		FROM stores AS s
 		RIGHT JOIN detail AS d ON s.store_id = d.store_id
-		INNER JOIN users AS u ON s.user_mail = u.user_mail
+		INNER JOIN users AS u ON d.user_mail = u.user_mail
 		WHERE 
     			s.store_id = #{store_id}
 		ORDER BY d.detail_postdt DESC;

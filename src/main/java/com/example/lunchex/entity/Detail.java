@@ -1,6 +1,7 @@
 package com.example.lunchex.entity;
 // 永井 241015
 //　糸山　241022　メモ：StoresとUsersの追加
+//　更新　2024/10/30　永井　user_nicknameを追加
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +23,8 @@ public class Detail {
 	private LocalDate detail_postdt;   
 	/** ユーザーメールアドレス */
 	private String user_mail;
+	/** ユーザーメールアドレス ★10/30 09:26永井追加　*/
+	private String user_nickname;
 	/** メニュー名 */
 	private String detail_menu;
 	/** 金額 */
