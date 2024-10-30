@@ -34,7 +34,7 @@
                         
                             <div class="store-card">
                                 <span class="store-text">
-                                <h3 th:text="${store.store_name}">店舗名</h3>
+                                <h3 th:text="${store.store_name}" style="margin-right: 10px;">店舗名</h3>
                             <p class="icon-text">
                                 <img src="/icons/phone_icon.svg" width="16" height="16">
                                 <span th:text="${store.store_tel}">電話番号</span>
@@ -44,12 +44,12 @@
                             <th:block th:if="${store.store_url} != null">
                                 <p class="icon-text">
                                     <img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-                                    <a th:href="${store.store_url}" target="_blank" th:text="WEBサイトを開く"></a>
+                                    <a th:href="${store.store_url}" target="_blank" th:text="WEBサイトを開く" rel="noopener noreferrer"></a>
                                 </p>
                             </th:block>
                             </span>
                             <th:block th:each="detail : ${store.detailList}">
-                                <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/images/default_menu_img.svg);background-position: center;background-size: cover;'">
+                                <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/images/default_menu_img.svg);background-position: center;background-size: cover;'" th:onclick="|location.href='/lunchexplorer/details/' + (${store.store_id})|">
                                     <div class="review-text">
                                     <p class="icon-text menu-name">
                                     <img src="/icons/menu_icon_w.svg" width="16" height="16">
@@ -77,21 +77,28 @@
                 <h3>広告エリア</h3>
                 <p>ここにアフィリエイト広告が表示される予定です。</p>
                 <!-- 広告スペースの例 -->
-                <div class="ad-banner" style="background-color: #f0f0f0; width: 100%; height: 150px; margin-bottom: 10px;">
-                    <a href="https://cal.co.jp/about/business/education/" target="_blank">
-                        <img src="/images/ad_1.png" alt="広告1" style="width: 100%; height: 100%; object-fit: cover;">
-                    </a>
-                </div>
-                <div class="ad-banner" style="background-color: #f0f0f0; width: 100%; height: 150px; margin-bottom: 10px;">
-                    <a href="https://www.hellowork.mhlw.go.jp/index.html" target="_blank">
-                        <img src="/images/ad_2.png" alt="広告2" style="width: 100%; height: 100%; object-fit: cover;">
-                    </a>
-                </div>
+				<div class="ad-banner" style="background-color: #f0f0f0; width: 100%; height: auto; margin-bottom: 10px;">
+				    <a href="https://cal.co.jp/about/business/education/" target="_blank" rel="noopener noreferrer">
+				        <img src="/images/ad_1.png" alt="広告1" style="width: 100%; height: 100%; object-fit: cover;">
+				    </a>
+				</div>
+				<div class="ad-banner" style="background-color: #f0f0f0; width: 100%; height: auto; margin-bottom: 10px;">
+				    <a href="https://www.hellowork.mhlw.go.jp/index.html" target="_blank" rel="noopener noreferrer">
+				        <img src="/images/ad_2.png" alt="広告2" style="width: 100%; height: 100%; object-fit: cover;">
+				    </a>
+				</div>
             </aside>
         </div>
     </main>
     <footer>
         <p>&copy; 2024 LunchExplorer</p>
     </footer>
+    <style>
+        @media (max-width: 768px) {
+            .ad-area {
+                display: none;
+            }
+        }
+    </style>
 </body>
 </html>

@@ -329,16 +329,16 @@ position: fixed;
     width: 300px;
 /*    background-color: #fff;*/
     height: 100%;
-    z-index: -1;
+    z-index: 0;
     padding-top: 15%;
     padding-left: 0px;
-    margin: 15px;
+    margin: 5px;
     }
 .content-wrapper {
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     }
 .main-content {
