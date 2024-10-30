@@ -6,23 +6,33 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
+	<!--エラーー表示-->
+	<div th:if="${param.error}">
+	<p style="color: red;">usernameまたはpasswordが違います</p>
+	</div>
+	<!--ログアウト表示 -->
+	<div th:if="${param.logout}">
+	<p style="color: blue">ログアウトしました</p>
+	</div>
     <header>
         <h1>LunchExplorer - ログイン</h1>
     </header>
     <main>
         <section>
-			<!-- ログイン後トップページに戻る処理追加 2024/10/24　糸山> -->
-			<!-- "@{/login}"→"@{/lunchexplorer}"へ変更 -->
-            <form th:action="@{/lunchexplorer}" method="get">
-                <div>
-                    <label for="username">ユーザー名:</label>
-                    <input type="text" id="username" name="username" required>
+			<!-- ログイン後処理追加 2024/10/30　糸山> -->
+			<!-- "@{/login}"→"@{/authentication}"へ変更 -->
+				<form th:action="@{/authentication}" th:object="${loginForm}" method="post"> 
+               <div>
+                    <label for="usernameInput">ユーザー名:</label>
+					<input type="text" name="username" id="usernameInput" th:field="*{username}" required>
                 </div>
                 <div>
-                    <label for="password">パスワード:</label>
-                    <input type="password" id="password" name="password" required>
+                    <label for="passwordInput">パスワード:</label>
+					<input type="password" name="password" id="passwordInput" th:field="*{password}" required>
                 </div>
-                <button type="submit">ログイン</button>
+				<div>
+					<input type="submit" value="login">
+				</div>
             </form>
         </section>
     </main>
