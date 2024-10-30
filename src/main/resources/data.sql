@@ -58,7 +58,7 @@ VALUES ('鴻翔', '09044918958', '大阪府大阪市中央区島之内1-21-32 �
 
 -- 4件目のデータ登録
 INSERT INTO stores (store_name, store_tel, store_address, store_url, user_mail)
-VALUES ('どうとんぼり神座 千日前店', '0662131238', '大阪府大阪市中央区道頓堀1-6-32', 'https://tabelog.com/osaka/A2701/A270202/27001561/', 'okada@gmail.com');
+VALUES ('どうとんぼり神座 千日前店', '0662131238', NULL, NULL, 'okada@gmail.com');
 
 -- 5件目のデータ登録
 INSERT INTO stores (store_name, store_tel, store_address, store_url, user_mail)

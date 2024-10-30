@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.example.lunchex.repository.AuthenticationMapper">
+	<!-- ユーザー名で認証情報を検索 -->
+	<select id="selectByUsername" resultType="com.example.lunchex.entity.Authentication">
+		SELECT user_mail as users_mail, user_nickname as users_nickname, user_password as users_password FROM users WHERE user_mail =
+		#{users_mail};
+</select>
+</mapper>

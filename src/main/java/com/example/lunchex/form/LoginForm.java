@@ -9,8 +9,8 @@ import lombok.Data;
 @Data
 public class LoginForm {
 	/**ログイン用ユーザーメールアドレス（ID）*/
-	private String usernameInput;
+	private String username;
 	/**ログイン用パスワード*/
-	private String passwordInput;
+	private String password;
 
 }

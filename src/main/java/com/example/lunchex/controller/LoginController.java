@@ -4,12 +4,15 @@ package com.example.lunchex.controller;
 /** 更新日：  				*/
 /** 更新者：  				*/
 
+//import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
+
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.lunchex.entity.Stores;
@@ -26,11 +29,28 @@ import lombok.RequiredArgsConstructor;
 public class LoginController {
 	
 	@GetMapping
-	public String showLogin(@ModelAttribute LoginForm form) {
+	public String showLogin(@ModelAttribute LoginForm form,Model model) {
 		//login.htmlに遷移
 		//return "/lunchexplorer";
+		//LoginFormをモデルに追加
+		model.addAttribute("loginForm", new LoginForm());
 		return "login";
 	}
+	
+	@PostMapping("/authentication")
+	public String authenticate(@ModelAttribute LoginForm loginForm, Model model) {
+	    // loginForm を使った認証処理を実装
+	    System.out.println("Username: " + loginForm.getUsername()); // デバッグ用
+	    System.out.println("Password: " + loginForm.getPassword()); // デバッグ用
+
+	    // 認証に成功した場合の処理
+	    // ...
+
+	    // 認証に失敗した場合は、エラーメッセージをモデルに追加して再表示
+	    model.addAttribute("error", "usernameまたはpasswordが違います");
+	    return "login"; // エラー表示のために再び login.html を表示
+	}
+	
 	/** DI */
 	private final LunchexListMapper mapper;
 
