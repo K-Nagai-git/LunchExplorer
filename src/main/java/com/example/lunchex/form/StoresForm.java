@@ -27,5 +27,6 @@ public class StoresForm {
 		}
         // 他のオプションフィールドをここに追加可能
     }
+
 }
 

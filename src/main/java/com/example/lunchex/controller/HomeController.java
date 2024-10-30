@@ -86,6 +86,9 @@ public class HomeController {
 				//コンソールのテスト用　深田
 				System.out.println(detailList);
 				
+				
+				
+				
 				return "test2";
 			}
 
