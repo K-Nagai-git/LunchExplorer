@@ -61,7 +61,7 @@
 			s.store_url,
 			d.detail_postdt,
 			d.user_mail,
-			d.user_nickname,
+			u.user_nickname,
 			d.detail_menu ,
 			d.detail_price ,
 			d.detail_rating ,
