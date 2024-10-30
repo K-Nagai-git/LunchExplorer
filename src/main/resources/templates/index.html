@@ -48,8 +48,9 @@
                                 </p>
                             </th:block>
                             </span>
+							<div class="review-container">
                             <th:block th:each="detail : ${store.detailList}">
-                                <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/images/default_menu_img.svg);background-position: center;background-size: cover;'" th:onclick="|location.href='/lunchexplorer/details/' + (${store.store_id})|">
+                                <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/material_img/default_menu_img.svg);background-position: center;background-size: cover;'" th:onclick="|location.href='/lunchexplorer/details/' + (${store.store_id})|">
                                     <div class="review-text">
                                     <p class="icon-text menu-name">
                                     <img src="/icons/menu_icon_w.svg" width="16" height="16">
@@ -62,29 +63,24 @@
                                     <p class="icon-text">
                                     <img src="/icons/comment_icon_w.svg" width="16" height="16">
                                     <span th:text="${detail.detail_review}">レビュー</span></p>
-    <!--                            <p class="icon-text"><img src="/icons/user_icon_w.svg" width="16" height="16"><span th:text="${detail.user_mail}">投稿者</span>-->
-    <!--                            <p class="icon-text"><img src="/icons/cal_icon_w.svg" width="16" height="16"><span th:text="${detail.detail_postdt}">投稿日時</span></p>-->
-                                    
-    <!--                                <img th:src="@{'/images/' + ${detail.detail_image}}" alt="レビュー画像" />-->
                                     </div>
                                 </div>
                             </th:block>
                         </div>
+						</div>
                     </th:block>
                 </div>
             </section>
             <aside class="ad-area">
-                <h3>広告エリア</h3>
-                <p>ここにアフィリエイト広告が表示される予定です。</p>
                 <!-- 広告スペースの例 -->
-				<div class="ad-banner" style="background-color: #f0f0f0; width: 100%; height: auto; margin-bottom: 10px;">
+				<div class="ad-banner" style="width: 100%; height: auto; margin-bottom: 10px;">
 				    <a href="https://cal.co.jp/about/business/education/" target="_blank" rel="noopener noreferrer">
-				        <img src="/images/ad_1.png" alt="広告1" style="width: 100%; height: 100%; object-fit: cover;">
+				        <img src="/material_img/ad_1.png" alt="広告1" style="width: 100%; height: 100%; object-fit: cover;">
 				    </a>
 				</div>
-				<div class="ad-banner" style="background-color: #f0f0f0; width: 100%; height: auto; margin-bottom: 10px;">
+				<div class="ad-banner" style="width: 100%; height: auto; margin-bottom: 10px;">
 				    <a href="https://www.hellowork.mhlw.go.jp/index.html" target="_blank" rel="noopener noreferrer">
-				        <img src="/images/ad_2.png" alt="広告2" style="width: 100%; height: 100%; object-fit: cover;">
+				        <img src="/material_img/ad_2.png" alt="広告2" style="width: 100%; height: 100%; object-fit: cover;">
 				    </a>
 				</div>
             </aside>
