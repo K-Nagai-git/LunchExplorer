@@ -47,7 +47,7 @@
 
         .close:hover,
         .close:focus {
-            color: #333	;
+            color: black;
             text-decoration: none;
             cursor: pointer;
         }
@@ -81,7 +81,23 @@
             display: none;
         }
 
-
+        @media (max-width: 768px) {
+            footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+                padding: 10px 0;
+            }
+            .footer-menu {
+                display: flex;
+                justify-content: space-around;
+            }
+            .button-container {
+                display: none;
+            }
+        }
 	</style>
     <title>詳細情報一覧</title>
 </head>
@@ -95,6 +111,13 @@
 	        </ul>
 	    </nav>
 	</header>
+	<main>
+	        <div class="content-wrapper">
+	            <section class="main-content">
+	                <div class="search-bar">
+	                    <input type="text" placeholder="店舗名で検索">
+	                    <button type="button">検索</button>
+	                </div>
     <table>
         <div class="store-cards">
             <!-- 店舗情報をループで表示 -->
@@ -114,33 +137,30 @@
                         <span th:text="${store.store_address}">住所</span>
                     </p>
 					</span>
-                    <p class="icon-text"><img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-						<a th:href="${store.store_url}" target="_blank" th:text="WEBサイトを開く"></a></p>
+                    <p class="icon-text"><img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"><a th:href="${store.store_url}" target="_blank" th:text="${store.store_url}"></a></p>
                     <div class="review-container">
                         <th:block th:each="detail : ${store.detailList}">
                             <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/images/default_menu_img.svg);background-position: center;background-size: cover;'" onclick="openModal(this)">
                                 <div class="review-text">
-									<p class="icon-text menu-name">
+                                    <p class="icon-text menu-name">
 								<img src="/icons/menu_icon_w.svg" width="16" height="16">
 								<span th:text="${detail.detail_menu}">メニュー</span>
 							</p>
-							<p class="icon-text">
-								<img src="/icons/price_icon_w.svg" width="16" height="16">
-								<span style="font-size:18px" th:text="${detail.detail_price} + '円'">価格</span>
-                            <img src="/icons/rating_icon_w.svg" width="16" height="16" style="margin-left: 10px;">
-								<span style="font-size:18px" th:text="${detail.detail_rating}">評価</span>
-							</p>
-                            <p class="icon-text">
-								<img src="/icons/comment_icon_w.svg" width="16" height="16">
-								<span th:text="${detail.detail_review}">レビュー</span>
-							</p>
-							<p class="icon-text">
-								<img src="/icons/user_icon_w.svg" width="16" height="16">
-								<span th:text="${detail.user_nickname}">投稿者</span>
+                                    <p class="icon-text">
+							<img src="/icons/price_icon_w.svg" width="16" height="16">
+							<span style="font-size:18px" th:text="${detail.detail_price} + '円'">価格</span>
+                                        <img src="/icons/rating_icon_w.svg" width="16" height="16" style="margin-left: 10px;">
+							<span style="font-size:18px" th:text="${detail.detail_rating}">評価</span>
 							</p>
                                     <p class="icon-text">
-								<img src="/icons/cal_icon_w.svg" width="16" height="16">
-								<span th:text="${detail.detail_postdt}">投稿日時</span></p>
+							<img src="/icons/comment_icon_w.svg" width="16" height="16">
+							<span th:text="${detail.detail_review}">レビュー</span></p>
+                                    <p class="icon-text">
+							<img src="/icons/user_icon_w.svg" width="16" height="16">
+							<span th:text="${detail.user_mail}">投稿者</span></p>
+                                    <p class="icon-text">
+							<img src="/icons/cal_icon_w.svg" width="16" height="16">
+							<span th:text="${detail.detail_postdt}">投稿日時</span></p>
                                 </div>
                             </div>
                         </th:block>
@@ -149,6 +169,22 @@
             </th:block>
         </div>
     </table>
+	            </section>
+	        </div>
+	</main>
+
+    <div class="ad-area">
+        <div class="ad">
+            <a href="https://cal.co.jp/about/business/education/" target="_blank">
+                <img src="/images/ad_1.png" alt="広告1" style="width: 100%; height: auto;">
+            </a>
+        </div>
+        <div class="ad">
+            <a href="https://www.hellowork.mhlw.go.jp/index.html" target="_blank">
+                <img src="/images/ad_2.png" alt="広告2" style="width: 100%; height: auto;">
+            </a>
+        </div>
+    </div>
 
     <div id="myModal" class="modal" onclick="closeModal()">
         <div class="modal-content">
