@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>404 - ページが見つかりません</title>
+    <!-- Google Fontsでホラー風のフォントを追加 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Creepster&display=swap">
+    <style>
+        body {
+            background: url('images/bg_default.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            font-family: 'Anton', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            transition: background-image 0.5s ease-in-out;
+        }
+
+        .error-container {
+            background: rgba(0, 0, 0, 0.8); /* ダークオーバーレイで暗い雰囲気を作る */
+            box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.9); /* 強い影で不気味さを強調 */
+            padding: 50px;
+            border-radius: 15px;
+            max-width: 700px;
+            width: 90%;
+        }
+
+        .error-code {
+            font-size: 9rem;
+            font-weight: bold;
+            color: #b22222; /* 暗い赤で恐怖感を演出 */
+            text-shadow: 8px 8px 15px rgba(0, 0, 0, 0.7); /* 黒い影で立体感 */
+            animation: flicker 2s infinite alternate; /* フリッカー効果 */
+            font-family: 'Creepster', cursive; /* 新しいフォントを適用 */
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.9; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .error-message, .fortune-result {
+            font-size: 2.5rem;
+            margin: 15px 0;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+            font-family: 'Creepster', cursive; /* 新しいフォントを適用 */
+        }
+
+        .fortune-result {
+            color: #ff4500;
+            animation: flicker-text 1.5s infinite alternate;
+        }
+
+        @keyframes flicker-text {
+            0% { color: #ff4500; }
+            100% { color: #8b0000; }
+        }
+
+        .back-home-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 15px 40px;
+            background-color: #333;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 5px 0 #8b0000;
+            transition: background-color 0.3s, transform 0.1s;
+            font-family: 'Anton', sans-serif;
+        }
+
+        .back-home-btn:hover {
+            background-color: #8b0000;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-code">404</h1>
+        <p class="error-message">この場所は立ち入ってはいけない…</p>
+        <p class="fortune-result" id="fortuneResult"></p>
+        <a href="/" class="back-home-btn">逃げる</a>
+    </div>
+
+    <script>
+        // ランダムにおみくじの結果を表示
+        const fortunes = ["大吉", "中吉", "吉", "凶", "大凶"];
+        
+        // 各運勢に対応する背景画像を定義 (.png)
+        const backgroundImages = {
+            "大吉": "images/bg_daikichi.png",
+            "中吉": "images/bg_chukichi.png",
+            "吉": "images/bg_kichi.png",
+            "凶": "images/bg_kyo.png",
+            "大凶": "images/bg_daikyo.png"
+        };
+
+        // ランダムに運勢を選択
+        const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+        document.getElementById("fortuneResult").innerText = `運命は: ${randomFortune}`;
+
+        // 運勢に応じて背景画像を変更
+        document.body.style.backgroundImage = `url('${backgroundImages[randomFortune]}')`;
+    </script>
+</body>
+</html>
+
+
