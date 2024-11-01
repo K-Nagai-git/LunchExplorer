@@ -12,7 +12,11 @@
 </head>
 <body>
 	<header>
-		<h1>LunchExplorer</h1>
+		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;">LunchExplorer</h1>
+				<div class="search-bar">
+							<input type="text" placeholder="店舗名で検索">
+							<button type="button">検索</button>
+						</div>
 		<nav>
 			<ul>
 				<li><a th:href="@{/login}">ログイン</a></li>
@@ -23,16 +27,16 @@
 	<main>
 		<div class="content-wrapper">
 			<section class="main-content">
-				<div class="search-bar">
-					<input type="text" placeholder="店舗名で検索">
-					<button type="button">検索</button>
-				</div>
+				
 				<div class="store-cards">
 					<!-- 店舗情報をループで表示 -->
 					<th:block th:each="store : ${stores}">
 						<div class="store-card">
+							<h3 th:text="${store.store_name}" style="margin-right: 0px; cursor: pointer;" th:onclick="|location.href='/lunchexplorer/details/' + (${store.store_id})|">店舗名</h3>
+															
+							<div class="text-blocks">
+								<div class="text-block1">
 							<span class="store-text">
-								<h3 th:text="${store.store_name}" style="margin-right: 10px; cursor: pointer;" th:onclick="|location.href='/lunchexplorer/details/' + (${store.store_id})|">店舗名</h3>
 								<p class="icon-text">
 									<img src="/icons/phone_icon.svg" width="16" height="16">
 									<span th:text="${store.store_tel}">電話番号</span>
@@ -50,6 +54,11 @@
 									</p>
 								</th:block>
 							</span>
+								</div>
+								<div class="text-block2">
+									<button onclick="location.href='/lunchexplorer'">書</button>
+								</div>
+							</div>
 							<div class="review-container">
 								<th:block th:each="detail : ${store.detailList}">
 									<div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/material_img/default_menu_img.svg);background-position: center;background-size: cover;'" th:onclick="|location.href='/lunchexplorer/details/' + (${store.store_id})|">
