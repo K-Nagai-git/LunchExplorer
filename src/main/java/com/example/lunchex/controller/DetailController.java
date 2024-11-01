@@ -15,15 +15,13 @@
 package com.example.lunchex.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.lunchex.service.StoresService;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/stores")
+//@RequestMapping("/stores")
 @RequiredArgsConstructor
 
 public class DetailController {
@@ -32,7 +30,7 @@ public class DetailController {
 	private  final StoresService storesService; //まだ理解してない　深田
 
 //レビューする内容を登録する
-	@GetMapping("/search")
+//	@GetMapping("/search")
 	public String newDetailRegister() {
 		
 		
