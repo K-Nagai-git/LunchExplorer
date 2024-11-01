@@ -53,6 +53,37 @@
 <!-- 一覧表示 -->
 	<select id = "selectStoreListPickDt" resultMap="StoresListResult">
 		SELECT 
+		    d.detail_id,
+		    s.store_id,
+		    s.store_name,
+		    s.store_tel,
+		    s.store_address,
+		    s.store_url,
+		    d.detail_postdt,
+		    d.user_mail,
+		    u.user_nickname,
+		    d.detail_menu,
+		    d.detail_price,
+		    d.detail_rating,
+		    d.detail_review_flag,
+		    d.detail_review,
+		    d.detail_image,
+		    d.detail_memo,
+		    d.detail_usedt,
+		    d.detail_visits
+		FROM detail AS d
+		INNER JOIN stores AS s ON s.store_id = d.store_id
+		INNER JOIN users AS u ON d.user_mail = u.user_mail
+		WHERE d.detail_id = (
+		    SELECT MAX(d2.detail_id)
+		    FROM detail AS d2
+		    WHERE d2.store_id = d.store_id
+		)
+		ORDER BY s.store_id;
+	</select>
+<!-- 一時保存修正検証完了後削除
+	<select id = "selectStoreListPickDt" resultMap="StoresListResult">
+		SELECT 
 			d.detail_id ,
 			s.store_id ,
 			s.store_name,
@@ -82,6 +113,7 @@
     			)
 		ORDER BY s.store_id;
 	</select>
+ -->
 <!-- 対象店舗一覧検索 --><!-- 24/10/22：ditail主のSQLからStores主のSQLへ修正 -->
 	<select id = "selectPickStoreList" resultMap="StoresListResult">
 		SELECT 
