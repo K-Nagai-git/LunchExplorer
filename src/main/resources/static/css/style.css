@@ -1,24 +1,43 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #ffaa00;
-    color: #333;
+    background-color: rgb(255, 145, 0);
+/*	background-color: rgb(249, 248, 248);*/
+
+    color: #664d33;
     margin: 0;
     padding: 0;
+    background-image: url("/material_img/bg.png");
+    background-position: center;
+    background-blend-mode: soft-light;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 header {
     background-color: #fff;
-    padding: 20px;
+    padding: 5px 30px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+    z-index: 2;
+    position: relative;
+    height: 50px;
+    }
 
 header h1 {
     font-size: 24px;
     margin: 0;
+}
+a {
+	color: #c76400;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:hover{
+	color: rgb(255, 128, 0);
 }
 
 nav ul {
@@ -35,7 +54,7 @@ nav ul li {
 
 nav a {
     text-decoration: none;
-    color: #333;
+    color: #664d33;
     font-weight: bold;
 }
 
@@ -49,13 +68,14 @@ nav a:hover {
     max-width: 500px;
     display: flex;
     gap: 0px;
-}
+    }
 
 .search-bar input[type="text"] {
 	flex: 1;
     padding: 10px;
     border: 1px solid #ff8000;
-    border-radius: 50px 0px 0px 50px;}
+    border-radius: 50px 0px 0px 50px;
+    }
 
 .search-bar button {
     padding: 8px 20px;
@@ -76,7 +96,9 @@ nav a:hover {
     display: flex;
     align-items: center;
     margin: 0px;
-    }
+    overflow: hidden;
+    white-space: nowrap;
+}
 .icon-text img {
     margin-right: 5px; /* アイコンとテキストの間隔 */
     }
@@ -166,7 +188,7 @@ nav a:hover {
     margin-bottom: 10px;
     font-family: system-ui;
     font-weight: 500;
-    color: #666666;
+    color: #664d33;
 }
 
 .store-cards {
@@ -191,7 +213,7 @@ nav a:hover {
     margin-top: 0;
     margin-bottom: 0px;
     font-size: 20px;
-	color: #666666;
+	color: #664d33;
     line-height: 1.2em;
 }
 
@@ -199,7 +221,6 @@ nav a:hover {
     margin: 0;
 /*    font-size: 0.7em;*/
     margin-top: 4px;
-
 }
 
 .store-card-button {
@@ -323,13 +344,13 @@ button:hover {
 }
 
 .ad-area {
-position: fixed;
-    top: 15%;
+	position: fixed;
+    top: 50%;
     right: 0;
-    transform: translateY(0%);
+    transform: translateY(-50%);
     width: 300px;
-    /* background-color: #fff; */
-    height: 0;
+/*    background-color: #fff; */
+/*    height: 0;*/
     z-index: 0;
     padding-top: 0%;
     padding-left: 0px;
@@ -337,9 +358,9 @@ position: fixed;
     }
 .content-wrapper {
     display: flex;
-    max-width: 1200px;
+/*    max-width: 1200px;*/
     margin: 0 auto;
-    padding: 10px;
+    padding: 0px 10px;
     box-sizing: border-box;
     }
 .main-content {

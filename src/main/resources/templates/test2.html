@@ -3,16 +3,8 @@
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"> <!-- 必要に応じてスタイルシートを追加 -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<style>
-
-<!--	    .review-container {-->
-<!--	        display: grid;-->
-<!--	        grid-template-columns: repeat(2, 1fr);-->
-<!--	        gap: 10px;-->
-<!--	        margin-top: 5px;-->
-<!--	    }-->
-
         .modal {
             display: none;
             position: fixed;
@@ -26,7 +18,7 @@
         }
 
         .modal-content {
-            margin: 3% auto;
+            margin: auto;
             padding: 10px;
             background-color: #fff;
             border-radius: 10px;
@@ -34,6 +26,8 @@
 			height: fit-content;
 			width: fit-content;
             position: relative;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         .close {
@@ -47,156 +41,120 @@
 
         .close:hover,
         .close:focus {
-            color: black;
+            color: #664d33;
             text-decoration: none;
             cursor: pointer;
         }
-
-<!--        .review {-->
-<!--            position: relative;-->
-<!--        }-->
-
-<!--        .review:hover::after {-->
-<!--            content: "";-->
-<!--            position: absolute;-->
-<!--            top: 0;-->
-<!--            left: 0;-->
-<!--            width: 100%;-->
-<!--            height: 100%;-->
-<!--            background: rgba(85, 40, 0, 0.3);-->
-<!--            transition: background 0.5s ease;-->
-<!--        }-->
 
         .review-text {
             position: relative;
             z-index: 1;
         }
-
-        .google-map-button {
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-
+		
         .footer-menu {
             display: none;
-        }
-
-        @media (max-width: 768px) {
-            footer {
-                position: fixed;
-                bottom: 0;
-                width: 100%;
-                background-color: #fff;
-                box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-                padding: 10px 0;
-            }
-            .footer-menu {
-                display: flex;
-                justify-content: space-around;
-            }
-            .button-container {
-                display: none;
-            }
         }
 	</style>
     <title>詳細情報一覧</title>
 </head>
 <body>
 	<header>
-	    <h1>LunchExplorer</h1>
-	    <nav>
-	        <ul>
-	            <li><a th:href="@{/login}">ログイン</a></li>
-	            <li><a th:href="@{/register}">ユーザー登録</a></li>
-	        </ul>
-	    </nav>
+		<h1>LunchExplorer</h1>
+		<nav>
+			<ul>
+				<li><a th:href="@{/login}">ログイン</a></li>
+				<li><a th:href="@{/register}">ユーザー登録</a></li>
+			</ul>
+		</nav>
 	</header>
 	<main>
-	        <div class="content-wrapper">
-	            <section class="main-content">
-	                <div class="search-bar">
-	                    <input type="text" placeholder="店舗名で検索">
-	                    <button type="button">検索</button>
-	                </div>
-    <table>
-        <div class="store-cards">
-            <!-- 店舗情報をループで表示 -->
-            <th:block th:each="store : ${stores}">
-                <div class="store-card">
-					<span class="store-text" style="display: flex; align-items: center;">
-                    <h3 th:text="${store.store_name}" style="margin-right: 10px;">店舗名</h3>
-                    <a th:href="@{'https://www.google.com/maps/search/?api=1&query=' + ${store.store_name} + ' ' + ${store.store_address}}" target="_blank">
-                        <button type="button" class="google-map-button">GoogleMap</button>
-                    </a>
-                    </span>
-					<span style="font-family: system-ui;">
-                    <p class="icon-text">
-                        <img src="/icons/phone_icon.svg" width="16" height="16">
-                        <span th:text="${store.store_tel}">電話番号</span>
-                        <img src="/icons/address_icon.svg" width="16" height="16" style="margin-left: 10px;">
-                        <span th:text="${store.store_address}">住所</span>
-                    </p>
-					</span>
-                    <p class="icon-text"><img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;"><a th:href="${store.store_url}" target="_blank" th:text="${store.store_url}"></a></p>
-                    <div class="review-container">
-                        <th:block th:each="detail : ${store.detailList}">
-                            <div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/material_img/default_menu_img.svg);background-position: center;background-size: cover;'" onclick="openModal(this)">
-                                <div class="review-text">
-                                    <p class="icon-text menu-name">
-								<img src="/icons/menu_icon_w.svg" width="16" height="16">
-								<span th:text="${detail.detail_menu}">メニュー</span>
-							</p>
-                                    <p class="icon-text">
-							<img src="/icons/price_icon_w.svg" width="16" height="16">
-							<span style="font-size:18px" th:text="${detail.detail_price} + '円'">価格</span>
-                                        <img src="/icons/rating_icon_w.svg" width="16" height="16" style="margin-left: 10px;">
-							<span style="font-size:18px" th:text="${detail.detail_rating}">評価</span>
-							</p>
-                                    <p class="icon-text">
-							<img src="/icons/comment_icon_w.svg" width="16" height="16">
-							<span th:text="${detail.detail_review}">レビュー</span></p>
-                                    <p class="icon-text">
-							<img src="/icons/user_icon_w.svg" width="16" height="16">
-							<span th:text="${detail.user_mail}">投稿者</span></p>
-                                    <p class="icon-text">
-							<img src="/icons/cal_icon_w.svg" width="16" height="16">
-							<span th:text="${detail.detail_postdt}">投稿日時</span></p>
-                                </div>
-                            </div>
-                        </th:block>
-                    </div>
-                </div>
-            </th:block>
-        </div>
-    </table>
-	            </section>
-	        </div>
-	</main>
-
-    <div class="ad-area">
-        <div class="ad">
-            <a href="https://cal.co.jp/about/business/education/" target="_blank">
-                <img src="/material_img/ad_1.png" alt="広告1" style="width: 100%; height: auto;">
-            </a>
-        </div>
-        <div class="ad">
-            <a href="https://www.hellowork.mhlw.go.jp/index.html" target="_blank">
-                <img src="/material_img/ad_2.png" alt="広告2" style="width: 100%; height: auto;">
-            </a>
-        </div>
-    </div>
-
-    <div id="myModal" class="modal" onclick="closeModal()">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <img id="modalImage" src="" alt="レビュー画像" style="width: 100%; height: auto;" />
-            <div id="modalReviewText" class="review-text">
-                <p class="icon-text menu-name">
-					<img src="/icons/menu_icon.svg" width="25" height="25">
-					<span id="modalMenu">メニュー</span></p>
-                <p class="icon-text">
-					<img src="/icons/price_icon.svg" width="16" height="16">
-					<span id="modalPrice">価格</span>
+		<div class="content-wrapper">
+			<section class="main-content">
+				<div class="search-bar">
+					<input type="text" placeholder="店舗名で検索">
+					<button type="button">検索</button>
+				</div>
+				<table>
+					<div class="store-cards">
+						<!-- 店舗情報をループで表示 -->
+						<th:block th:each="store : ${stores}">
+							<div class="store-card">
+								<span class="store-text" style="display: flex; align-items: center;">
+									<h3 th:text="${store.store_name}" style="margin-right: 10px;">店舗名</h3>
+									<a th:href="@{'https://www.google.com/maps/search/?api=1&query=' + ${store.store_name} + ' ' + ${store.store_address}}" target="_blank">
+										<button type="button" class="google-map-button">GoogleMap</button>
+									</a>
+								</span>
+								<span style="font-family: system-ui;">
+										<p class="icon-text">
+											<img src="/icons/phone_icon.svg" width="16" height="16">
+											<span th:text="${store.store_tel}">電話番号</span>
+											<img src="/icons/address_icon.svg" width="16" height="16" style="margin-left: 10px;">
+											<span th:text="${store.store_address}">住所</span>
+										</p>
+									</span>
+									<p class="icon-text">
+										<img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+										<a th:href="${store.store_url}" target="_blank" th:text="WEBサイトを開く"></a>
+									</p>
+									<div class="review-container">
+										<th:block th:each="detail : ${store.detailList}">
+											<div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/material_img/default_menu_img.svg);background-position: center;background-size: cover;'" onclick="openModal(this)">
+												<div class="review-text">
+													<p class="icon-text menu-name">
+														<img src="/icons/menu_icon_w.svg" width="16" height="16">
+														<span th:text="${detail.detail_menu}">メニュー</span>
+													</p>
+													<p class="icon-text">
+														<img src="/icons/price_icon_w.svg" width="16" height="16">
+														<span style="font-size:18px" th:text="${detail.detail_price} + '円'">価格</span>
+														<img src="/icons/rating_icon_w.svg" width="16" height="16" style="margin-left: 10px;">
+														<span style="font-size:18px" th:text="${detail.detail_rating}">評価</span>
+													</p>
+													<p class="icon-text">
+														<img src="/icons/comment_icon_w.svg" width="16" height="16">
+														<span th:text="${detail.detail_review}">レビュー</span></p>
+														<p class="icon-text">
+															<img src="/icons/user_icon_w.svg" width="16" height="16">
+															<span th:text="${detail.user_nickname}">投稿者</span></p>
+															<p class="icon-text">
+																<img src="/icons/cal_icon_w.svg" width="16" height="16">
+																<span th:text="${detail.detail_postdt}">投稿日時</span></p>
+															</div>
+														</div>
+													</th:block>
+												</div>
+											</div>
+										</th:block>
+									</div>
+								</table>
+							</section>
+						</div>
+					</main>
+					<aside class="ad-area">
+											<!-- 広告スペースの例 -->
+											<div class="ad-banner" style="width: 100%; height: auto; margin-bottom: 10px;">
+												<a href="https://cal.co.jp/about/business/education/" target="_blank" rel="noopener noreferrer">
+													<img src="/material_img/ad_1.png" alt="広告1" style="width: 100%; height: 100%; object-fit: cover;">
+												</a>
+											</div>
+											<div class="ad-banner" style="width: 100%; height: auto; margin-bottom: 10px;">
+												<a href="https://www.hellowork.mhlw.go.jp/index.html" target="_blank" rel="noopener noreferrer">
+													<img src="/material_img/ad_2.png" alt="広告2" style="width: 100%; height: 100%; object-fit: cover;">
+												</a>
+											</div>
+										</aside>
+					<div id="myModal" class="modal" onclick="closeModal()">
+						<div class="modal-content">
+							<span class="close" onclick="closeModal()">&times;</span>
+							<img id="modalImage" src="" alt="レビュー画像" style="width: 100%; height: auto;" />
+							<div id="modalReviewText" class="review-text">
+								<p class="icon-text menu-name">
+									<img src="/icons/menu_icon.svg" width="25" height="25">
+									<span id="modalMenu">メニュー</span></p>
+									<p class="icon-text">
+										<img src="/icons/price_icon.svg" width="16" height="16">
+										<span id="modalPrice">価格</span>
                     <img src="/icons/rating_icon.svg" width="16" height="16" style="margin-left: 10px;">
 					<span id="modalRating">評価</span></p>
                 <p class="icon-text">

@@ -14,9 +14,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <title>店舗検索</title>
 </head>
 <body>
+	<header>
+	    <h1>LunchExplorer</h1>
+	    <nav>
+	        <ul>
+	            <li><a th:href="@{/login}">ログイン</a></li>
+	            <li><a th:href="@{/register}">ユーザー登録</a></li>
+	        </ul>
+	    </nav>
+	</header>
+	<main>
+		<div class="content-wrapper">
+			<section class="main-content">
+				<table>
+					<div class="store-cards">
     <h1>店舗名または電話番号で検索</h1>
 
     <form th:action="@{/stores/search}" method="get">
@@ -34,6 +49,35 @@
             <button type="submit">次へ</button>
         </div>
     </form>
+					</div>
+				</table>
+			</section>
+		</div>
+	</main>
+	
+	<div class="ad-area">
+	     <div class="ad">
+	         <a href="https://cal.co.jp/about/business/education/" target="_blank">
+	             <img src="/material_img/ad_1.png" alt="広告1" style="width: 100%; height: auto;">
+	         </a>
+	     </div>
+	     <div class="ad">
+	         <a href="https://www.hellowork.mhlw.go.jp/index.html" target="_blank">
+	             <img src="/material_img/ad_2.png" alt="広告2" style="width: 100%; height: auto;">
+	         </a>
+	     </div>
+	 </div>
+	 <footer>
+		<div class="button-container">
+			<button onclick="location.href='/lunchexplorer'">トップページに戻る</button>
+		</div>
+		<div class="footer-menu">
+			<button onclick="location.href='/lunchexplorer'">トップページに戻る</button>
+		</div>
+		<p>&copy; 2024 LunchExplorer</p>
+	</footer>
+
+
 </body>
 </html>
 
