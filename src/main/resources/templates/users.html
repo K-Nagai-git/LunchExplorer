@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 	<head>
 	    <meta charset="UTF-8">
 	    <title>LunchExplorer - ユーザー登録</title>
@@ -11,6 +11,12 @@
 	</header>
 	<main>
 	    <section>
+			<div>
+			    <p>ログイン中のユーザー名: <span sec:authentication="username">未ログイン</span></p>
+			</div>
+			<div sec:authentication="user_mail">
+				ログイン情報のname値に置き換わる
+			</div>
 			<!--フラッシュメッセージの表示-->
 				<p th:if="${message}" th:text="${message}" 
 				style="color: blue;">完了メッセージ
@@ -52,7 +58,6 @@
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="ログアウト">
 		</form>
-		
 	<footer>
 	    <p>&copy; 2024 LunchExplorer</p>
 	</footer>
