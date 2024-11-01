@@ -1,3 +1,8 @@
+// ★★★★★★★★★★★★
+// ここは新規店舗の検索のコントローラーです。
+//ここで店舗のあるなしや、画面の遷移をします。
+//★★★★★★★★★★★★★★ 
+
 //作成者　深田　1021　
 //メモ：
 //現時点でヘルパーが未実装。
@@ -6,7 +11,7 @@
 //本人の理解力が低いため足りてない部分があるかも
 //更新　深田　1025　新規店舗登録のためのコードを記載と修正を行う。あと若干まだ理解不足かも
 //更新　深田　1029　25日の続き。分からなくて泣きそう。大工事中。
-//更新　深田　1029　29の続き。ゴール見えなくて今日も泣きそう。天気がいい。
+//更新　深田　1030　29の続き。ゴール見えなくて今日も泣きそう。天気がいい。
 
 package com.example.lunchex.controller;
 
@@ -47,93 +52,93 @@ public class StoresController {
 	   
 			return "storeSearch";
 	}
+	
+	//「次へ」をクリックすると「/stores/search」のURLに飛ぶようにHTMLで設定
 	@GetMapping("/search")
 	public String StoreSearch(
-	    @RequestParam("storeName") String storeName,
-	    @RequestParam("storeTel") String storeTel,
-	    Model model,
-	    @AuthenticationPrincipal Users user
-	) {
-	    // テスト用: HTMLから受け取ったデータをコンソールに表示
-	    System.out.println("店舗名: " + storeName);
-	    System.out.println("電話番号: " + storeTel);
-	    
-	    List<Stores> allStores = storesService.getAllStores();
-	    
-	    // 入力データと比較
-	    boolean exists = allStores.stream().anyMatch(store -> 
-	        storeName != null && storeTel != null && 
-	        storeName.equals(store.getStore_name()) && 
-	        storeTel.equals(store.getStore_tel())
-	    );
-
-	    // 店舗が存在する場合
-	    if (exists) {
-	        model.addAttribute("storeName", storeName);
-	        model.addAttribute("storeTel", storeTel);
-	        model.addAttribute("currentDate", LocalDate.now().toString());
-	        return "storeSerchResult"; // 存在する場合の画面に遷移
-	    } else {
-	        // 店舗が存在しない場合
-	        model.addAttribute("storeName", storeName);
-	        model.addAttribute("storeTel", storeTel);
-	        model.addAttribute("currentDate", LocalDate.now().toString());
-	        return "newDetailRegister"; // 新規登録画面に遷移
-	    }
-	}
-
-//	//「次へ」をクリックすると「/stores/search」のURLに飛ぶようにHTMLで設定
-//	@GetMapping("/search")
-//	public String StoreSearch(
-//	
-//	@RequestParam("storeName")String storeName,//HTMLで入力された店舗の名前が格納される
-//	@RequestParam("storeTel") String storeTel,//HTMLで入力された電話番号が格納される
-//	Model model ,
-//	@AuthenticationPrincipal Users user       //Users型のuserにユーザ情報を格納
-//	) {
-//		
-//		
-//		//☆テスト用☆ HTMLから受け取ったデータをコンソールに表示
+	
+	@RequestParam("storeName")String storeName,//HTMLで入力された店舗の名前が格納される
+	@RequestParam("storeTel") String storeTel,//HTMLで入力された電話番号が格納される
+	Model model ,
+	@AuthenticationPrincipal Users user       //Users型のuserにユーザ情報を格納
+	) {	
+		//☆テスト用☆ HTMLから受け取ったデータをコンソールに表示
 //        System.out.println("店舗名: " + storeName);
 //        System.out.println("電話番号: " + storeTel);
-//        
-//        List<Stores> allStores = storesService.getAllStores();//ストアの全てのデータがここに入るはず・・・
-//        
-//        // 入力データと比較　　正直、意味不明
+        
+        List<Stores> allStores = storesService.getAllStores();//ストアの全てのデータがここに入るはず・・・
+        
+//         入力データと比較  電話番号か店舗名のどデータベースにあ
+        boolean exists = allStores.stream().anyMatch(store -> 
+        (storeName != null && storeName.equals(store.getStore_name())) || 
+        (storeTel != null && storeTel.equals(store.getStore_tel()))
+    );
+
+         // 店舗が既に存在する場合の処理
+        // すでに登録されているので詳細登録に飛ばすHTMLを表示する。
+        //ちなみに「exists」にしている理由は特にない。
+        if (exists) {
+           
+            model.addAttribute("storeName", storeName);  //HTMLで入力された店舗名をモデルに格納
+            model.addAttribute("storeTel", storeTel);    //HTMLで入力された電話番号をモデルに格納
+            model.addAttribute("currentDate", LocalDate.now().toString()); // 日付も再設定
+            
+            return "storeSerchResult"; // まだ実装途中。ここの画面が画面の「i」になる。
+
+         // 店舗が存在しない場合の処理
+         // 店舗が登録されていないので、新規登録処理を続ける。詳細入力に進む。フィグマでいうと「K」に当たる     
+        } else {
+        	
+        	 model.addAttribute("storeName", storeName);  //HTMLで入力された店舗名をモデルに格納
+             model.addAttribute("storeTel", storeTel);    //HTMLで入力された電話番号をモデルに格納
+             model.addAttribute("currentDate", LocalDate.now().toString()); // 日付も再設定（面倒なのでこの処理）
+            
+            return "newDetailRegister"; // 詳細入力にHTMLに進む。
+        } 
+	}
+}
+
+
+
+
+//避難用　深田
+	//	@GetMapping("/search")
+//	public String StoreSearch(
+//	    @RequestParam("storeName") String storeName,
+//	    @RequestParam("storeTel") String storeTel,
+//	    Model model,
+//	    @AuthenticationPrincipal Users user
+//	) {
+//	    // テスト用: HTMLから受け取ったデータをコンソールに表示
+//	    System.out.println("店舗名: " + storeName);
+//	    System.out.println("電話番号: " + storeTel);
+//	    
+//	    List<Stores> allStores = storesService.getAllStores();
+//	    
+//	    // 入力データと比較
+//	    boolean exists = allStores.stream().anyMatch(store -> 
+//	        storeName != null && storeTel != null && 
+//	        storeName.equals(store.getStore_name()) && 
+//	        storeTel.equals(store.getStore_tel())
+//	    );
+////        // 入力データと比較
 //        boolean exists = allStores.stream().anyMatch(store ->
 //                store.getStore_name().equals(storeName) && store.getStore_tel().equals(storeTel));
-//         
-//        // 店舗が既に存在する場合の処理
-//        // すでに登録されているので詳細登録に飛ばすHTMLを表示する。
-//        //ちなみに「exists」にしている理由は特にない。
-//        if (exists) {
-//           
-//            model.addAttribute("storeName", storeName);  //HTMLで入力された店舗名をモデルに格納
-//            model.addAttribute("storeTel", storeTel);    //HTMLで入力された電話番号をモデルに格納
-//            model.addAttribute("currentDate", LocalDate.now().toString()); // 日付も再設定
-//            
-//            
-//            return "storeSerchResult"; // まだ実装途中。名前はわかりやすいようにしている。ここの画面が画面の「i」になる。
-//            
-//            
-//        
-//         // 店舗が存在しない場合の処理
-//         // 店舗が登録されていないので、新規登録処理を続ける。詳細入力に進む。フィグマでいうと「K」に当たる
-//        
-//        } else {
-//        	
-//        	 model.addAttribute("storeName", storeName);  //HTMLで入力された店舗名をモデルに格納
-//             model.addAttribute("storeTel", storeTel);    //HTMLで入力された電話番号をモデルに格納
-//             model.addAttribute("currentDate", LocalDate.now().toString()); // 日付も再設定（面倒なのでこの処理）
-//            
-//            return "newDetailRegister"; // 詳細入力にHTMLに進む。
-//        }
-//        
-//        
-//        
+
+//	    // 店舗が存在する場合
+//	    if (exists) {
+//	        model.addAttribute("storeName", storeName);
+//	        model.addAttribute("storeTel", storeTel);
+//	        model.addAttribute("currentDate", LocalDate.now().toString());
+//	        return "storeSerchResult"; // 存在する場合の画面に遷移
+//	    } else {
+//	        // 店舗が存在しない場合
+//	        model.addAttribute("storeName", storeName);
+//	        model.addAttribute("storeTel", storeTel);
+//	        model.addAttribute("currentDate", LocalDate.now().toString());
+//	        return "newDetailRegister"; // 新規登録画面に遷移
+//	    }
 //	}
-}
-	
 	
 	
 	
