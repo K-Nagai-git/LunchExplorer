@@ -20,7 +20,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.lunchex.entity.Stores;
@@ -31,7 +30,7 @@ import com.example.lunchex.service.StoresService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/stores")
+//@RequestMapping("/stores")
 @RequiredArgsConstructor
 @ControllerAdvice
 public class StoresControllerNagai {
