@@ -19,10 +19,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.lunchex.entity.LoginUser;
 import com.example.lunchex.entity.Stores;
-import com.example.lunchex.entity.Users;
+import com.example.lunchex.repository.AuthenticationMapper;
 import com.example.lunchex.repository.LunchexListMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -35,27 +37,33 @@ public class HomeController {
 
 	/** DI */
 	private final LunchexListMapper mapper;
+	private final AuthenticationMapper authenticationMapper;
 	
 //	
 //	テストまち！！！！！！！！！！！！！！！！！！！！！！！深田
 //	
 //	//
 	//トップページ表示のコントローラー（このコントローラー内でログインか未ログインか判別してHTMLに渡す
-	//@AuthenticationPrincipalでログインした人の情報をUsersクラスに格納	
+	//@AuthenticationPrincipalでログインした人の情報をuserに格納	
 	@GetMapping()
-		public String showIndex(Model model,@AuthenticationPrincipal Users user) {
+		public String showIndex(Model model,@AuthenticationPrincipal LoginUser user) {
 			
-		    System.out.println("通過チェック");
-			System.out.println(user);
+//		　　テスト用深田
+		    System.out.println("------------------------------------通過チェック------------------------------------");
+			System.out.println(user);//ログインの情報なのでニックネームは格納されていない
 		
+		
+
 		    List<Stores> storeList;
-			List<Users> userList = new ArrayList<>(); // ユーザー情報を格納するためのリスト
+			List<LoginUser> userList = new ArrayList<>(); // ユーザー情報を格納するためのリスト
 		   
 			// ユーザー情報が存在するか確認を行う。
 			//ユーザー情報が存在する場合はこちらのListを渡す
 	        if (user != null) {
 	            storeList = mapper.selectStoreListPickDt();
+	            
 	            userList.add(user); // ログインしているユーザー情報をリストに追加
+	            
 	        } 
 			 // ユーザー情報がない場合はこちらのListを渡す
 	        else {storeList = mapper.selectStoreListPickDt();
@@ -66,29 +74,30 @@ public class HomeController {
 			model.addAttribute("users",userList);
 			// HTMLのテンプレートをそっと返す
 			
-			System.out.println(userList);
+//			テスト用　深田
+//			System.out.println(userList);
+			
 			return "index";
 		}
 		
-		
-            //詳細画面表示のコントローラー 
-			@GetMapping("/details/2")
-			public String showDetail(  Model model) {
+      //詳細画面表示のコントローラー 
+	  //店舗一覧から詳細ページの遷移確率OK　1030　深田
+			@GetMapping("/details/{id}")
+			public String showDetail
+			( @PathVariable("id") int id,Model model)//ストアIDを受け取ってint型のidに格納			
+			{		
+				//コンソールのテスト用　深田
+//				System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
+
+				//idに対応した店舗のレビュー情報を格納
+				List<Stores> detailList=mapper.selectPickStoreList(id);
+				
+				//モデルに追加
+				model.addAttribute("stores",detailList);				
 				
 				//コンソールのテスト用　深田
-				System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
-				
-				
-				List<Stores> detailList=mapper.selectPickStoreList(2);
-				
-				model.addAttribute("stores",detailList);
-				
-				//コンソールのテスト用　深田
-				System.out.println(detailList);
-				
-				
-				
-				
+//				System.out.println(detailList);
+
 				return "test2";
 			}
 

@@ -1,12 +1,56 @@
+
+// ★★★★★★★★★★★★
+// ここは新規店舗のレビュー登録・投稿のコントローラーです。
+//ここで店舗の詳細レビューを投稿や画面の遷移をします。
+//★★★★★★★★★★★★★★ 
+
 //作成者　深田　1021　
 //メモ：
 //現時点でヘルパーが未実装。
 //全てコメントアウトしている。
 //また「こうなるだろう」という予測の元、名称をつけているので注意
 //本人の理解力が低いため足りてない部分があるかも
+//更新　深田　1030　頑張ります
 
 package com.example.lunchex.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.lunchex.service.StoresService;
+
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequestMapping("/stores")
+@RequiredArgsConstructor
+
+public class DetailController {
+	
+	/** DI */
+	private  final StoresService storesService; //まだ理解してない　深田
+
+//レビューする内容を登録する
+	@GetMapping("/search")
+	public String newDetailRegister() {
+		
+		
+		
+		
+		return null;
+		
+	}
+
+
+}
+
+
+
+
+
+
+//避難用　深田
 //import java.util.List;
 //
 //import org.springframework.stereotype.Controller;
