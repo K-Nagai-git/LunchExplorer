@@ -24,8 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.lunchex.entity.LoginUser;
 import com.example.lunchex.entity.Stores;
+import com.example.lunchex.entity.Users;
 import com.example.lunchex.repository.AuthenticationMapper;
 import com.example.lunchex.repository.LunchexListMapper;
+import com.example.lunchex.repository.UsersMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,7 +40,7 @@ public class HomeController {
 	/** DI */
 	private final LunchexListMapper mapper;
 	private final AuthenticationMapper authenticationMapper;
-	
+	private final UsersMapper usersMapper;  // ニックネーム取得用　永井
 //	
 //	テストまち！！！！！！！！！！！！！！！！！！！！！！！深田
 //	
@@ -56,7 +58,7 @@ public class HomeController {
 
 		    List<Stores> storeList;
 			List<LoginUser> userList = new ArrayList<>(); // ユーザー情報を格納するためのリスト
-		   
+			
 			// ユーザー情報が存在するか確認を行う。
 			//ユーザー情報が存在する場合はこちらのListを渡す
 	        if (user != null) {
@@ -64,18 +66,26 @@ public class HomeController {
 	            
 	            userList.add(user); // ログインしているユーザー情報をリストに追加
 	            
+		        String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
+		        Users loginUser=usersMapper.getUserByMail(loginEmail);
+		        String loginNickname=loginUser.getUser_nickname();            
+				model.addAttribute("login_nickname",loginNickname);
+				System.out.println("★"+loginNickname);
+		        
 	        } 
 			 // ユーザー情報がない場合はこちらのListを渡す
 	        else {storeList = mapper.selectStoreListPickDt();
 	        }
-			
+	        
 	        //判別が終了したLisｔををモデルにぶち込む
 			model.addAttribute("stores", storeList);
 			model.addAttribute("users",userList);
+
+			
 			// HTMLのテンプレートをそっと返す
 			
 //			テスト用　深田
-//			System.out.println(userList);
+//			System.out.println("★"+loginNickname);
 			
 			return "index";
 		}
