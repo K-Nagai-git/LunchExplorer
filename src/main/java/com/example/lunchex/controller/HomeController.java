@@ -68,7 +68,7 @@ public class HomeController {
 			Users loginUser=usersMapper.getUserByMail(loginEmail);
 			String loginNickname=loginUser.getUser_nickname();            
 			model.addAttribute("login_nickname",loginNickname);
-			System.out.println("★"+loginNickname);
+			System.out.println("★"+loginNickname); // 削除可
 
 		} 
 		// ユーザー情報がない場合はこちらのListを渡す
@@ -92,17 +92,24 @@ public class HomeController {
 	//店舗一覧から詳細ページの遷移確率OK　1030　深田
 	@GetMapping("/details/{id}")
 	public String showDetail
-	( @PathVariable("id") int id,Model model)//ストアIDを受け取ってint型のidに格納			
+	( @PathVariable("id") int id,Model model,@AuthenticationPrincipal LoginUser user)//ストアIDを受け取ってint型のidに格納、ログインニックネームも			
 	{		
 		//コンソールのテスト用　深田
-		//				System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
-
+		//System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
+						
 		//idに対応した店舗のレビュー情報を格納
 		List<Stores> detailList=mapper.selectPickStoreList(id);
 
+		if (user!=null) {
+			String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
+			Users loginUser=usersMapper.getUserByMail(loginEmail);
+			String loginNickname=loginUser.getUser_nickname();            
+			model.addAttribute("login_nickname",loginNickname);
+			System.out.println("★★"+loginNickname); // 削除可
+		}
+		
 		//モデルに追加
-		model.addAttribute("stores",detailList);				
-
+		model.addAttribute("stores",detailList);
 		//コンソールのテスト用　深田
 		//				System.out.println(detailList);
 
