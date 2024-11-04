@@ -19,8 +19,15 @@
 						</div>
 		<nav>
 			<ul>
-				<li><a th:href="@{/login}">ログイン</a></li>
-				<li><a th:href="@{/register}">ユーザー登録</a></li>
+				<span th:if="${login_nickname == null}">
+					<li><a th:href="@{/login}">ログイン</a></li>
+					<li><a th:href="@{/register}">ユーザー登録</a></li>
+				</span>
+				<span th:if="${login_nickname != null}">
+					<li>
+				  	 <span th:text="${login_nickname}">User</span>さん
+					</li>
+			   	</span>
 			</ul>
 		</nav>
 	</header>
@@ -62,7 +69,7 @@
 							<div class="review-container">
 								<th:block th:each="detail : ${store.detailList}">
 									<div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/material_img/default_menu_img.svg);background-position: center;background-size: cover;'" th:onclick="|location.href='/lunchexplorer/details/' + (${store.store_id})|">
-										<div class="review-text">
+									<div class="review-text">					
 											<p class="icon-text menu-name">
 												<img src="/icons/menu_icon_w.svg" width="16" height="16">
 												<span th:text="${detail.detail_menu}">メニュー</span></p>

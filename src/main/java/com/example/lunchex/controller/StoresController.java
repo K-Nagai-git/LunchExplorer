@@ -92,7 +92,6 @@ public class StoresController {
 		// 店舗が既に存在する場合の処理
 		// すでに登録されているので詳細登録に飛ばすHTMLを表示する。
 		//ちなみに「exists」にしている理由は特にない。
-		// 更新　11/01 永井
 		if (matchingStore != null) {
 
 			int storeId = matchingStore.getStore_id();
