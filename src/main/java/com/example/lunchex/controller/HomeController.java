@@ -24,10 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.lunchex.entity.LoginUser;
 import com.example.lunchex.entity.Stores;
-import com.example.lunchex.entity.Users;
 import com.example.lunchex.repository.AuthenticationMapper;
 import com.example.lunchex.repository.LunchexListMapper;
-import com.example.lunchex.repository.UsersMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,81 +38,68 @@ public class HomeController {
 	/** DI */
 	private final LunchexListMapper mapper;
 	private final AuthenticationMapper authenticationMapper;
-	private final UsersMapper usersMapper;  // ニックネーム取得用　永井
-	//	
-	//	テストまち！！！！！！！！！！！！！！！！！！！！！！！深田
-	//	
-	//	//
+	
+//	
+//	テストまち！！！！！！！！！！！！！！！！！！！！！！！深田
+//	
+//	//
 	//トップページ表示のコントローラー（このコントローラー内でログインか未ログインか判別してHTMLに渡す
 	//@AuthenticationPrincipalでログインした人の情報をuserに格納	
 	@GetMapping()
-	public String showIndex(Model model,@AuthenticationPrincipal LoginUser user) {
+		public String showIndex(Model model,@AuthenticationPrincipal LoginUser user) {
+			
+//		　　テスト用深田
+		    System.out.println("------------------------------------通過チェック------------------------------------");
+			System.out.println(user);//ログインの情報なのでニックネームは格納されていない
+		
+		
 
-		//		　　テスト用深田
-		System.out.println("------------------------------------通過チェック------------------------------------");
-		System.out.println(user);//ログインの情報なのでニックネームは格納されていない
-
-		List<Stores> storeList;
-		List<LoginUser> userList = new ArrayList<>(); // ユーザー情報を格納するためのリスト
-
-		// ユーザー情報が存在するか確認を行う。
-		//ユーザー情報が存在する場合はこちらのListを渡す
-		if (user != null) {
-			storeList = mapper.selectStoreListPickDt();
-
-			userList.add(user); // ログインしているユーザー情報をリストに追加
-
-			String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
-			Users loginUser=usersMapper.getUserByMail(loginEmail);
-			String loginNickname=loginUser.getUser_nickname();            
-			model.addAttribute("login_nickname",loginNickname);
-			System.out.println("★"+loginNickname); // 削除可
-
-		} 
-		// ユーザー情報がない場合はこちらのListを渡す
-		else {storeList = mapper.selectStoreListPickDt();
-		}
-
-		//判別が終了したLisｔををモデルにぶち込む
-		model.addAttribute("stores", storeList);
-		model.addAttribute("users",userList);
-
-
-		// HTMLのテンプレートをそっと返す
-
-		//			テスト用　深田
-		//			System.out.println("★"+loginNickname);
-
-		return "index";
-	}
-
-	//詳細画面表示のコントローラー 
-	//店舗一覧から詳細ページの遷移確率OK　1030　深田
-	@GetMapping("/details/{id}")
-	public String showDetail
-	( @PathVariable("id") int id,Model model,@AuthenticationPrincipal LoginUser user)//ストアIDを受け取ってint型のidに格納、ログインニックネームも			
-	{		
-		//コンソールのテスト用　深田
-		//System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
-						
-		//idに対応した店舗のレビュー情報を格納
-		List<Stores> detailList=mapper.selectPickStoreList(id);
-
-		if (user!=null) {
-			String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
-			Users loginUser=usersMapper.getUserByMail(loginEmail);
-			String loginNickname=loginUser.getUser_nickname();            
-			model.addAttribute("login_nickname",loginNickname);
-			System.out.println("★★"+loginNickname); // 削除可
+		    List<Stores> storeList;
+			List<LoginUser> userList = new ArrayList<>(); // ユーザー情報を格納するためのリスト
+		   
+			// ユーザー情報が存在するか確認を行う。
+			//ユーザー情報が存在する場合はこちらのListを渡す
+	        if (user != null) {
+	            storeList = mapper.selectStoreListPickDt();
+	            
+	            userList.add(user); // ログインしているユーザー情報をリストに追加
+	            
+	        } 
+			 // ユーザー情報がない場合はこちらのListを渡す
+	        else {storeList = mapper.selectStoreListPickDt();
+	        }
+			
+	        //判別が終了したLisｔををモデルにぶち込む
+			model.addAttribute("stores", storeList);
+			model.addAttribute("users",userList);
+			// HTMLのテンプレートをそっと返す
+			
+//			テスト用　深田
+//			System.out.println(userList);
+			
+			return "index";
 		}
 		
-		//モデルに追加
-		model.addAttribute("stores",detailList);
-		//コンソールのテスト用　深田
-		//				System.out.println(detailList);
+      //詳細画面表示のコントローラー 
+	  //店舗一覧から詳細ページの遷移確率OK　1030　深田
+			@GetMapping("/details/{id}")
+			public String showDetail
+			( @PathVariable("id") int id,Model model)//ストアIDを受け取ってint型のidに格納			
+			{		
+				//コンソールのテスト用　深田
+//				System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
 
-		return "test2";
-	}
+				//idに対応した店舗のレビュー情報を格納
+				List<Stores> detailList=mapper.selectPickStoreList(id);
+				
+				//モデルに追加
+				model.addAttribute("stores",detailList);				
+				
+				//コンソールのテスト用　深田
+//				System.out.println(detailList);
+
+				return "test2";
+			}
 
 }
 
