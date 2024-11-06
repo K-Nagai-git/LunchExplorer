@@ -45,6 +45,16 @@ public class DetailForm {
         private LocalDate detailUsedt;
     	//来店回数
         private Integer detailVisits;
+        
+        //boolean型用のGetterとSetter
+        // Getterメソッド（boolean型なので、isで始める）
+        public boolean isStoreReviewFlag() {
+            return detailReviewFlag;
+        }
+        // Setterメソッド
+        public void setStoreReviewFlag(boolean storeReviewFlag) {
+            this.detailReviewFlag = detailReviewFlag;
+        }
   
 }
 
