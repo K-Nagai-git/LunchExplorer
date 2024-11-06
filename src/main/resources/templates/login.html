@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>ログイン</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>HIRU-DOKO - ログイン</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+		<link rel="icon" href="/material_img/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/material_img/favicon.ico" type="image/x-icon">
+		<style>
+		</style>
+	</head>
 <body>
 	<header>
-		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;">LunchExplorer - ログイン</h1>
+		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;"><img src="/material_img/logo_mtt.svg" alt="LunchExplorer"></h1>
+				<div class="search-bar">
+						<input type="text" placeholder="店舗名で検索">
+						<button type="button">検索</button>
+					</div>
+		<nav>
+			<ul>
+				<span th:if="${login_nickname == null}">
+					<li><a th:href="@{/login}">ログイン</a></li>
+					<li><a th:href="@{/login}">レビュー投稿</a></li>
+					<li><a th:href="@{/register}">ユーザー登録</a></li>
+				</span>
+				<span th:if="${login_nickname != null}">
+					<span th:text="${login_nickname}">User</span>さん
+					<li><a th:href="@{/stores}">レビュー投稿</a></li>
+					<li><a th:href="@{/logout}">ログアウト</a></li>
+				</span>
+			</ul>
+		</nav>
 	</header>
 	<main>
 		<div class="content-wrapper">
@@ -22,23 +45,21 @@
 					<!--ログアウト表示 -->
 					<div th:if="${param.logout}">
 						<p style="color: blue">ログアウトしました</p>
-					</div>					
-<!-- ログイン後処理追加 2024/10/30　糸山> -->
-<!-- "@{/login}"→"@{/authentication}"へ変更 -->
-				<form th:action="@{/authentication}" th:object="${loginForm}" method="post"> 
-					<div>
-						<label for="usernameInput">ユーザー名:</label>
-						<input type="text" name="username" id="usernameInput" th:field="*{username}" required>
-					</div>
-					<div>
-						<label for="passwordInput">パスワード:</label>
-					 	<input type="password" name="password" id="passwordInput" th:field="*{password}" required>
-					</div>
-					<div>
-						<input type="submit" value="login">
-					</div>
-				</form>
-					</table>
+					</div>				 
+					<form th:action="@{/authentication}" th:object="${loginForm}" method="post"> 
+						<div>
+							<label for="usernameInput">メールアドレス:</label>
+							<input type="text" name="username" id="usernameInput" th:field="*{username}" required>
+						</div>
+						<div>
+							<label for="passwordInput">パスワード:</label>
+						 	<input type="password" name="password" id="passwordInput" th:field="*{password}" required>
+						</div>
+						<div>
+							<input type="submit" value="ログイン">
+						</div>
+					</form>
+						</table>
 			</div>
 		</section>
 	</div>

@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 	<head>
-	    <meta charset="UTF-8">
-	    <title>LunchExplorer - ユーザー登録</title>
-	    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>HIRU-DOKO - ユーザー登録</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"> <!-- 必要に応じてスタイルシートを追加 -->
+		<style>
+		</style>
 	</head>
 <body>
 	<header>
-	    <h1>LunchExplorer - ユーザー登録</h1>
+		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;"><img src="/material_img/logo_mtt.svg" alt="LunchExplorer"></h1>
+				<div class="search-bar">
+							<input type="text" placeholder="店舗名で検索">
+							<button type="button">検索</button>
+						</div>
+		<nav>
+			<ul>
+				<span th:if="${login_nickname == null}">
+					<li><a th:href="@{/stores}">レビュー投稿</a></li>
+										<li><a th:href="@{/login}">ログイン</a></li>
+					<li><a th:href="@{/register}">ユーザー登録</a></li>
+				</span>
+				<span th:if="${login_nickname != null}">
+					<li><a th:href="@{/stores}">レビュー投稿</a></li>
+	
+					 <span th:text="${login_nickname}">User</span>さん
+					 <li><a th:href="@{/logout}">ログアウト</a></li>
+				</span>
+			</ul>
+		</nav>
 	</header>
 	<main>
-	    <section>
-			<div>
+		<div class="content-wrapper">
+			<section class="main-content">
+				<table>
+					<div class="form-card">
 			    <p>ログイン中のユーザー名: <span sec:authentication="username">未ログイン</span></p>
-			</div>
+			
 			<div sec:authentication="user_mail">
 				ログイン情報のname値に置き換わる
 			</div>
@@ -46,8 +70,11 @@
 				</div>
 	            <button type="submit">登録</button>
 	        </form>
-			
+				</table>
+				
 	    </section>
+		</div>
+		
 	</main>
 	<!--ボタン：一覧へ移動-->
 		<form th:action="@{/lunchexplorer}" method="get">

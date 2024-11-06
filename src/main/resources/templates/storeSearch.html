@@ -8,24 +8,36 @@
 <!--更新　深田　1029　コード修正-->
 <!--更新　深田　1030　コード修正-->
 
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-    <title>店舗検索</title>
+    <title>HIRU-DOKO - 店舗検索</title>
 </head>
 <body>
 	<header>
-		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;">LunchExplorer</h1>
-	    <nav>
-	        <ul>
-	            <li><a th:href="@{/login}">ログイン</a></li>
-	            <li><a th:href="@{/register}">ユーザー登録</a></li>
-	        </ul>
-	    </nav>
+		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;"><img src="/material_img/logo_mtt.svg" alt="LunchExplorer"></h1>
+				<div class="search-bar">
+							<input type="text" placeholder="店舗名で検索">
+							<button type="button">検索</button>
+						</div>
+		<nav>
+			<ul>
+				<span th:if="${login_nickname == null}">
+					<li><a th:href="@{/login}">ログイン</a></li>
+					<li><a th:href="@{/login}">レビュー投稿</a></li>
+					<li><a th:href="@{/register}">ユーザー登録</a></li>
+				</span>
+				<span th:if="${login_nickname != null}">
+					
+					<span th:text="${login_nickname}">User</span>さん
+					<li><a th:href="@{/stores}">レビュー投稿</a></li>
+					<li><a th:href="@{/logout}">ログアウト</a></li>
+				</span>
+			</ul>
+		</nav>
 	</header>
 	<main>
 		<div class="content-wrapper">

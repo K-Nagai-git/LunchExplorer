@@ -1,30 +1,34 @@
-<!--更新　深田　1023　メモ：いい感じ-->
-<!--更新　深田　1023　二回目　メモ：トップページを本格的にするためコードをを変更-->
+<!--更新　深田　1023　メモ：トップページを本格的にするためコードをを変更-->
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="ja">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>LunchExplorer</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"> <!-- 必要に応じてスタイルシートを追加 -->
+	<title>HIRU-DOKO</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="icon" href="/material_img/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="/material_img/favicon.ico" type="image/x-icon">
 	<style>
 	</style>
 </head>
 <body>
 	<header>
-		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;">LunchExplorer</h1>
-				<div class="search-bar">
-							<input type="text" placeholder="店舗名で検索">
-							<button type="button">検索</button>
-						</div>
+		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;"><img src="/material_img/logo_mtt.svg" alt="LunchExplorer"></h1> <!-- ロゴをクリックするとトップページに戻る -->
+		<div class="search-bar">
+			<input type="text" placeholder="店舗名で検索">
+			<button type="button">検索</button>
+		</div>
 		<nav>
 			<ul>
-				<span th:if="${login_nickname == null}">
+				<span th:if="${login_nickname == null}"> <!-- ログインしていない場合の表示 -->
 					<li><a th:href="@{/login}">ログイン</a></li>
+					<li><a th:href="@{/login}">レビュー投稿</a></li>
 					<li><a th:href="@{/register}">ユーザー登録</a></li>
 				</span>
 				<span th:if="${login_nickname != null}">
-					 <span th:text="${login_nickname}">User</span>さん
+					<span th:text="${login_nickname}">User</span>さん
+					<li><a th:href="@{/stores}">レビュー投稿</a></li>
+					<li><a th:href="@{/logout}">ログアウト</a></li>
 				</span>
 			</ul>
 		</nav>
@@ -32,33 +36,31 @@
 	<main>
 		<div class="content-wrapper">
 			<section class="main-content">
-				
 				<div class="store-cards">
 					<!-- 店舗情報をループで表示 -->
 					<th:block th:each="store : ${stores}">
 						<div class="store-card">
-							<h3 th:text="${store.store_name}" style="margin-right: 0px; cursor: pointer;" th:onclick="|location.href='/lunchexplorer/details/' + (${store.store_id})|">店舗名</h3>
-															
+							<h3 th:text="${store.store_name}" style="margin-right: 0px; cursor: pointer;" th:onclick="|location.href='/lunchexplorer/details/' + (${store.store_id})|">店舗名</h3> <!-- 店舗名をクリックすると詳細ページに遷移 -->
 							<div class="text-blocks">
 								<div class="text-block1">
-							<span class="store-text">
-								<p class="icon-text">
-									<img src="/icons/phone_icon.svg" width="16" height="16">
-									<span th:text="${store.store_tel}">電話番号</span>
-								</p>
-								<th:block th:if="${store.store_address} != null">
-									<p class="icon-text">
-										<img src="/icons/address_icon.svg" width="16" height="16">
-										<span th:text="${store.store_address}">住所</span>
-									</p>
-								</th:block>
-								<th:block th:if="${store.store_url} != null">
-									<p class="icon-text">
-										<img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
-										<a th:href="${store.store_url}" target="_blank" th:text="WEBサイトを開く" rel="noopener noreferrer"></a>
-									</p>
-								</th:block>
-							</span>
+									<span class="store-text">
+										<p class="icon-text">
+											<img src="/icons/phone_icon.svg" width="16" height="16">
+											<span th:text="${store.store_tel}">電話番号</span>
+										</p>
+										<th:block th:if="${store.store_address} != null">
+											<p class="icon-text">
+												<img src="/icons/address_icon.svg" width="16" height="16">
+												<span th:text="${store.store_address}">住所</span>
+											</p>
+										</th:block>
+										<th:block th:if="${store.store_url} != null">
+											<p class="icon-text">
+												<img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
+												<a th:href="${store.store_url}" target="_blank" th:text="WEBサイトを開く" rel="noopener noreferrer"></a>
+											</p>
+										</th:block>
+									</span>
 								</div>
 								<div class="text-block2">
 									<button onclick="location.href='/lunchexplorer'">書</button>
@@ -70,37 +72,40 @@
 										<div class="review-text">
 											<p class="icon-text menu-name">
 												<img src="/icons/menu_icon_w.svg" width="16" height="16">
-												<span th:text="${detail.detail_menu}">メニュー</span></p>
+												<span th:text="${detail.detail_menu}">メニュー</span>
+											</p>
 											<p class="icon-text menu-name">
 												<img src="/icons/price_icon_w.svg" width="16" height="16">
 												<span th:text="${detail.detail_price} + '円'">価格</span>
 												<img src="/icons/rating_icon_w.svg" width="16" height="16" style="margin-left: 10px;">
-												<span th:text="${detail.detail_rating}">評価</span></p>
+												<span th:text="${detail.detail_rating}">評価</span>
+											</p>
 											<p class="icon-text">
 												<img src="/icons/comment_icon_w.svg" width="16" height="16">
-												<span th:text="${detail.detail_review}">レビュー</span></p>
-												</div>
-											</div>
-										</th:block>
+												<span th:text="${detail.detail_review}">レビュー</span>
+											</p>
+										</div>
 									</div>
-								</div>
-							</th:block>
+								</th:block>
+							</div>
 						</div>
-					</section>
-					<aside class="ad-area">
-						<!-- 広告スペースの例 -->
-						<div class="ad-banner" style="width: 100%; height: auto; margin-bottom: 10px;">
-							<a href="https://cal.co.jp/about/business/education/" target="_blank" rel="noopener noreferrer">
-								<img src="/material_img/ad_1.png" alt="広告1" style="width: 100%; height: 100%; object-fit: cover;">
-							</a>
-						</div>
-						<div class="ad-banner" style="width: 100%; height: auto; margin-bottom: 10px;">
-							<a href="https://www.hellowork.mhlw.go.jp/index.html" target="_blank" rel="noopener noreferrer">
-								<img src="/material_img/ad_2.png" alt="広告2" style="width: 100%; height: 100%; object-fit: cover;">
-							</a>
-						</div>
-					</aside>
+					</th:block>
 				</div>
+			</section>
+			<aside class="ad-area">
+				<!-- 広告スペースの例 -->
+				<div class="ad-banner" style="width: 100%; height: auto; margin-bottom: 10px;">
+					<a href="https://cal.co.jp/about/business/education/" target="_blank" rel="noopener noreferrer">
+						<img src="/material_img/ad_1.png" alt="広告1" style="width: 100%; height: 100%; object-fit: cover;">
+					</a>
+				</div>
+				<div class="ad-banner" style="width: 100%; height: auto; margin-bottom: 10px;">
+					<a href="https://www.hellowork.mhlw.go.jp/index.html" target="_blank" rel="noopener noreferrer">
+						<img src="/material_img/ad_2.png" alt="広告2" style="width: 100%; height: 100%; object-fit: cover;">
+					</a>
+				</div>
+			</aside>
+		</div>
     </main>
     <footer>
         <p>&copy; 2024 LunchExplorer</p>
