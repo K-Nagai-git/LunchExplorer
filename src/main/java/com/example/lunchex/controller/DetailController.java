@@ -101,8 +101,9 @@ public class DetailController {
 	
 	/** 店舗・詳細登録*/
 	@GetMapping("/detailsave")
-	public String newStoresDetailRegister(StoresForm storesForm) {
-		
+	public String newStoresDetailRegister(StoresForm storesForm, DetailForm detailForm) {
+
+		//ｈｔｍｌフォームから取得したデータを格納
 		StoresForm storesDate = new StoresForm();
 		storesDate.setStoreName(storesForm.getStoreName());
 		storesDate.setStoreTel(storesForm.getStoreTel());
@@ -112,12 +113,38 @@ public class DetailController {
 		
 		//DetailForm detailform = new DetailForm();
 		System.out.println("★登録処理入り口" + storesDate);
+		//店舗情報登録（新規・更新）
 		newStoresInsert(storesDate);
+		
+		//店舗ID取得
+		Stores storesID = new Stores();
+		storesID = storesService.getStoreByName(storesDate.getStoreName());
+		
+		//htmlフォームから取得したデータを格納
+		DetailForm detailDate = new DetailForm();
+		
+//		detailDate.setStoreId(detailFor)
+//		detailDate
+//		detailDate
+//		detailDate
+//		detailDate
+//		detailDate
+//		detailDate
+//		detailDate
+//		detailDate
+//		detailDate
+//		detailDate
+//		detailDate
+//		
+//		detailDate
+		
+		//詳細情報登録(新規)
 		//newDetail(detailform);
 		
 		return "redirect:/detail";
 	}
 	/** 店舗登録*/
+	//登録されていない店舗は新規登録、すでに登録されている店舗は更新として登録する
 	public void newStoresInsert(StoresForm form) {
 		System.out.println("★" +form);
 		System.out.println("通過チェック(店舗)");
@@ -149,6 +176,7 @@ public class DetailController {
 		}
 	}
 	/** 詳細登録*/
+		//詳細登録はすべて新規（時間が出きれな更新処理も追加）
 		public void newDetail(DetailForm form) {
 			System.out.println("通過チェック(詳細)");
 			//エンティティへの変換
