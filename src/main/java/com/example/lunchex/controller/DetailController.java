@@ -16,63 +16,79 @@
 
 package com.example.lunchex.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.lunchex.entity.Detail;
+import com.example.lunchex.entity.LoginUser;
 import com.example.lunchex.entity.Stores;
 import com.example.lunchex.form.DetailForm;
 import com.example.lunchex.form.StoresForm;
 import com.example.lunchex.helper.DetailHelper;
 import com.example.lunchex.helper.StoresHelper;
+import com.example.lunchex.repository.AuthenticationMapper;
 import com.example.lunchex.service.DetailService;
 import com.example.lunchex.service.StoresService;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
-//@RequestMapping("/stores")
 @RequestMapping("/detail")
 @RequiredArgsConstructor
 public class DetailController {
+	private final AuthenticationMapper authenticationMapper;
 	
 	/** DI */
 	private final StoresService storesService; 
 	private final DetailService detailService;
 	
 	/**画面表示*/
-	@GetMapping
+	//店舗データなし
+	@GetMapping()
 	public String showDetail(@ModelAttribute DetailForm form, StoresForm storesForm, Model model) {
 		//login.htmlに遷移
 		//return "/lunchexplorer";
 		model.addAttribute("storesForm", new StoresForm()); // StoreFormはデータクラス
-		
-//		//登録済みの場合情報表示
-//		System.out.println("店名は" + storesForm.getStoreName());
-//		//店舗に対する情報を取得
-//		Stores stores = storesService.getStoreByName(storesForm.getStoreName());
-//		System.out.println("登録済み有無を確認");
-//		if(stores != null) {
-//			System.out.println("登録済みデータ表示");
-//			//対象のある場合はFormへの変換
-//			StoresForm storesDateform = StoresHelper.convertStoresForm(stores);
-//			//対象データがある場合はモデルにFormを追加
-//	        model.addAttribute("storesDateform", form);
-//
-//			return "detail";
-//			
-//		}else {
-//			System.out.println("データなし");
-//			//対象データがない場合はフラッシュメッセージを設定
-//			//attributes.addFlashAttribute("errorMessage", "対象データはありません");
-//			return "redirect:/detail";
-//		}
 		return "detail";
+	}
+	
+	//店舗データあり
+	@GetMapping("/{id}")
+	public String showStoresDetail(@PathVariable("id") int id, @ModelAttribute DetailForm form, StoresForm storesForm, Model model) {
+		model.addAttribute("storesForm", new StoresForm()); // StoreFormはデータクラス
+		System.out.println("通過チェック");
+		System.out.println("IDチェック" + id);
+		//店舗情報を取得
+		Stores stores = storesService.getStoreById(id);
+		
+		System.out.println("データ取得チェック1" + stores.getStore_name());
+		
+		//DBから取得した店舗データを格納
+		Stores storesData = new Stores();
+		storesData.setStore_name(stores.getStore_name());
+		storesData.setStore_tel(stores.getStore_tel());
+		storesData.setStore_address(stores.getStore_address());
+		storesData.setStore_url(stores.getStore_url());
+		storesData.setUser_mail(stores.getUser_mail());
+		
+		System.out.println("登録済みデータ表示");
+		//対象のある場合はFormへの変換
+		StoresForm dataform = StoresHelper.convertStoresForm(storesData);
+				
+		System.out.println("データ取得チェック2" + dataform.getStoreName());
+		
+		//対象データがある場合はモデルにFormを追加
+        model.addAttribute("storesForm", dataform);
+
+		
+        return "detail";
 	}
 	
 	@GetMapping("/newView")
@@ -101,19 +117,33 @@ public class DetailController {
 	
 	/** 店舗・詳細登録*/
 	@GetMapping("/detailsave")
-	public String newStoresDetailRegister(StoresForm storesForm, DetailForm detailForm) {
-
+	public String newStoresDetailRegister(StoresForm storesForm, DetailForm detailForm ,@AuthenticationPrincipal LoginUser user) {
+		
 		//ｈｔｍｌフォームから取得した店舗データを格納
 		StoresForm storesDate = new StoresForm();
 		storesDate.setStoreName(storesForm.getStoreName());
 		storesDate.setStoreTel(storesForm.getStoreTel());
 		storesDate.setStoreAddress(storesForm.getStoreAddress());
 		storesDate.setStoreUrl(storesForm.getStoreUrl());
-		storesDate.setStoreUserMail(storesForm.getStoreUserMail());
+		//storesDate.setStoreUserMail(storesForm.getStoreUserMail());
+		
+		//店舗登録者のユーザーメールアドレスを取得
+		Stores stores = storesService.getStoreByName(storesDate.getStoreName());
+		//店舗登録がすでに
+		if(stores != null) {
+			System.out.println("通過チェックストアユーザーID" + storesDate.getStoreUserMail());
+			storesDate.setStoreUserMail(stores.getUser_mail());
+		}
+		//店舗登録がない場合
+		else {
+			System.out.println("通過チェックログインユーザーID" + user.getUsername());
+			storesDate.setStoreUserMail(user.getUsername());
+		}
 		
 		//DetailForm detailform = new DetailForm();
 		System.out.println("★登録処理入り口" + storesDate);
 		//店舗情報登録（新規・更新）
+		System.out.println("★メールアドレス" + storesDate.getStoreUserMail());
 		newStoresInsert(storesDate);
 		
 		//店舗ID取得
@@ -125,7 +155,8 @@ public class DetailController {
 		
 		detailDate.setStoreId(storesID.getStore_id());
 		detailDate.setDetailPostdt(detailForm.getDetailPostdt());
-		detailDate.setDitailUserMail(detailForm.getDitailUserMail());
+		//detailDate.setDitailUserMail(detailForm.getDitailUserMail());
+		detailDate.setDitailUserMail(user.getUsername());
 		detailDate.setDetailMenu(detailForm.getDetailMenu());
 		detailDate.setDetailPrice(detailForm.getDetailPrice());
 		detailDate.setDetailRating(detailForm.getDetailRating());
@@ -144,6 +175,7 @@ public class DetailController {
 	/** 店舗登録*/
 	//登録されていない店舗は新規登録、すでに登録されている店舗は更新として登録する
 	public void newStoresInsert(StoresForm form) {
+		System.out.println("店舗登録ユーザー" + form.getStoreUserMail());
 		System.out.println("★" +form);
 		System.out.println("通過チェック(店舗)");
 		//登録されているIDかどうか確認
@@ -155,8 +187,8 @@ public class DetailController {
 			//form.setIsNew(true);
 			
 			System.out.println("店舗更新登録");
-			// フォームのデータを受け取って処理する
 		    System.out.println("店舗名: " + form.getStoreName());
+		    System.out.println("★ユーザーメールアドレス: " + form.getStoreUserMail());
 			//エンティティへの変換
 			stores = StoresHelper.convertNewStores(form);
 			System.out.println("エンティティへの変換通過");
