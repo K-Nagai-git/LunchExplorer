@@ -13,23 +13,31 @@
         <!--<input type="hidden" name="storeId" th:field="*{storeId}">-->
         <div th:object="${storesForm}">
             <label for="storeName">店舗名</label>
-            <input type="text" th:field="*{storeName}" required>
+            <input type="text" id="storeName"th:field="*{storeName}" 
+					th:disabled="${not #fields.hasErrors('storeName') and storesForm.storeName != null}" 
+					required>
         </div>
         <div th:object="${storesForm}">
             <label for="storeTel">電話番号:</label>
-            <input type="text" th:field="*{storeTel}" required>
+            <input type="text" th:field="*{storeTel}" 
+			th:disabled="${not #fields.hasErrors('storeTel') and storesForm.storeTel != null}" 
+			required>
         </div>
         <div th:object="${storesForm}">
             <label for="storeAddress">店舗住所:</label>
-            <input type="text" th:field="*{storeAddress}">
+            <input type="text" th:field="*{storeAddress}"
+			th:disabled="${not #fields.hasErrors('storeAddress') and storesForm.storeAddress != null}" >
         </div>
         <div th:object="${storesForm}">
             <label for="storeUrl">店舗ホームページ:</label>
-            <input type="text" th:field="*{storeUrl}">
+            <input type="text" th:field="*{storeUrl}"
+			th:disabled="${not #fields.hasErrors('storeUrl') and storesForm.storeUrl != null}" >
         </div>
         <div th:object="${storesForm}">
-            <label for="storeUserMail">ユーザーID（メールアドレス）:</label>
-            <input type="text" th:field="*{storeUserMail}" required>
+            <!--<label for="storeUserMail">ユーザーID（メールアドレス）:</label>-->
+            <input type="hidden" th:field="*{storeUserMail}" 
+			th:disabled="${not #fields.hasErrors('storeUserMail') and storesForm.storeUserMail != null}" 
+			required>
         </div>
 		<!-- 詳細情報の登録フォーム -->
 		<!--<div>
@@ -42,8 +50,8 @@
 		 </div>
 		 
 		 <div th:object="${detailForm}">
-		       <label for="	ditailUserMail">ユーザーメールアドレス</label>
-		       <input type="text" th:field="*{ditailUserMail}" required>
+		       <!--<label for="	ditailUserMail">ユーザーメールアドレス</label>-->
+		       <input type="hidden" th:field="*{ditailUserMail}" required>
 		 </div>
 		 <div th:object="${detailForm}">
 		        <label for="detailMenu">メニュー名</label>
@@ -59,7 +67,7 @@
 		</div>
 		<div th:object="${detailForm}">
 		    <label for="detailReviewFlag">レビュー表示フラグ</label>
-		    <input type="checkbox" th:field="*{detailReviewFlag}" id="detailReviewFlag">
+		    <input type="checkbox" th:field="*{detailReviewFlag}" id="detailReviewFlag" th:checked="true">
 		</div>
 		<div th:object="${detailForm}">
 			     <label for="detailReview">レビュー</label>
