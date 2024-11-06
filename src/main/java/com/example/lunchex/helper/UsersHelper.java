@@ -17,9 +17,9 @@ public class UsersHelper {
 	public static UsersForm convertRecorderForm(Users Users) {
 		
 		UsersForm form = new UsersForm();
-		form.setUserMail(form.getUserMail());
-		form.setUserNickname(form.getUserNickname());
-		form.setUserPassword(form.getUserPassword());
+		form.setUserMail(Users.getUser_mail());
+		form.setUserNickname(Users.getUser_nickname());
+		form.setUserPassword(Users.getUser_password());
 		
 		
 		return form;

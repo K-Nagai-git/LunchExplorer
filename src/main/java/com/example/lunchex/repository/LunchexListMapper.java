@@ -25,7 +25,7 @@ public interface LunchexListMapper {
     /** 指定したIDの店舗を取得する */
     @Select("SELECT * FROM stores WHERE store_id = #{store_id}")
     Stores findById(int id);
-
+    
     /** 店舗を登録する */
 //    @Insert("INSERT INTO stores (store_name, store_tel, store_address, store_url, user_mail) VALUES (#{store_name}, #{store_tel}, #{store_address}, #{store_url}, #{user_mail})")
     @Options(useGeneratedKeys = true, keyProperty = "store_id")

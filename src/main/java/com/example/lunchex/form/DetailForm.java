@@ -2,6 +2,8 @@
 
 package com.example.lunchex.form;
 
+import java.time.LocalDate;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -11,23 +13,38 @@ import lombok.Data;
 public class DetailForm {
 
     // メニュー情報登録フォームのデータクラス
-    public static class MenuRegisterForm {
-        @NotEmpty(message = "メニュー名を入力してください")
-        private String menuName; // メニュー名
 
+    	
+    	/**詳細（投稿）情報*/
+    	//店舗ID
+    	private Integer storeId;
+    	//投稿日
+    	private LocalDate detailPostdt;
+    	//ユーザーメールアドレス
+    	private String ditailUserMail;
+    	//メニュー名
+        @NotEmpty(message = "メニュー名を入力してください")   
+        private String detailMenu; // メニュー名
+    	//金額
         @NotNull(message = "金額を入力してください")
         @Positive(message = "金額は正の値でなければなりません")
-        private Integer price; // 金額
-
+        private Integer detailPrice; // 金額
+    	//評価
         @NotNull(message = "評価を選択してください")
-        private Integer rating; // 評価（1から5）
-
-        private String comment; // コメント（任意）
-
-        private String photo; // 写真投稿（任意）
-
+        private Integer detailRating; // 評価（1から5）
+    	//レビュー表示フラグ
         @NotNull(message = "レビュー公開の選択が必要です")
-        private Boolean isPublic; // レビューを公開するかしないか
-    }
+        private Boolean detailReviewFlag; // レビューを公開するかしないか
+    	//レビュー       
+        private String detailReview; // コメント（任意）
+    	//レビュー用画像
+        private String detailImage; // 写真投稿（任意）
+    	//メモ
+        private String detailMemo; 
+    	//利用日付
+        private LocalDate detailUsedt;
+    	//来店回数
+        private Integer detailVisits;
+  
 }
 

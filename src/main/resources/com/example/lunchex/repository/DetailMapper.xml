@@ -7,19 +7,25 @@
 <!-- ************************ -->
 <mapper namespace="com.example.lunchex.repository.DetailMapper">
     <!-- 全件検索 -->
-    <select id="selectAllDetail" resultType="com.example.lunchex.entity.Detail">
+    <select id="getAllDetails" resultType="com.example.lunchex.entity.Detail">
         SELECT detail_id,store_id,detail_postdt,user_mail,detail_menu,detail_price,
         detail_rating,detail_review_flag,detail_review,detail_image,detail_memo,
         detail_usedt,detail_visits FROM detail
     </select>
     <!-- １件検索 -->
-    <select id="selectByIdDetail" resultType="com.example.lunchex.entity.Detail">
+    <select id="getDetailById" resultType="com.example.lunchex.entity.Detail">
         SELECT detail_id,store_id,detail_postdt,user_mail,detail_menu,detail_price,
         detail_rating,detail_review_flag,detail_review,detail_image,detail_memo,
         detail_usedt,detail_visits FROM detail WHERE detail_id = #{id}
     </select>
+    <!-- 特定ユーザー検索 -->
+    <select id="getDetailsByUser" resultType="com.example.lunchex.entity.Detail">
+        SELECT detail_id,store_id,detail_postdt,user_mail,detail_menu,detail_price,
+        detail_rating,detail_review_flag,detail_review,detail_image,detail_memo,
+        detail_usedt,detail_visits FROM detail WHERE detail_id = #{user_mail}
+    </select>
     <!-- 登録 -->
-    <insert id="insertDetail">
+    <insert id="addDetail">
 	    INSERT INTO detail (store_id,detail_postdt,user_mail,detail_menu,
 	    detail_price,detail_rating,detail_review_flag,detail_review,detail_image,
 	    detail_memo,detail_usedt,detail_visits) 

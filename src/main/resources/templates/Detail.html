@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メニュー情報登録</title>
+</head>
+<body>
+    <h1>メニュー情報を入力してください</h1>
+
+    <!-- 店舗情報の登録フォーム -->
+    <form th:action="@{/detail/detailsave}" th:object="${storesForm}" method="get">
+        <!--<input type="hidden" name="storeId" th:field="*{storeId}">-->
+        <div>
+            <label for="storeName">店舗名</label>
+            <input type="text" th:field="*{storeName}" required>
+        </div>
+        <div>
+            <label for="storeTel">電話番号:</label>
+            <input type="text" th:field="*{storeTel}" required>
+        </div>
+        <div>
+            <label for="storeAddress">店舗住所:</label>
+            <input type="text" th:field="*{storeAddress}">
+        </div>
+        <div>
+            <label for="storeUrl">店舗ホームページ:</label>
+            <input type="text" th:field="*{storeUrl}">
+        </div>
+        <div>
+            <label for="storeUserMail">ユーザーID（メールアドレス）:</label>
+            <input type="text" th:field="*{storeUserMail}" required>
+        </div>
+		<!-- 詳細情報の登録フォーム -->
+		<div>
+		     <label for="storeName">店舗ID</label>
+		     <input type="text" th:field="*{storeName}" required>
+		 </div>
+		 <div>
+			<label for="detailPostdt">投稿日:</label>
+			<input type="date" id="detailPostdt" name="detailPostdt" required>
+		 </div>
+		 
+		 <div>
+		       <label for="storeName">ユーザーメールアドレス</label>
+		       <input type="text" th:field="*{storeName}" required>
+		 </div>
+		 <div>
+		        <label for="storeName">メニュー名</label>
+		        <input type="text" th:field="*{storeName}" required>
+		 </div>
+		 <div>
+			     <label for="storeName">金額</label>
+			     <input type="text" th:field="*{storeName}" required>
+		 </div>
+		 <div>
+			     <label for="storeName">評価</label>
+			     <input type="text" th:field="*{storeName}" required>
+		</div>
+		<div>
+			     <label for="storeName">レビュー表示フラグ</label>
+			     <input type="text" th:field="*{storeName}" required>
+		</div>
+		<div>
+			     <label for="storeName">レビュー</label>
+			     <input type="text" th:field="*{storeName}" required>
+		</div>
+		<div>
+				 <label for="storeName">レビュー用画像</label>
+				 <input type="text" th:field="*{storeName}" required>
+		</div>
+		<div>
+				 <label for="storeName">メモ</label>
+				 <input type="text" th:field="*{storeName}" required>
+		</div>
+		<div>
+		    <label for="detailUsedt">利用付日</label>
+		    <input type="date" id="detailUsedt" th:field="*{detailUsedt}" required>
+		</div>
+		<script>
+		    window.onload = function() {
+		        const today = new Date().toISOString().split('T')[0];
+		        document.getElementById('detailUsedt').value = today;
+		    };
+		</script>
+		<div>
+				 <label for="storeName">来店回数</label>
+				 <input type="text" th:field="*{storeName}" required>
+		</div>
+
+        <button type="submit">登録</button>
+    </form>
+	<script>
+	    window.onload = function() {
+	        // 当日日付を取得し、"YYYY-MM-DD"の形式に整形
+	        const today = new Date().toISOString().split('T')[0];
+	        
+	        // 当日日付のみ入力可能に設定
+	        const dateInput = document.getElementById('detailPostdt');
+	        dateInput.min = today;
+	        dateInput.max = today;
+	    };
+	</script>
+</body>
+</html>

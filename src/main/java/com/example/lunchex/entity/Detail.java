@@ -1,7 +1,4 @@
 package com.example.lunchex.entity;
-// 永井 241015
-//　糸山　241022　メモ：StoresとUsersの追加
-//　更新　2024/10/30　永井　user_nicknameを追加
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
