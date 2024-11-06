@@ -34,7 +34,8 @@ public class DetailForm {
         private Integer detailRating; // 評価（1から5）
     	//レビュー表示フラグ
         @NotNull(message = "レビュー公開の選択が必要です")
-        private Boolean detailReviewFlag; // レビューを公開するかしないか
+        //private Boolean detailReviewFlag; // レビューを公開するかしないか
+        private Boolean detailReviewFlag = true;  // デフォルトでtrueを設定
     	//レビュー       
         private String detailReview; // コメント（任意）
     	//レビュー用画像
@@ -46,15 +47,15 @@ public class DetailForm {
     	//来店回数
         private Integer detailVisits;
         
-        //boolean型用のGetterとSetter
-        // Getterメソッド（boolean型なので、isで始める）
-        public boolean isStoreReviewFlag() {
-            return detailReviewFlag;
-        }
-        // Setterメソッド
-        public void setStoreReviewFlag(boolean storeReviewFlag) {
-            this.detailReviewFlag = detailReviewFlag;
-        }
+//        //boolean型用のGetterとSetter
+//        // Getterメソッド（boolean型なので、isで始める）
+//        public boolean isStoreReviewFlag() {
+//            return detailReviewFlag;
+//        }
+//        // Setterメソッド
+//        public void setStoreReviewFlag(boolean detailReviewFlag) {
+//            this.detailReviewFlag = detailReviewFlag;
+//        }
   
 }
 

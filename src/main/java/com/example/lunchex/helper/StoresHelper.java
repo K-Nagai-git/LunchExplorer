@@ -5,7 +5,8 @@
 //「User」に変更し、それにともないコードを修正
 //更新　深田　1021　
 //メモ：上記の修正をもとに戻す。クラス名を「Users」に変更
-
+//更新　糸山　1106
+//メモ　StoresHelperのクラスに合わせてStoresのエンティティ変換コードだけに変更
 
 
 package com.example.lunchex.helper;
@@ -59,16 +60,22 @@ public class StoresHelper {
 		return stores;
 
 	}
-	public static StoresForm convertStoresForm(Stores Stores) {
+	public static StoresForm convertStoresForm(Stores stores) {
 		StoresForm form = new StoresForm();
 
 		//店舗ID
+		form.setStoreId(stores.getStore_id());
 		//店舗名
+		form.setStoreName(stores.getStore_name());
 		//店舗電話番号
+		form.setStoreTel(stores.getStore_tel());
 		//店舗住所
+		form.setStoreAddress(stores.getStore_address());
 		//店舗URL
+		form.setStoreUrl(stores.getStore_url());
 		//登録者ID
-
+		form.setStoreUserMail(stores.getUser_mail());
+		
 		return form;
 	}
 
