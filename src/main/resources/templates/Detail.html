@@ -9,71 +9,71 @@
     <h1>メニュー情報を入力してください</h1>
 
     <!-- 店舗情報の登録フォーム -->
-    <form th:action="@{/detail/detailsave}" th:object="${storesForm}" method="get">
+    <form th:action="@{/detail/detailsave}" method="get">
         <!--<input type="hidden" name="storeId" th:field="*{storeId}">-->
-        <div>
+        <div th:object="${storesForm}">
             <label for="storeName">店舗名</label>
             <input type="text" th:field="*{storeName}" required>
         </div>
-        <div>
+        <div th:object="${storesForm}">
             <label for="storeTel">電話番号:</label>
             <input type="text" th:field="*{storeTel}" required>
         </div>
-        <div>
+        <div th:object="${storesForm}">
             <label for="storeAddress">店舗住所:</label>
             <input type="text" th:field="*{storeAddress}">
         </div>
-        <div>
+        <div th:object="${storesForm}">
             <label for="storeUrl">店舗ホームページ:</label>
             <input type="text" th:field="*{storeUrl}">
         </div>
-        <div>
+        <div th:object="${storesForm}">
             <label for="storeUserMail">ユーザーID（メールアドレス）:</label>
             <input type="text" th:field="*{storeUserMail}" required>
         </div>
 		<!-- 詳細情報の登録フォーム -->
-		<div>
-		     <label for="storeName">店舗ID</label>
-		     <input type="text" th:field="*{storeName}" required>
-		 </div>
-		 <div>
+		<!--<div>
+		     <label for="storeId">店舗ID</label>
+		     <input type="text" th:field="*{			 storeId}" required>
+		 </div>-->
+		 <div th:object="${detailForm}">
 			<label for="detailPostdt">投稿日:</label>
 			<input type="date" id="detailPostdt" name="detailPostdt" required>
 		 </div>
 		 
-		 <div>
-		       <label for="storeName">ユーザーメールアドレス</label>
-		       <input type="text" th:field="*{storeName}" required>
+		 <div th:object="${detailForm}">
+		       <label for="	ditailUserMail">ユーザーメールアドレス</label>
+		       <input type="text" th:field="*{ditailUserMail}" required>
 		 </div>
-		 <div>
-		        <label for="storeName">メニュー名</label>
-		        <input type="text" th:field="*{storeName}" required>
+		 <div th:object="${detailForm}">
+		        <label for="detailMenu">メニュー名</label>
+		        <input type="text" th:field="*{detailMenu}" required>
 		 </div>
-		 <div>
-			     <label for="storeName">金額</label>
-			     <input type="text" th:field="*{storeName}" required>
+		 <div th:object="${detailForm}">
+			     <label for="detailPrice">金額</label>
+			     <input type="text" th:field="*{detailPrice}" required>
 		 </div>
-		 <div>
-			     <label for="storeName">評価</label>
-			     <input type="text" th:field="*{storeName}" required>
+		 <div th:object="${detailForm}">
+			     <label for="detailRating">評価</label>
+			     <input type="text" th:field="*{detailRating}" required>
 		</div>
-		<div>
-			     <label for="storeName">レビュー表示フラグ</label>
-			     <input type="text" th:field="*{storeName}" required>
+		<div th:object="${detailForm}">
+		    <label for="detailReviewFlag">レビュー表示フラグ</label>
+		    <input type="checkbox" th:field="*{detailReviewFlag}" id="detailReviewFlag">
 		</div>
-		<div>
-			     <label for="storeName">レビュー</label>
-			     <input type="text" th:field="*{storeName}" required>
+		<div th:object="${detailForm}">
+			     <label for="detailReview">レビュー</label>
+			     <input type="text" th:field="*{detailReview}">
 		</div>
-		<div>
-				 <label for="storeName">レビュー用画像</label>
-				 <input type="text" th:field="*{storeName}" required>
+		<div th:object="${detailForm}">
+				 <label for="detailImage">レビュー用画像</label>
+				 <input type="text" th:field="*{detailImage}">
 		</div>
-		<div>
-				 <label for="storeName">メモ</label>
-				 <input type="text" th:field="*{storeName}" required>
+		<div th:object="${detailForm}">
+				 <label for="detailMemo">メモ</label>
+				 <input type="text" th:field="*{detailMemo}">
 		</div>
-		<div>
+		<div th:object="${detailForm}">
 		    <label for="detailUsedt">利用付日</label>
 		    <input type="date" id="detailUsedt" th:field="*{detailUsedt}" required>
 		</div>
@@ -83,9 +83,9 @@
 		        document.getElementById('detailUsedt').value = today;
 		    };
 		</script>
-		<div>
-				 <label for="storeName">来店回数</label>
-				 <input type="text" th:field="*{storeName}" required>
+		<div th:object="${detailForm}">
+				 <label for="detailVisits">来店回数</label>
+				 <input type="text" th:field="*{detailVisits}" required>
 		</div>
 
         <button type="submit">登録</button>

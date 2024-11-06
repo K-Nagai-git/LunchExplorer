@@ -103,7 +103,7 @@ public class DetailController {
 	@GetMapping("/detailsave")
 	public String newStoresDetailRegister(StoresForm storesForm, DetailForm detailForm) {
 
-		//ｈｔｍｌフォームから取得したデータを格納
+		//ｈｔｍｌフォームから取得した店舗データを格納
 		StoresForm storesDate = new StoresForm();
 		storesDate.setStoreName(storesForm.getStoreName());
 		storesDate.setStoreTel(storesForm.getStoreTel());
@@ -120,26 +120,24 @@ public class DetailController {
 		Stores storesID = new Stores();
 		storesID = storesService.getStoreByName(storesDate.getStoreName());
 		
-		//htmlフォームから取得したデータを格納
+		//htmlフォームから取得した詳細データを格納
 		DetailForm detailDate = new DetailForm();
 		
-//		detailDate.setStoreId(detailFor)
-//		detailDate
-//		detailDate
-//		detailDate
-//		detailDate
-//		detailDate
-//		detailDate
-//		detailDate
-//		detailDate
-//		detailDate
-//		detailDate
-//		detailDate
-//		
-//		detailDate
-		
+		detailDate.setStoreId(storesID.getStore_id());
+		detailDate.setDetailPostdt(detailForm.getDetailPostdt());
+		detailDate.setDitailUserMail(detailForm.getDitailUserMail());
+		detailDate.setDetailMenu(detailForm.getDetailMenu());
+		detailDate.setDetailPrice(detailForm.getDetailPrice());
+		detailDate.setDetailRating(detailForm.getDetailRating());
+		detailDate.setDetailReviewFlag(detailForm.getDetailReviewFlag());
+		detailDate.setDetailReview(detailForm.getDetailReview());
+		detailDate.setDetailImage(detailForm.getDetailImage());
+		detailDate.setDetailMemo(detailForm.getDetailMemo());
+		detailDate.setDetailUsedt(detailForm.getDetailUsedt());
+		detailDate.setDetailVisits(detailForm.getDetailVisits());
+
 		//詳細情報登録(新規)
-		//newDetail(detailform);
+		newDetail(detailDate);
 		
 		return "redirect:/detail";
 	}
