@@ -10,22 +10,8 @@
 
 package com.example.lunchex.controller;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.example.lunchex.entity.Stores;
-import com.example.lunchex.entity.Users;
-import com.example.lunchex.repository.LunchexListMapper;
-import com.example.lunchex.service.StoresService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,70 +21,70 @@ import lombok.RequiredArgsConstructor;
 @ControllerAdvice
 public class StoresControllerNagai {
 
-	/** DI */
-	private  final StoresService storesService; //まだ理解してない　深田
-	private final LunchexListMapper mapper;
-
-	//登録画面最初のページに移動
-	//説明→まず店舗がDBにあるかどうかの検索を行う。
-	//いちよ、ログインしているユーザのデータと時間のデータを渡しているがHTMLで表示はしていない。
-	@GetMapping
-	public String showStoresRegister(Model model,@AuthenticationPrincipal Users user){
-		List<Users> userList = new ArrayList<>();
-		userList.add(user); // ログインしているユーザー情報をリストに追加
-		model.addAttribute("currentDate", LocalDate.now().toString());
-
-		return "storeSearch";
-	}
-	@GetMapping("/search")
-	@ExceptionHandler(Exception.class)
-	public String StoreSearch(
-			@RequestParam("storeName") String storeName,
-			@RequestParam("storeTel") String storeTel,
-			Model model,
-			@AuthenticationPrincipal Users user
-			) {
-		// テスト用: HTMLから受け取ったデータをコンソールに表示
-		System.out.println("店舗名: " + storeName);
-		System.out.println("電話番号: " + storeTel);
-
-		List<Stores> allStores = storesService.getAllStores();
-
-		// 入力データと比較
-		// boolean exists = allStores.stream().anyMatch(store -> 
-		Stores matchingStore = allStores.stream()
-				.filter(store ->     
-				storeName != null && storeTel != null && 
-				storeName.equals(store.getStore_name()) && 
-				storeTel.equals(store.getStore_tel())
-						)
-				.findFirst()
-				.orElse(null);
-
-		// 店舗が存在する場合
-		//	    if (exists) {
-		if (matchingStore != null) {
-
-			// model.addAttribute("storeName", storeName);
-			// model.addAttribute("storeTel", storeTel);
-			// model.addAttribute("currentDate", LocalDate.now().toString());
-			// return "storeSerchResult"; // 存在する場合の画面に遷移
-
-			//　修正版（永井）
-			// 詳細画面へ遷移
-			int storeId = matchingStore.getStore_id();
-			List<Stores> detailList=mapper.selectPickStoreList(storeId);
-			model.addAttribute("stores",detailList);
-			return "test2";
-
-		} else {
-			// 店舗が存在しない場合
-			model.addAttribute("storeName", storeName);
-			model.addAttribute("storeTel", storeTel);
-			model.addAttribute("currentDate", LocalDate.now().toString());
-			return "newDetailRegister"; // 新規登録画面に遷移
-		}
-	}
+//	/** DI */
+//	private  final StoresService storesService; //まだ理解してない　深田
+//	private final LunchexListMapper mapper;
+//
+//	//登録画面最初のページに移動
+//	//説明→まず店舗がDBにあるかどうかの検索を行う。
+//	//いちよ、ログインしているユーザのデータと時間のデータを渡しているがHTMLで表示はしていない。
+//	@GetMapping
+//	public String showStoresRegister(Model model,@AuthenticationPrincipal Users user){
+//		List<Users> userList = new ArrayList<>();
+//		userList.add(user); // ログインしているユーザー情報をリストに追加
+//		model.addAttribute("currentDate", LocalDate.now().toString());
+//
+//		return "storeSearch";
+//	}
+//	@GetMapping("/search")
+//	@ExceptionHandler(Exception.class)
+//	public String StoreSearch(
+//			@RequestParam("storeName") String storeName,
+//			@RequestParam("storeTel") String storeTel,
+//			Model model,
+//			@AuthenticationPrincipal Users user
+//			) {
+//		// テスト用: HTMLから受け取ったデータをコンソールに表示
+//		System.out.println("店舗名: " + storeName);
+//		System.out.println("電話番号: " + storeTel);
+//
+//		List<Stores> allStores = storesService.getAllStores();
+//
+//		// 入力データと比較
+//		// boolean exists = allStores.stream().anyMatch(store -> 
+//		Stores matchingStore = allStores.stream()
+//				.filter(store ->     
+//				storeName != null && storeTel != null && 
+//				storeName.equals(store.getStore_name()) && 
+//				storeTel.equals(store.getStore_tel())
+//						)
+//				.findFirst()
+//				.orElse(null);
+//
+//		// 店舗が存在する場合
+//		//	    if (exists) {
+//		if (matchingStore != null) {
+//
+//			// model.addAttribute("storeName", storeName);
+//			// model.addAttribute("storeTel", storeTel);
+//			// model.addAttribute("currentDate", LocalDate.now().toString());
+//			// return "storeSerchResult"; // 存在する場合の画面に遷移
+//
+//			//　修正版（永井）
+//			// 詳細画面へ遷移
+//			int storeId = matchingStore.getStore_id();
+//			List<Stores> detailList=mapper.selectPickStoreList(storeId);
+//			model.addAttribute("stores",detailList);
+//			return "test2";
+//
+//		} else {
+//			// 店舗が存在しない場合
+//			model.addAttribute("storeName", storeName);
+//			model.addAttribute("storeTel", storeTel);
+//			model.addAttribute("currentDate", LocalDate.now().toString());
+//			return "newDetailRegister"; // 新規登録画面に遷移
+//		}
+//	}
 }
 
 //	//「次へ」をクリックすると「/stores/search」のURLに飛ぶようにHTMLで設定

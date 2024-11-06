@@ -1,5 +1,5 @@
 
-// ★★★★★★★★★★★★
+//★★★★★★★★★★★★
 // ここは新規店舗のレビュー登録・投稿のコントローラーです。
 //ここで店舗の詳細レビューを投稿や画面の遷移をします。
 //★★★★★★★★★★★★★★ 
@@ -11,37 +11,165 @@
 //また「こうなるだろう」という予測の元、名称をつけているので注意
 //本人の理解力が低いため足りてない部分があるかも
 //更新　深田　1030　頑張ります
+//更新：糸山　2024/11/01　
+//全面修正
 
 package com.example.lunchex.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.lunchex.entity.Detail;
+import com.example.lunchex.entity.Stores;
+import com.example.lunchex.form.DetailForm;
+import com.example.lunchex.form.StoresForm;
+import com.example.lunchex.helper.DetailHelper;
+import com.example.lunchex.helper.StoresHelper;
+import com.example.lunchex.service.DetailService;
 import com.example.lunchex.service.StoresService;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
 //@RequestMapping("/stores")
+@RequestMapping("/detail")
 @RequiredArgsConstructor
-
 public class DetailController {
 	
 	/** DI */
-	private  final StoresService storesService; //まだ理解してない　深田
-
-//レビューする内容を登録する
-//	@GetMapping("/search")
-	public String newDetailRegister() {
+	private final StoresService storesService; 
+	private final DetailService detailService;
+	
+	/**画面表示*/
+	@GetMapping
+	public String showDetail(@ModelAttribute DetailForm form, StoresForm storesForm, Model model) {
+		//login.htmlに遷移
+		//return "/lunchexplorer";
+		model.addAttribute("storesForm", new StoresForm()); // StoreFormはデータクラス
 		
-		
-		
-		
-		return null;
-		
+//		//登録済みの場合情報表示
+//		System.out.println("店名は" + storesForm.getStoreName());
+//		//店舗に対する情報を取得
+//		Stores stores = storesService.getStoreByName(storesForm.getStoreName());
+//		System.out.println("登録済み有無を確認");
+//		if(stores != null) {
+//			System.out.println("登録済みデータ表示");
+//			//対象のある場合はFormへの変換
+//			StoresForm storesDateform = StoresHelper.convertStoresForm(stores);
+//			//対象データがある場合はモデルにFormを追加
+//	        model.addAttribute("storesDateform", form);
+//
+//			return "detail";
+//			
+//		}else {
+//			System.out.println("データなし");
+//			//対象データがない場合はフラッシュメッセージを設定
+//			//attributes.addFlashAttribute("errorMessage", "対象データはありません");
+//			return "redirect:/detail";
+//		}
+		return "detail";
 	}
+	
+	@GetMapping("/newView")
+	public String newDetailView(@RequestParam("stores_id") Integer stores_id , Model model,RedirectAttributes attributes) {
+		System.out.println("IDは" + stores_id);
+		//記録者IDに対する情報を取得
+		Stores stores = storesService.getStoreById(stores_id);
+		System.out.println("店舗登録済み有無を確認");
+		if(stores != null) {
+			System.out.println("登録済みデータ表示");
+			//対象のある場合はFormへの変換
+			StoresForm form = StoresHelper.convertStoresForm(stores);
 
+			//対象データがある場合はモデルにFormを追加
+	        model.addAttribute("storesForm", form);
 
-}
+			return "/detail";
+			
+		}else {
+			System.out.println("データなし");
+			//対象データがない場合はフラッシュメッセージを設定
+			attributes.addFlashAttribute("errorMessage", "対象データはありません");
+			return "detail";
+		}		
+	}
+	
+	/** 店舗・詳細登録*/
+	@GetMapping("/detailsave")
+	public String newStoresDetailRegister(StoresForm storesForm) {
+		
+		StoresForm storesDate = new StoresForm();
+		storesDate.setStoreName(storesForm.getStoreName());
+		storesDate.setStoreTel(storesForm.getStoreTel());
+		storesDate.setStoreAddress(storesForm.getStoreAddress());
+		storesDate.setStoreUrl(storesForm.getStoreUrl());
+		storesDate.setStoreUserMail(storesForm.getStoreUserMail());
+		
+		//DetailForm detailform = new DetailForm();
+		System.out.println("★登録処理入り口" + storesDate);
+		newStoresInsert(storesDate);
+		//newDetail(detailform);
+		
+		return "redirect:/detail";
+	}
+	/** 店舗登録*/
+	public void newStoresInsert(StoresForm form) {
+		System.out.println("★" +form);
+		System.out.println("通過チェック(店舗)");
+		//登録されているIDかどうか確認
+		Stores stores = storesService.getStoreByName(form.getStoreName());
+		System.out.println("店舗登録済み有無を確認");
+		if(stores != null) {
+			System.out.println("すでに登録されている店舗IDです");
+			//attributes.addFlashAttribute("errorMessage", "すでに登録されているIDです");
+			//form.setIsNew(true);
+			
+			System.out.println("店舗更新登録");
+			// フォームのデータを受け取って処理する
+		    System.out.println("店舗名: " + form.getStoreName());
+			//エンティティへの変換
+			stores = StoresHelper.convertNewStores(form);
+			System.out.println("エンティティへの変換通過");
+			//登録実行
+			storesService.updateStore(stores);
+		}else {
+			System.out.println("登録されていない店舗IDです");
+			System.out.println("店舗新規登録");
+			 System.out.println("店舗名: " + form.getStoreName());
+			//エンティティへの変換
+			stores = StoresHelper.convertNewStores(form);
+			System.out.println("エンティティへの変換通過");
+			//登録実行
+			storesService.addStore(stores);
+		}
+	}
+	/** 詳細登録*/
+		public void newDetail(DetailForm form) {
+			System.out.println("通過チェック(詳細)");
+			//エンティティへの変換
+			Detail detail = DetailHelper.convertRecorder(form);
+			System.out.println("エンティティへの変換通過");
+			//登録実行
+			detailService.addDetail(detail);
+		}
+}	
+//深田さんが書いたコード
+////レビューする内容を登録する
+////	@GetMapping("/search")
+//	public String newDetailRegister() {
+//		
+//		
+//		
+//		
+//		return null;
+//		
+//	}
+//}
 
 
 

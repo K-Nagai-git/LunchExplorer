@@ -15,25 +15,9 @@
 
 package com.example.lunchex.controller;
 
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.example.lunchex.entity.Stores;
-import com.example.lunchex.entity.Users;
-import com.example.lunchex.repository.LunchexListMapper;
-import com.example.lunchex.service.StoresService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -43,73 +27,73 @@ import lombok.RequiredArgsConstructor;
 @ControllerAdvice
 public class StoresController {
 
-	/** DI */
-	private  final StoresService storesService; //まだ理解してない　深田
-	private final LunchexListMapper mapper;
-
-	//登録画面最初のページに移動
-	//説明→まず店舗がDBにあるかどうかの検索を行う。
-	//いちよ、ログインしているユーザのデータと時間のデータを渡しているがHTMLで表示はしていない。
-	@GetMapping
-	public String showStoresRegister(Model model,@AuthenticationPrincipal Users user){
-		List<Users> userList = new ArrayList<>();
-		userList.add(user); // ログインしているユーザー情報をリストに追加
-		model.addAttribute("currentDate", LocalDate.now().toString());
-
-		return "storeSearch";
-	}
-
-	//「次へ」をクリックすると「/stores/search」のURLに飛ぶようにHTMLで設定
-	@GetMapping("/search")
-	@ExceptionHandler(Exception.class)	
-	public String StoreSearch(
-
-			@RequestParam("storeName")String storeName,//HTMLで入力された店舗の名前が格納される
-			@RequestParam("storeTel") String storeTel,//HTMLで入力された電話番号が格納される
-			Model model ,
-			@AuthenticationPrincipal Users user       //Users型のuserにユーザ情報を格納
-			) {	
-		//☆テスト用☆ HTMLから受け取ったデータをコンソールに表示
-		//        System.out.println("店舗名: " + storeName);
-		//        System.out.println("電話番号: " + storeTel);
-
-		List<Stores> allStores = storesService.getAllStores();//ストアの全てのデータがここに入るはず・・・
-
-		//         入力データと比較  電話番号か店舗名のどデータベースにあ
-		//        boolean exists = allStores.stream().anyMatch(store -> 
-		//        (storeName != null && storeName.equals(store.getStore_name())) || 
-		//        (storeTel != null && storeTel.equals(store.getStore_tel()))
-		//    );
-		Stores matchingStore = allStores.stream()
-				.filter(store ->     
-				storeName != null && storeTel != null && 
-				storeName.equals(store.getStore_name()) && 
-				storeTel.equals(store.getStore_tel())
-						)
-				.findFirst()
-				.orElse(null);
-
-		// 店舗が既に存在する場合の処理
-		// すでに登録されているので詳細登録に飛ばすHTMLを表示する。
-		//ちなみに「exists」にしている理由は特にない。
-		// 更新　11/01 永井
-		if (matchingStore != null) {
-
-			int storeId = matchingStore.getStore_id();
-			List<Stores> detailList=mapper.selectPickStoreList(storeId);
-			model.addAttribute("stores",detailList);
-			return "test2";
-			// 店舗が存在しない場合の処理
-			// 店舗が登録されていないので、新規登録処理を続ける。詳細入力に進む。フィグマでいうと「K」に当たる     
-		} else {
-
-			model.addAttribute("storeName", storeName);  //HTMLで入力された店舗名をモデルに格納
-			model.addAttribute("storeTel", storeTel);    //HTMLで入力された電話番号をモデルに格納
-			model.addAttribute("currentDate", LocalDate.now().toString()); // 日付も再設定（面倒なのでこの処理）
-
-			return "newDetailRegister"; // 詳細入力にHTMLに進む。
-		} 
-	}
+//	/** DI */
+//	private  final StoresService storesService; //まだ理解してない　深田
+//	private final LunchexListMapper mapper;
+//
+//	//登録画面最初のページに移動
+//	//説明→まず店舗がDBにあるかどうかの検索を行う。
+//	//いちよ、ログインしているユーザのデータと時間のデータを渡しているがHTMLで表示はしていない。
+//	@GetMapping
+//	public String showStoresRegister(Model model,@AuthenticationPrincipal Users user){
+//		List<Users> userList = new ArrayList<>();
+//		userList.add(user); // ログインしているユーザー情報をリストに追加
+//		model.addAttribute("currentDate", LocalDate.now().toString());
+//
+//		return "storeSearch";
+//	}
+//
+//	//「次へ」をクリックすると「/stores/search」のURLに飛ぶようにHTMLで設定
+//	@GetMapping("/search")
+//	@ExceptionHandler(Exception.class)	
+//	public String StoreSearch(
+//
+//			@RequestParam("storeName")String storeName,//HTMLで入力された店舗の名前が格納される
+//			@RequestParam("storeTel") String storeTel,//HTMLで入力された電話番号が格納される
+//			Model model ,
+//			@AuthenticationPrincipal Users user       //Users型のuserにユーザ情報を格納
+//			) {	
+//		//☆テスト用☆ HTMLから受け取ったデータをコンソールに表示
+//		//        System.out.println("店舗名: " + storeName);
+//		//        System.out.println("電話番号: " + storeTel);
+//
+//		List<Stores> allStores = storesService.getAllStores();//ストアの全てのデータがここに入るはず・・・
+//
+//		//         入力データと比較  電話番号か店舗名のどデータベースにあ
+//		//        boolean exists = allStores.stream().anyMatch(store -> 
+//		//        (storeName != null && storeName.equals(store.getStore_name())) || 
+//		//        (storeTel != null && storeTel.equals(store.getStore_tel()))
+//		//    );
+//		Stores matchingStore = allStores.stream()
+//				.filter(store ->     
+//				storeName != null && storeTel != null && 
+//				storeName.equals(store.getStore_name()) && 
+//				storeTel.equals(store.getStore_tel())
+//						)
+//				.findFirst()
+//				.orElse(null);
+//
+//		// 店舗が既に存在する場合の処理
+//		// すでに登録されているので詳細登録に飛ばすHTMLを表示する。
+//		//ちなみに「exists」にしている理由は特にない。
+//		// 更新　11/01 永井
+//		if (matchingStore != null) {
+//
+//			int storeId = matchingStore.getStore_id();
+//			List<Stores> detailList=mapper.selectPickStoreList(storeId);
+//			model.addAttribute("stores",detailList);
+//			return "test2";
+//			// 店舗が存在しない場合の処理
+//			// 店舗が登録されていないので、新規登録処理を続ける。詳細入力に進む。フィグマでいうと「K」に当たる     
+//		} else {
+//
+//			model.addAttribute("storeName", storeName);  //HTMLで入力された店舗名をモデルに格納
+//			model.addAttribute("storeTel", storeTel);    //HTMLで入力された電話番号をモデルに格納
+//			model.addAttribute("currentDate", LocalDate.now().toString()); // 日付も再設定（面倒なのでこの処理）
+//
+//			return "newDetailRegister"; // 詳細入力にHTMLに進む。
+//		} 
+//	}
 }
 
 

@@ -7,7 +7,6 @@ package com.example.lunchex.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.example.lunchex.entity.Detail;
 
@@ -16,32 +15,56 @@ import com.example.lunchex.entity.Detail;
  */
 @Mapper
 public interface DetailMapper {
+	
+    // 全ての詳細情報を取得する
+    List<Detail> getAllDetails();
 
-    /**
-     * 全ての「レビュー等」を取得します。
-     */
-    List<Detail> selectAllDetail();
+    // IDで指定された詳細情報を取得する
+    Detail getDetailById(int detail_id);
 
-    /**
-     * 指定されたIDに対応する「レビュー等」を取得します。
-     */
-    Detail selectByIdDetail(@Param("id") Integer id);
+    // 特定のユーザーの詳細情報を取得する
+    List<Detail> getDetailsByUser(String user_mail);
 
-    /**
-     * 「レビュー等」を登録します。
-     */
-    void insertDetail(Detail detail);
+    // 特定の店舗の詳細情報を取得する
+    List<Detail> getDetailsByStoreId(int store_id);
 
-    /**
-     * 「レビュー等」を更新します。
-     */
+    // 新しい詳細情報を追加する
+    void addDetail(Detail detail);
+
+    // 既存の詳細情報を更新する
     void updateDetail(Detail detail);
 
-    /**
-     * 指定されたIDの「レビュー等」を削除します。
-     */
-    void deleteDetail(@Param("id") Integer id);
+    // 詳細情報を削除する
+    void deleteDetail(int detail_id);
 }
+
+//    /**
+//     * 全ての「レビュー等」を取得します。
+//     */
+//    List<Detail> selectAllDetail();
+//
+//    /**
+//     * 指定されたIDに対応する「レビュー等」を取得します。
+//     */
+//    Detail selectByIdDetail(@Param("id") int detail_id);
+//
+//    /**
+//     * 「レビュー等」を登録します。
+//     */
+//    void insertDetail(Detail detail);
+//
+//    /**
+//     * 「レビュー等」を更新します。
+//     */
+//    void updateDetail(Detail detail);
+//
+//    /**
+//     * 指定されたIDの「レビュー等」を削除します。
+//     */
+//    void deleteDetail(@Param("id") Integer id);
+//
+//	List<Detail> selectByStoreId(int store_id);
+//}
 
 
 //*****************

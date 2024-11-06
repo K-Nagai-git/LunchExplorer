@@ -7,9 +7,20 @@
 <mapper namespace="com.example.lunchex.repository.StoresMapper">
 	<!-- 店舗登録機能用 --><!-- 24/10/21 ：糸山 -->
 	<!-- 店舗検索 -->
+	<select id="getStoreAll" resultType="com.example.lunchex.entity.Stores">
+		 SELECT 
+        	store_id,
+        	store_name,
+        	store_tel,
+        	store_address,
+        	store_url,
+        	user_mail
+         FROM stores;
+	</select>
 	<select id="getStoreById" resultType="com.example.lunchex.entity.Stores">
         SELECT 
-        	store_id,store_name,
+        	store_id,
+        	store_name,
         	store_tel,
         	store_address,
         	store_url,
@@ -17,6 +28,18 @@
          FROM stores
          WHERE 
     		store_id = #{store_id};
+    </select> 
+    <select id="getStoreByName" resultType="com.example.lunchex.entity.Stores">
+        SELECT 
+        	store_id,
+        	store_name,
+        	store_tel,
+        	store_address,
+        	store_url,
+        	user_mail
+         FROM stores
+         WHERE 
+    		store_name = #{store_name};
     </select> 
     <!-- 店舗登録 -->
 	<insert id="addStore" parameterType="com.example.lunchex.entity.Stores">
@@ -40,11 +63,11 @@
 			store_address = #{store_address},
 			store_url = #{store_url},
 			user_mail = #{user_mail}
-		WHERE store_id = #{store_id};
+		WHERE store_name = #{store_name};
 	</update>
 	<!-- 店舗削除 -->
 	<delete id="deleteStore" parameterType="com.example.lunchex.entity.Stores">
 		DELETE FROM stores
-		WHERE store_id = #{store_id}
+		WHERE store_name = #{store_name}
 	</delete>
 </mapper>
