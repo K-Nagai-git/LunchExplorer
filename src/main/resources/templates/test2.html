@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+<!--Googleフォント-->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=M+PLUS+1:wght@100..900&family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet">
 	<style>
         .modal {
             display: none;
@@ -97,25 +98,32 @@
 		<div class="content-wrapper">
 			<section class="main-content">
 				<table>
-					<div class="store-cards">
-						<!-- 店舗情報をループで表示 -->
+					<div class="store-cards"><!-- 店舗情報をループで表示 -->
 						<th:block th:each="store : ${stores}">
 							<div class="store-card">
 								<span class="store-text" style="display: flex; align-items: center;">
 									<h3 th:text="${store.store_name}" style="margin-right: 10px;">店舗名</h3>
 								</span>
-								<span style="font-family: system-ui;">
+								<div class="text-blocks">
+									<div class="text-block1">
 										<p class="icon-text">
 											<img src="/icons/phone_icon.svg" width="16" height="16">
 											<span th:text="${store.store_tel}">電話番号</span>
 											<img src="/icons/address_icon.svg" width="16" height="16" style="margin-left: 10px;">
 											<a th:href="@{'https://www.google.com/maps/search/?api=1&query=' + ${store.store_name} + ' ' + ${store.store_address}}" target="_blank" th:text="${store.store_address}">住所</a>
 										</p>
-									</span>
 									<p class="icon-text">
 										<img src="/icons/url_icon.svg" width="16" height="16" style="vertical-align: middle; margin-right: 5px;">
 										<a th:href="${store.store_url}" target="_blank" th:text="WEBサイトを開く"></a>
 									</p>
+									</div>
+									<div class="text-block2">
+										<button th:onclick="|location.href='/detail/' + (${store.store_id})|">
+											<p class="icon-text"><img src="/icons/write_icon_w.svg" width="24" height="24">レビュー</p>
+										</button>
+									</div>
+								</div>
+									
 									<div class="review-container">
 										<th:block th:each="detail : ${store.detailList}">
 											<div class="review" th:style="${detail.detail_image} != null ? 'background-image: url(/images/' + ${detail.detail_image} + ');background-position: center;background-size: cover;' : 'background-image: url(/material_img/default_menu_img.svg);background-position: center;background-size: cover;'" onclick="openModal(this)">
@@ -143,6 +151,7 @@
 											</div>
 										</th:block>
 									</div>
+									
 								</div>
 							</th:block>
 						</div>

@@ -1,7 +1,7 @@
 /* General Styles */
 body {
-	font-family: "M PLUS Rounded 1c", sans-serif;
-	background-color: #ffba60;
+	font-family: "M PLUS 1", sans-serif;
+  	background-color: #ffba60;
 /*	background-color: rgb(249, 248, 248);*/
 	color: #664d33;
 	margin: 0;
@@ -259,7 +259,7 @@ nav a:hover {
 
 .store-text {
 	font-size: 12px;
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 	font-family: "M PLUS Rounded 1c", sans-serif;
 	font-weight: 500;
 	color: #664d33;
@@ -295,10 +295,7 @@ nav a:hover {
 }
 
 .store-card p {
-	margin: 0;
-/*	font-size: 0.7em;*/
-	margin-top: 2px;
-	margin-bottom: 2px;
+	margin: 2px 0px;
 }
 
 .store-card-button {
