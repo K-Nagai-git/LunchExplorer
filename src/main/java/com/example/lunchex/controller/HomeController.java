@@ -21,13 +21,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.lunchex.entity.LoginUser;
 import com.example.lunchex.entity.Stores;
 import com.example.lunchex.entity.Users;
+import com.example.lunchex.form.StoresForm;
 import com.example.lunchex.repository.AuthenticationMapper;
 import com.example.lunchex.repository.LunchexListMapper;
 import com.example.lunchex.repository.UsersMapper;
+import com.example.lunchex.service.StoresService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,6 +44,7 @@ public class HomeController {
 	private final LunchexListMapper mapper;
 	private final AuthenticationMapper authenticationMapper;
 	private final UsersMapper usersMapper;  // ログインニックネーム取得用
+	private final StoresService storesService; 
 
 	//	
 	//	テストまち！！！！！！！！！！！！！！！！！！！！！！！深田
@@ -117,7 +121,30 @@ public class HomeController {
 
 		return "test2";
 	}
-
+	
+	//トップページの店舗検索コントローラー　深田
+	@GetMapping("/topSearch")
+	public String topSearch(StoresForm storesForm ,Model model,RedirectAttributes attributes) {	
+		
+		if(storesForm!=null) {
+			//ｈｔｍｌフォームから取得した店舗データを格納
+			StoresForm storesDate = new StoresForm();
+			storesDate.setStoreName(storesForm.getStoreName());
+			Stores storesID = new Stores();
+			storesID = storesService.getStoreByName(storesDate.getStoreName());	
+			int id=storesID.getStore_id();
+			//idに対応した店舗のレビュー情報を格納
+			List<Stores> detailList=mapper.selectPickStoreList(id);
+			//モデルに追加
+			model.addAttribute("stores",detailList);
+			return  "test2";
+			
+		}
+		else {
+			model.addAttribute("errorMessage", "エラーが発生しました。");
+		    return "index";
+		}
+	}
 }
 
 //	//トップページ表示のコントローラー（一旦非表示　避難用に　実行：深田　）
