@@ -121,19 +121,27 @@ public class HomeController {
 
 		return "test2";
 	}
-	
-	//トップページの店舗検索コントローラー　深田
+
+//トップページの店舗検索機能　深田///////すごく長い！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 	@GetMapping("/topSearch")
-	public String topSearch(StoresForm storesForm ,Model model,RedirectAttributes attributes) {	
-		
-		
+	public String topSearch(StoresForm storesForm ,Model model,RedirectAttributes attributes,@AuthenticationPrincipal LoginUser user) {	
+	
 			//ｈｔｍｌフォームから取得した店舗データを格納
 			StoresForm storesDate = new StoresForm();
 			Stores storesID = new Stores();
 			storesDate.setStoreName(storesForm.getStoreName());
-			storesID = storesService.getStoreByName(storesDate.getStoreName());	
-			
+		    storesID = storesService.getStoreByName(storesDate.getStoreName());	
+   
+    //トップページの店舗検索コントローラー		
+	//分岐！店舗情報があるときはこれを渡す
 			if(storesID!=null) {
+				if (user != null) {
+					String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
+					Users loginUser=usersMapper.getUserByMail(loginEmail);
+					String loginNickname=loginUser.getUser_nickname();            
+					model.addAttribute("login_nickname",loginNickname);
+					System.out.println("★"+loginNickname); // 削除可
+				} 
 				int id=storesID.getStore_id();
 			//idに対応した店舗のレビュー情報を格納
 			List<Stores> detailList=mapper.selectPickStoreList(id);
@@ -141,9 +149,26 @@ public class HomeController {
 			model.addAttribute("stores",detailList);
 			return  "test2";
 			}
+			
+	//トップページの店舗検索コントローラー		
+	//分岐！店舗情報がないときはこれを渡す
 			else {
-				//店舗情報がないときはこれを渡す
-			model.addAttribute("errorMessage", "エラーが発生しました。");
+				model.addAttribute("errorMessage", "該当する店舗が見つかりませんでした。");
+			List<Stores> storeList;
+			List<LoginUser> userList = new ArrayList<>(); // ユーザー情報を格納するためのリスト
+			if (user != null) {
+				storeList = mapper.selectStoreListPickDt();
+				userList.add(user); // ログインしているユーザー情報をリストに追加
+				String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
+				Users loginUser=usersMapper.getUserByMail(loginEmail);
+				String loginNickname=loginUser.getUser_nickname();            
+				model.addAttribute("login_nickname",loginNickname);
+				System.out.println("★"+loginNickname); // 削除可
+			} 
+			else {storeList = mapper.selectStoreListPickDt();
+			}
+			model.addAttribute("stores", storeList);
+			model.addAttribute("users",userList);
 			return "index";
 		}
 	}

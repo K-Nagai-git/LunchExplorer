@@ -23,6 +23,12 @@
 			<button type="submit">検索</button>
 		</form>
 		</div>
+		
+		<!-- エラーメッセージ表示エリア -->
+		<div class="error-message" th:if="${errorMessage != null}">
+		    <p th:text="${errorMessage}">エラーメッセージがここに表示されます</p>
+		</div>
+
 		<nav>
 			<ul>
 				<span th:if="${login_nickname == null}"> <!-- ログインしていない場合の表示 -->
