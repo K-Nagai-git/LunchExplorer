@@ -126,23 +126,25 @@ public class HomeController {
 	@GetMapping("/topSearch")
 	public String topSearch(StoresForm storesForm ,Model model,RedirectAttributes attributes) {	
 		
-		if(storesForm!=null) {
+		
 			//ｈｔｍｌフォームから取得した店舗データを格納
 			StoresForm storesDate = new StoresForm();
-			storesDate.setStoreName(storesForm.getStoreName());
 			Stores storesID = new Stores();
+			storesDate.setStoreName(storesForm.getStoreName());
 			storesID = storesService.getStoreByName(storesDate.getStoreName());	
-			int id=storesID.getStore_id();
+			
+			if(storesID!=null) {
+				int id=storesID.getStore_id();
 			//idに対応した店舗のレビュー情報を格納
 			List<Stores> detailList=mapper.selectPickStoreList(id);
-			//モデルに追加
+				//モデルに追加して渡す
 			model.addAttribute("stores",detailList);
 			return  "test2";
-			
-		}
-		else {
+			}
+			else {
+				//店舗情報がないときはこれを渡す
 			model.addAttribute("errorMessage", "エラーが発生しました。");
-		    return "index";
+			return "index";
 		}
 	}
 }
