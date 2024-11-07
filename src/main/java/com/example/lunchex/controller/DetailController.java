@@ -139,7 +139,7 @@ public class DetailController {
 		System.out.println("★店舗名チェック：" + storesDate.getStoreName());
 		
 		if (this.storeId != null) {
-			if(storesDate.getStoreId() == null) {
+			if(storesDate.getStoreName() == null) {
 				Stores keyStoresID = storesService.getStoreById(storeId);
 				storesDate.setStoreId(storeId);
 				storesDate.setStoreName(keyStoresID.getStore_name());
@@ -202,7 +202,9 @@ public class DetailController {
 		//詳細情報登録(新規)
 		newDetail(detailDate);
 		
-		return "redirect:/detail";
+		System.out.println("最終チェック" + detailDate.getStoreId());
+		//return "redirect:/detail/";
+		return "redirect:/lunchexplorer/details/" + detailDate.getStoreId();
 	}
 	/** 店舗登録*/
 	//登録されていない店舗は新規登録、すでに登録されている店舗は更新として登録する

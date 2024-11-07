@@ -102,7 +102,39 @@
 	    <input type="file" name="file" />
 	    <button type="submit">Upload</button>
 	</form>-->
+<!-- ↓ローカルへ入力データ保持用　うまくいかなければ消す-->
+	<!-- 入力データのローカルストレージ保存と復元用スクリプト -->
+	 <script>
+	     // ページ読み込み時にローカルストレージからデータを取得して表示
+	     document.addEventListener("DOMContentLoaded", function() {
+	         const storedData = localStorage.getItem("menuFormData");
+	         if (storedData) {
+	             const formData = JSON.parse(storedData);
+	             document.getElementById("storeName").value = formData.storeName || '';
+	             document.getElementById("storeTel").value = formData.storeTel || '';
+	             // 他の入力フィールドも同様に復元
+	         }
+	     });
 	
+	     // フォームのデータをローカルストレージに保存する関数
+	     function saveFormData() {
+	         const formData = {
+	             storeName: document.getElementById("storeName").value,
+	             storeTel: document.getElementById("storeTel").value,
+	             // 他の入力フィールドも同様に取得
+	         };
+	         localStorage.setItem("menuFormData", JSON.stringify(formData));
+	     }
+	
+	     // フォームの各入力フィールドに変更があったときに自動的にデータを保存
+	     document.getElementById("menuForm").addEventListener("input", saveFormData);
+	
+	     // フォーム送信時にローカルストレージのデータを削除
+	     document.getElementById("menuForm").addEventListener("submit", function() {
+	         localStorage.removeItem("menuFormData");
+	     });
+	 </script>
+<!-- ↑ローカルへ入力データ保持用　うまくいかなければ消す-->
 	<form action="/upload" method="post" enctype="multipart/form-data" th:action="@{/upload}" th:object="${file}">
 	    <input type="file" name="file"/>
 	    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <!-- CSRFトークン -->
