@@ -31,7 +31,7 @@ header {
 header h1 {
 	font-size: 24px;
 	margin: 0;
-	width: 200px;
+	width: 250px;
 }
 
 a {
@@ -76,16 +76,16 @@ nav a:hover {
 
 .search-bar input[type="text"] {
 	flex: 1;
-	padding: 10px;
+	padding: 7px 15px;
 	border: 1px solid #ff8000;
 	border-radius: 50px 0px 0px 50px;
 }
 
 .search-bar button {
-	padding: 8px 20px;
+	padding: 5px 20px;
 	background-color: #ff8000;
 	color: #fff;
-	border: none;
+	border: 1px solid #ff8000;
 	border-radius: 0px 50px 50px 0px;
 	cursor: pointer;
 	transition: background-color 0.3s;
@@ -93,6 +93,7 @@ nav a:hover {
 
 .search-bar button:hover {
 	background-color: #cc6600;
+	border: 1px solid #cc6600;
 }
 
 /* アイコンを行の上下中央に配置するためのスタイル */
@@ -157,6 +158,9 @@ nav a:hover {
 	border: none;
 	border-radius: 50px;
 	cursor: pointer;
+}
+.form {
+	padding: 5px 0px;
 }
 
 .text-blocks {
@@ -446,4 +450,8 @@ button:hover {
 	flex: 1;
 	margin-right: 300px;
 	margin-bottom: 50px;
+}
+
+.error-message {
+	color: #c76400;
 }
