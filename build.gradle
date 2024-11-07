@@ -37,6 +37,21 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	
+	//ファイル名をDBに追加するために追加
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    //runtimeOnly 'com.h2database:h2'
+    // JPAの依存関係
+    implementation 'javax.persistence:javax.persistence-api:2.2'  // もしくは jakarta.persistence
+    // Spring Data JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // H2データベース（使用するデータベースに応じて変更）
+    //implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Spring Boot Starter Data JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // PostgreSQL Driver
+    implementation 'org.postgresql:postgresql:42.5.0'  // 最新の安定版を使用
 }
 
 tasks.named('test') {
