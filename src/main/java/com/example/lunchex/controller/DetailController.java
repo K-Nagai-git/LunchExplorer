@@ -46,6 +46,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DetailController {
 	private final AuthenticationMapper authenticationMapper;
+	//店舗情報が判明してる場合の店舗ID一時保存用変数
+	Integer storeId = null;	//時間がないための緊急処置　別の方法があるはずなのでのちに確認：糸山
 	
 	/** DI */
 	private final StoresService storesService; 
@@ -79,6 +81,9 @@ public class DetailController {
 		storesData.setStore_address(stores.getStore_address());
 		storesData.setStore_url(stores.getStore_url());
 		storesData.setUser_mail(stores.getUser_mail());
+		
+		//既に登録されている場合の現在ID
+		storeId =id;
 		
 		System.out.println("登録済みデータ表示");
 		//対象のある場合はFormへの変換
@@ -129,9 +134,24 @@ public class DetailController {
 		storesDate.setStoreUrl(storesForm.getStoreUrl());
 		//storesDate.setStoreUserMail(storesForm.getStoreUserMail());
 		
+		System.out.println("★店舗ID変数チェック：" + storeId);
+		System.out.println("★店舗IDチェック：" + storesDate.getStoreId());
+		System.out.println("★店舗名チェック：" + storesDate.getStoreName());
+		
+		if (this.storeId != null) {
+			if(storesDate.getStoreId() == null) {
+				Stores keyStoresID = storesService.getStoreById(storeId);
+				storesDate.setStoreId(storeId);
+				storesDate.setStoreName(keyStoresID.getStore_name());
+				storesDate.setStoreTel(keyStoresID.getStore_address());
+				storesDate.setStoreAddress(keyStoresID.getStore_address());
+				storesDate.setStoreUrl(keyStoresID.getStore_url());
+			}
+		}
+		
 		//店舗登録者のユーザーメールアドレスを取得
 		Stores stores = storesService.getStoreByName(storesDate.getStoreName());
-		//店舗登録がすでに
+		//店舗登録がすでにある
 		if(stores != null) {
 			System.out.println("通過チェックストアユーザーID" + storesDate.getStoreUserMail());
 			storesDate.setStoreUserMail(stores.getUser_mail());
