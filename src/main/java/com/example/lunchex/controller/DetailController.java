@@ -16,6 +16,9 @@
 
 package com.example.lunchex.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -30,11 +33,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.lunchex.entity.Detail;
 import com.example.lunchex.entity.LoginUser;
 import com.example.lunchex.entity.Stores;
+import com.example.lunchex.entity.Users;
 import com.example.lunchex.form.DetailForm;
 import com.example.lunchex.form.StoresForm;
 import com.example.lunchex.helper.DetailHelper;
 import com.example.lunchex.helper.StoresHelper;
 import com.example.lunchex.repository.AuthenticationMapper;
+import com.example.lunchex.repository.LunchexListMapper;
+import com.example.lunchex.repository.UsersMapper;
 import com.example.lunchex.service.DetailService;
 import com.example.lunchex.service.FileService;
 import com.example.lunchex.service.StoresService;
@@ -52,6 +58,8 @@ public class DetailController {
 	/** DI */
 	private final StoresService storesService; 
 	private final DetailService detailService;
+	private final UsersMapper usersMapper;  // ログインニックネーム取得用
+	private final LunchexListMapper mapper;
 	
 	/**画面表示*/
 	//店舗データなし
@@ -267,6 +275,72 @@ public class DetailController {
 		public String getFileName() {
 		    return fileService.getUploadedFileName();
 		}
+	
+//詳細ページの店舗検索機能　深田///////すごく長い！！！！！！！！！！！！！！！！！！！！！！！！		
+		@GetMapping("/detailSearch")
+		public String topSearch(StoresForm storesForm ,Model model,RedirectAttributes attributes,@AuthenticationPrincipal LoginUser user) {	
+		
+				//ｈｔｍｌフォームから取得した店舗データを格納
+				StoresForm storesDate = new StoresForm();
+				Stores storesID = new Stores();
+				storesDate.setStoreName(storesForm.getStoreName());
+			    storesID = storesService.getStoreByName(storesDate.getStoreName());	
+	   
+	    //トップページの店舗検索コントローラー		
+		//分岐！店舗情報があるときはこれを渡す
+				if(storesID!=null) {
+					if (user != null) {
+						String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
+						Users loginUser=usersMapper.getUserByMail(loginEmail);
+						String loginNickname=loginUser.getUser_nickname();            
+						model.addAttribute("login_nickname",loginNickname);
+						System.out.println("★"+loginNickname); // 削除可
+					} 
+					int id=storesID.getStore_id();
+				//idに対応した店舗のレビュー情報を格納
+				List<Stores> detailList=mapper.selectPickStoreList(id);
+					//モデルに追加して渡す
+				model.addAttribute("stores",detailList);
+				return  "test2";
+				}
+				
+		//トップページの店舗検索コントローラー		
+		//分岐！店舗情報がないときはこれを渡す
+				else {
+					model.addAttribute("errorMessage", "該当する店舗が見つかりませんでした。");
+				List<Stores> storeList;
+				List<LoginUser> userList = new ArrayList<>(); // ユーザー情報を格納するためのリスト
+				if (user != null) {
+					storeList = mapper.selectStoreListPickDt();
+					userList.add(user); // ログインしているユーザー情報をリストに追加
+					String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
+					Users loginUser=usersMapper.getUserByMail(loginEmail);
+					String loginNickname=loginUser.getUser_nickname();            
+					model.addAttribute("login_nickname",loginNickname);
+					System.out.println("★"+loginNickname); // 削除可
+				} 
+				else {storeList = mapper.selectStoreListPickDt();
+				}
+				model.addAttribute("stores", storeList);
+				model.addAttribute("users",userList);
+				return "index";
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }	
 //深田さんが書いたコード
 ////レビューする内容を登録する
