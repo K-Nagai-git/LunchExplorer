@@ -18,9 +18,10 @@
 		<nav>
 			<ul>
 				<span th:if="${login_nickname == null}">
-					<li><a th:href="@{/stores}">レビュー投稿</a></li>
-										<li><a th:href="@{/login}">ログイン</a></li>
-					<li><a th:href="@{/register}">ユーザー登録</a></li>
+					<!--<li><a th:href="@{/stores}">レビュー投稿</a></li>-->
+					<li><a th:href="@{/detail}">レビュー投稿</a></li>
+					<li><a th:href="@{/login}">ログイン</a></li>
+					<li><a th:href="@{/users}">ユーザー登録</a></li>
 				</span>
 				<span th:if="${login_nickname != null}">
 					<li><a th:href="@{/stores}">レビュー投稿</a></li>
@@ -36,11 +37,7 @@
 			<section class="main-content">
 				<table>
 					<div class="form-card">
-			    <p>ログイン中のユーザー名: <span sec:authentication="username">未ログイン</span></p>
-			
-			<div sec:authentication="user_mail">
-				ログイン情報のname値に置き換わる
-			</div>
+					<h1>ユーザー情報を入力</h1>
 			<!--フラッシュメッセージの表示-->
 				<p th:if="${message}" th:text="${message}" 
 				style="color: blue;">完了メッセージ
@@ -49,25 +46,25 @@
 				style="color: red;">検索エラーメッセージ
 			    </p> 
 			<!--アクション:登録or編集-->
-	<!--		<form th:action="${recorderForm.isNew} ? @{/RecorderController/save}:@{/RecorderController/update}"
-				th:object="${recorderForm}" method="post">		-->
+	
 	        <form th:action="@{/users/usersave}"
 				th:object="${usersForm}" method="post">
 	            <div>
 	                <label for="userMail">ユーザー名(メールアドレス):</label>
 						<input type="text" th:field="*{userMail}" required>
-	              <!--  <input type="text" id="user_mail" name="user_mail" required> -->
+	              
 	            </div>
 	            <div>
 	                <label for="userNickname">ニックネーム:</label>
 					<input type="text" th:field="*{userNickname}" required>
-	            <!--    <input type="text" id="user_nickname" name="user_nickname" required> -->
+	           
 	            </div>
+				
 				<div>
 				    <label for="userPassword">パスワード:</label>
 					<input type="text" th:field="*{userPassword}" required>
-				 <!--   <input type="password" id="user_password" name="user_password" required>	-->
 				</div>
+				
 	            <button type="submit">登録</button>
 	        </form>
 				</table>
@@ -76,15 +73,7 @@
 		</div>
 		
 	</main>
-	<!--ボタン：一覧へ移動-->
-		<form th:action="@{/lunchexplorer}" method="get">
-			<input type="submit" value="トップページへ" style="width: 150px; height: 30px;">
-		</form>
-		
-		<!-- テスト用：ログアウト -->
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="ログアウト">
-		</form>
+
 	<footer>
 	    <p>&copy; 2024 LunchExplorer</p>
 	</footer>
