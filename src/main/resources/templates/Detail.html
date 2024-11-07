@@ -73,10 +73,10 @@
 			     <label for="detailReview">レビュー</label>
 			     <input type="text" th:field="*{detailReview}">
 		</div>
-		<div th:object="${detailForm}">
+		<!--<div th:object="${detailForm}">
 				 <label for="detailImage">レビュー用画像</label>
 				 <input type="text" th:field="*{detailImage}">
-		</div>
+		</div>-->
 		<div th:object="${detailForm}">
 				 <label for="detailMemo">メモ</label>
 				 <input type="text" th:field="*{detailMemo}">
@@ -98,6 +98,17 @@
 
         <button type="submit">登録</button>
     </form>
+	<!--<form method="post" action="/upload" enctype="multipart/form-data">
+	    <input type="file" name="file" />
+	    <button type="submit">Upload</button>
+	</form>-->
+	
+	<form action="/upload" method="post" enctype="multipart/form-data" th:action="@{/upload}" th:object="${file}">
+	    <input type="file" name="file"/>
+	    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <!-- CSRFトークン -->
+	    <button type="submit">アップロード</button>
+		<h1 th:text="${message}"></h1> <!-- メッセージを表示 -->
+	</form>
 	<script>
 	    window.onload = function() {
 	        // 当日日付を取得し、"YYYY-MM-DD"の形式に整形

@@ -16,6 +16,7 @@
 
 package com.example.lunchex.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,7 @@ import com.example.lunchex.helper.DetailHelper;
 import com.example.lunchex.helper.StoresHelper;
 import com.example.lunchex.repository.AuthenticationMapper;
 import com.example.lunchex.service.DetailService;
+import com.example.lunchex.service.FileService;
 import com.example.lunchex.service.StoresService;
 
 import lombok.RequiredArgsConstructor;
@@ -162,11 +164,21 @@ public class DetailController {
 		detailDate.setDetailRating(detailForm.getDetailRating());
 		detailDate.setDetailReviewFlag(detailForm.getDetailReviewFlag());
 		detailDate.setDetailReview(detailForm.getDetailReview());
-		detailDate.setDetailImage(detailForm.getDetailImage());
+		//detailDate.setDetailImage(detailForm.getDetailImage());
 		detailDate.setDetailMemo(detailForm.getDetailMemo());
 		detailDate.setDetailUsedt(detailForm.getDetailUsedt());
 		detailDate.setDetailVisits(detailForm.getDetailVisits());
 
+		//ファイル名の取得
+		if(getFileName() != null) {
+			System.out.println("★ファイル名" + getFileName());
+			detailDate.setDetailImage(getFileName());
+			System.out.println("★画像イメージファイル名" + getFileName());
+		}else {
+			System.out.println("★アップロードファイルなし");
+			detailDate.setDetailImage(detailForm.getDetailImage());
+		}
+		
 		//詳細情報登録(新規)
 		newDetail(detailDate);
 		
@@ -197,7 +209,7 @@ public class DetailController {
 		}else {
 			System.out.println("登録されていない店舗IDです");
 			System.out.println("店舗新規登録");
-			 System.out.println("店舗名: " + form.getStoreName());
+			System.out.println("店舗名: " + form.getStoreName());
 			//エンティティへの変換
 			stores = StoresHelper.convertNewStores(form);
 			System.out.println("エンティティへの変換通過");
@@ -212,8 +224,26 @@ public class DetailController {
 			//エンティティへの変換
 			Detail detail = DetailHelper.convertRecorder(form);
 			System.out.println("エンティティへの変換通過");
+			
+//			//ファイル名の取得
+//			if(getFileName() != null) {
+//			System.out.println("★ファイル名" + getFileName());
+//			detail.setDetail_image(getFileName());
+//			System.out.println("★画像イメージファイル名" + getFileName());
+//			}
 			//登録実行
 			detailService.addDetail(detail);
+			
+			// ファイル名を初期化
+		    fileService.clearUploadedFileName();  // ここでファイル名を初期化
+		}
+		
+		@Autowired
+		private FileService fileService;
+
+		@GetMapping("/getFileName")
+		public String getFileName() {
+		    return fileService.getUploadedFileName();
 		}
 }	
 //深田さんが書いたコード

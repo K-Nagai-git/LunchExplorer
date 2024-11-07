@@ -32,7 +32,7 @@ public class SecurityConfig {
 			//「/login」へのアクセスは認証を必要としない
 			.requestMatchers("/login", "/index").permitAll()
 			// 認証が必要なページ(htmlが出来次第設定）
-			.requestMatchers("/detail","/admin/**", "/secure/**", "/home", "/").authenticated() 
+			.requestMatchers("/detail/**","/admin/**", "/secure/**", "/home", "/").authenticated() 
 			//その他のリクエストは認証が必要
 			//.anyRequest().authenticated())
 			//その他のページは認証不要
@@ -65,5 +65,5 @@ public class SecurityConfig {
 			);
 			
 		return http.build();
-	}
+	}	
 }
