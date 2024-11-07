@@ -34,6 +34,7 @@ public class LoginController {
 		//return "/lunchexplorer";
 		//LoginFormをモデルに追加
 		model.addAttribute("loginForm", new LoginForm());
+		System.out.println("★★　/loginを経由");
 		return "login";
 	}
 	

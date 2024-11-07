@@ -24,14 +24,18 @@
 		<nav>
 			<ul>
 				<span th:if="${login_nickname == null}"> <!-- ログインしていない場合の表示 -->
-					<li><a th:href="@{/login}">ログイン</a></li>
-					<li><a th:href="@{/login}">レビュー投稿</a></li>
+					<li><a th:href="@{/login}">ログイン　</a></li>
+					<li><a th:href="@{/login}">レビュー投稿　</a></li>
 					<li><a th:href="@{/register}">ユーザー登録</a></li>
 				</span>
 				<span th:if="${login_nickname != null}">
 					<span th:text="${login_nickname}">User</span>さん
 					<li><a th:href="@{/stores}">レビュー投稿</a></li>
-					<li><a th:href="@{/logout}">ログアウト</a></li>
+<!--					<li><a th:href="@{/logout}">ログアウト</a></li>-->
+					<!-- ログアウト -->
+					    <form th:action="@{/logout}" method="post">
+					        <input type="submit" value="ログアウト">
+					    </form>
 				</span>
 			</ul>
 		</nav>
