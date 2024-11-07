@@ -18,8 +18,10 @@
 	<header>
 		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;"><img src="/material_img/logo_mtt.svg" alt="LunchExplorer"></h1> <!-- ロゴをクリックするとトップページに戻る -->
 		<div class="search-bar">
-			<input type="text" placeholder="店舗名で検索">
-			<button type="button">検索</button>
+			<form th:action="@{/lunchexplorer/topSearch}" method="get">
+			<input type="text" name="storeName" placeholder="店舗名で検索"required>
+			<button type="submit">検索</button>
+		</form>
 		</div>
 		<nav>
 			<ul>
