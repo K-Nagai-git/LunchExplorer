@@ -77,9 +77,9 @@
 		WHERE d.detail_id = (
 		    SELECT MAX(d2.detail_id)
 		    FROM detail AS d2
-		    WHERE d2.store_id = d.store_id
+		    WHERE d2.store_id = d.store_id 
 		)
-		ORDER BY s.store_id;
+		ORDER BY s.store_id DESC;
 	</select>
 <!-- 一時保存修正検証完了後削除
 	<select id = "selectStoreListPickDt" resultMap="StoresListResult">
@@ -140,7 +140,7 @@
 		INNER JOIN users AS u ON d.user_mail = u.user_mail
 		WHERE 
     			s.store_id = #{store_id}
-		ORDER BY d.detail_postdt DESC;
+		ORDER BY d.detail_id DESC;
 	</select>
 </mapper>
 <!--</mapper> -->
