@@ -8,6 +8,9 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="icon" href="/material_img/favicon.ico" type="image/x-icon">
 	<link rel="shortcut icon" href="/material_img/favicon.ico" type="image/x-icon">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet">
 	<style>
 	</style>
 </head>
@@ -51,7 +54,7 @@
 										<th:block th:if="${store.store_address} != null">
 											<p class="icon-text">
 												<img src="/icons/address_icon.svg" width="16" height="16">
-												<span th:text="${store.store_address}">住所</span>
+												<a th:href="@{'https://www.google.com/maps/search/?api=1&query=' + ${store.store_name} + ' ' + ${store.store_address}}" target="_blank" th:text="${store.store_address}">住所</a>
 											</p>
 										</th:block>
 										<th:block th:if="${store.store_url} != null">
@@ -63,7 +66,8 @@
 									</span>
 								</div>
 								<div class="text-block2">
-									<button onclick="location.href='/lunchexplorer'">書</button>
+									<button onclick="location.href='/detail/' + (${store.store_id})">
+										<p class="icon-text"><img src="/icons/write_icon_w.svg" width="16" height="16">レビュー</p></button>
 								</div>
 							</div>
 							<div class="review-container">
@@ -106,16 +110,16 @@
 				</div>
 			</aside>
 		</div>
-    </main>
-    <footer>
-        <p>&copy; 2024 LunchExplorer</p>
-    </footer>
-    <style>
-        @media (max-width: 768px) {
-            .ad-area {
-                display: none;
-            }
-        }
-    </style>
+	</main>
+	<footer>
+		<p>&copy; 2024 LunchExplorer</p>
+	</footer>
+	<style>
+		@media (max-width: 768px) {
+			.ad-area {
+				display: none;
+			}
+		}
+	</style>
 </body>
 </html>

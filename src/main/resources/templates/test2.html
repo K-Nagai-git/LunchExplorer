@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap" rel="stylesheet">
 	<style>
         .modal {
             display: none;
@@ -69,7 +72,8 @@
 </head>
 <body>
 	<header>
-		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;"><img src="/material_img/logo_mtt.svg" alt="LunchExplorer"></h1>
+		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;">
+			<img src="/material_img/logo_mtt.svg" alt="LunchExplorer"></h1>
 				<div class="search-bar">
 						<input type="text" placeholder="店舗名で検索">
 						<button type="button">検索</button>
@@ -99,16 +103,13 @@
 							<div class="store-card">
 								<span class="store-text" style="display: flex; align-items: center;">
 									<h3 th:text="${store.store_name}" style="margin-right: 10px;">店舗名</h3>
-									<a th:href="@{'https://www.google.com/maps/search/?api=1&query=' + ${store.store_name} + ' ' + ${store.store_address}}" target="_blank">
-										<button type="button" class="google-map-button">GoogleMap</button>
-									</a>
 								</span>
 								<span style="font-family: system-ui;">
 										<p class="icon-text">
 											<img src="/icons/phone_icon.svg" width="16" height="16">
 											<span th:text="${store.store_tel}">電話番号</span>
 											<img src="/icons/address_icon.svg" width="16" height="16" style="margin-left: 10px;">
-											<span th:text="${store.store_address}">住所</span>
+											<a th:href="@{'https://www.google.com/maps/search/?api=1&query=' + ${store.store_name} + ' ' + ${store.store_address}}" target="_blank" th:text="${store.store_address}">住所</a>
 										</p>
 									</span>
 									<p class="icon-text">

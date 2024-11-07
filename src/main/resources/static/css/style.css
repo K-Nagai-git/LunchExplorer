@@ -1,310 +1,319 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #ffba60;
+	font-family: "M PLUS Rounded 1c", sans-serif;
+	background-color: #ffba60;
 /*	background-color: rgb(249, 248, 248);*/
-    color: #664d33;
-    margin: 0;
-    padding: 0;
-    background-image: url("/images/IMG_3354.jpeg");
-    background-position: center;
-    background-blend-mode: soft-light;
-    background-size: cover;
-    background-attachment: fixed;
+	color: #664d33;
+	margin: 0;
+	padding: 0;
+	background-image: url("/images/IMG_3354.jpeg");
+	background-position: center;
+	background-blend-mode: soft-light;
+	background-size: cover;
+	background-attachment: fixed;
 }
 
 header {
-    background-color: #fff;
-    padding: 5px 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 3;
-    position: relative;
-    height: 50px;
-    position: fixed;
-    width: -webkit-fill-available;
-    }
+	background-color: #fff;
+	padding: 5px 30px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 3;
+	position: relative;
+	height: 50px;
+	position: fixed;
+	width: -webkit-fill-available;
+	font-size: 12px;
+}
 
 header h1 {
-    font-size: 24px;
-    margin: 0;
-    width: 200px;
+	font-size: 24px;
+	margin: 0;
+	width: 200px;
 }
+
 a {
 	color: #c76400;
 	font-weight: bold;
 	text-decoration: none;
 }
 
-a:hover{
+a:hover {
 	color: rgb(255, 128, 0);
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 15px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	gap: 15px;
 }
 
 nav ul li {
-    display: inline;
+	display: inline;
 }
 
 nav a {
-    text-decoration: none;
-    color: #664d33;
-    font-weight: bold;
+	text-decoration: none;
+	color: #664d33;
+	font-weight: bold;
 }
 
 nav a:hover {
-    color: #ff8000;
+	color: #ff8000;
 }
 
 /* 検索バー */
 .search-bar {
-    margin: 20px auto;
-    max-width: 500px;
-    display: flex;
-    gap: 0px;
-    }
+	margin: 20px auto;
+	max-width: 500px;
+	display: flex;
+	gap: 0px;
+}
 
 .search-bar input[type="text"] {
 	flex: 1;
-    padding: 10px;
-    border: 1px solid #ff8000;
-    border-radius: 50px 0px 0px 50px;
-    }
+	padding: 10px;
+	border: 1px solid #ff8000;
+	border-radius: 50px 0px 0px 50px;
+}
 
 .search-bar button {
-    padding: 8px 20px;
-    background-color: #ff8000;
-    color: #fff;
-    border: none;
-    border-radius: 0px 50px 50px 0px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+	padding: 8px 20px;
+	background-color: #ff8000;
+	color: #fff;
+	border: none;
+	border-radius: 0px 50px 50px 0px;
+	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
 .search-bar button:hover {
-    background-color: #cc6600;
+	background-color: #cc6600;
 }
 
 /* アイコンを行の上下中央に配置するためのスタイル */
 .icon-text {
-    display: flex;
-    align-items: center;
-    margin: 0px;
-    overflow: hidden;
-    white-space: nowrap;
+	display: flex;
+	align-items: center;
+	margin: 0px;
+	overflow: hidden;
+	white-space: nowrap;
 }
+
 .icon-text img {
-    margin-right: 5px; /* アイコンとテキストの間隔 */
+	margin-right: 5px; /* アイコンとテキストの間隔 */
 }
-    
+
 /*フォームカード*/
 .form-card {
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
-    position: relative;
-    overflow: hidden;
-    min-width: 50%;
-    margin: 110px auto;
-    z-index: 1;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+	background-color: #fff;
+	padding: 20px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	border-radius: 15px;
+	position: relative;
+	overflow: hidden;
+	min-width: 50%;
+	margin: 20px 10%;
+	z-index: 1;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 
 .form-card label {
-    display: inline-block;
-    width: 150px;
-    text-align: right;
-    margin-right: 10px;
+	display: inline-block;
+	width: 150px;
+	text-align: right;
+	margin-right: 10px;
 }
 
 .form-card input[type="text"],
+.form-card input[type="date"],
+.form-card input[type="checkbox"],
 .form-card input[type="password"] {
-    width: calc(70% - 180px);
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+	width: calc(70% - 180px);
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
+
 .form-card div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
 }
 
 .form-card input[type="submit"] {
-    padding: 10px 20px;
-    background-color: #ff8000;
-    color: #FFF;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
+	padding: 10px 20px;
+	background-color: #ff8000;
+	color: #FFF;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
 }
 
-.text-blocks{
+.text-blocks {
 	display: -webkit-box;
 }
-.text-block1{
-	width: 70%;
-    margin-right: 9px;
-    padding-block: 5px;
-    align-content: center;
+
+.text-block1 {
+	width: 60%;
+	margin-right: 9px;
+	padding-block: 5px;
+	align-content: center;
 }
 
-.text-block2{
+.text-block2 {
 	align-content: center;
-    width: 27%;
-    margin-block: 5px;
+	width: 37%;
+	margin-block: 5px;
+	text-align: right;
 }
+
 /* レビューカード */
 .review {
-    background-color: #e0e0e0;
-    padding: 0px;
-    margin-top: 0px;
-    border-radius: 10px;
-    display: grid;
-    gap: 5px;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 180px;
-    align-items: end;
+	background-color: #e0e0e0;
+	padding: 0px;
+	margin-top: 0px;
+	border-radius: 10px;
+	display: grid;
+	gap: 5px;
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 180px;
+	align-items: end;
 }
 
 .review:hover::before {
-    transform: scale(1.1);
-    transition: transform 0.3s ease;
+	transform: scale(1.1);
+	transition: transform 0.3s ease;
 }
 
 .review::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    z-index: 0;
-/*    background-image: url("/images/default_menu.svg");*/
-    transition: transform 0.3s ease;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	z-index: 0;
+/*	background-image: url("/images/default_menu.svg");*/
+	transition: transform 0.3s ease;
 }
 
 .review::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgb(226 106 0 / 60%));
-    z-index: 1;
+	z-index: 1;
 }
 
 .review:hover::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(226, 106, 0, 0.4);
-    transition: background 0.3s ease;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(226, 106, 0, 0.4);
+	transition: background 0.3s ease;
 }
 
 .review + .review {
-    margin-top: 0px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+	margin-top: 0px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .review-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 10px;
-/*    margin-top: 10px;*/
-/*    max-height: 185px;*/
-/*    overflow-y: scroll;*/
-/*    padding-right: 5px;*/
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 10px;
+/*	margin-top: 10px;*/
+/*	max-height: 185px;*/
+/*	overflow-y: scroll;*/
+/*	padding-right: 5px;*/
 }
 
 .review-container::-webkit-scrollbar {
-    width: 6px;
+	width: 6px;
 }
 
 .review-container::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 3px;
+	background-color: #ccc;
+	border-radius: 3px;
 }
 
 .store-text {
-    font-size: 12px;
-    margin-bottom: 10px;
-    font-family: system-ui;
-    font-weight: 500;
-    color: #664d33;
+	font-size: 12px;
+	margin-bottom: 10px;
+	font-family: "M PLUS Rounded 1c", sans-serif;
+	font-weight: 500;
+	color: #664d33;
 }
 
 .store-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 10px;
-    margin: 10px;
-    margin-bottom: 50px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+	gap: 10px;
+	margin: 10px;
+	margin-bottom: 50px;
 }
 
 .store-card {
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
-    position: relative;
-    overflow: hidden;
-    min-width:50%;
-    height: fit-content;
+	background-color: #fff;
+	padding: 10px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	border-radius: 15px;
+	position: relative;
+	overflow: hidden;
+	min-width: 50%;
+	height: fit-content;
 }
 
 .store-card h3 {
-    margin-top: 0;
-    margin-bottom: 0px;
-    font-size: 20px;
+	margin-top: 0;
+	margin-bottom: 0px;
+	font-size: 20px;
 	color: #664d33;
-    line-height: 1.2em;
-    padding-bottom: 5px;
-    border-bottom: solid 1px #dddddd
+	line-height: 1.2em;
+	padding-bottom: 5px;
+	border-bottom: solid 1px #dddddd;
 }
 
 .store-card p {
-    margin: 0;
-/*    font-size: 0.7em;*/
-    margin-top: 2px;
-    margin-bottom: 2px;
+	margin: 0;
+/*	font-size: 0.7em;*/
+	margin-top: 2px;
+	margin-bottom: 2px;
 }
 
 .store-card-button {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 5px 20px;
-    background-color: #28a745;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s;
+	display: inline-block;
+	margin-top: 10px;
+	padding: 5px 20px;
+	background-color: #28a745;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 8px;
+	transition: background-color 0.3s;
 }
 
 .store-card-button:hover {
-    background-color: #218838;
+	background-color: #218838;
 }
 
 .menu-name {
@@ -314,128 +323,130 @@ nav a:hover {
 }
 
 .review .review-text {
-    font-size: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin: 10px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #fff;
-    align-self: end;
-    z-index: 2;
-    filter: drop-shadow(0px 0px 4px rgb(85, 40, 0, 0.7));
-    font-family: system-ui;
-    letter-spacing: 0.15em;
+	font-size: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	margin: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #fff;
+	align-self: end;
+	z-index: 2;
+	filter: drop-shadow(0px 0px 4px rgb(85, 40, 0, 0.7));
+	font-family: system-ui;
+	letter-spacing: 0.15em;
 }
 
 /* フッター */
 footer {
-    background-color: #fff;
-    text-align: center;
-    padding: 20px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    margin-top: 40px;
+	background-color: #fff;
+	text-align: center;
+	padding: 20px;
+	box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+	margin-top: 40px;
 }
 
 footer p {
-    margin: 0;
-    color: #666;
+	margin: 0;
+	color: #666;
 }
+
 /* 共通フッタースタイル */
 footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #fff;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    padding: 10px 0;
-    text-align: center;
-    z-index: 2;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: #fff;
+	box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+	padding: 10px 0;
+	text-align: center;
+	z-index: 2;
 }
 
 .footer-menu {
-    display: none;
+	display: none;
 }
 
 @media (max-width: 768px) {
-    footer {
-        display: flex;
-        justify-content: space-around;
-        padding: 10px 0;
-    }
-    .footer-menu {
-        display: flex;
-        justify-content: space-around;
-    }
-    .button-container {
-        display: none;
-    }
+	footer {
+		display: flex;
+		justify-content: space-around;
+		padding: 10px 0;
+	}
+	.footer-menu {
+		display: flex;
+		justify-content: space-around;
+	}
+	.button-container {
+		display: none;
+	}
 }
-
 
 /* ボタンスタイル */
 .button-container {
-    margin-top: 10px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+	margin-top: 10px;
+	display: flex;
+	gap: 10px;
+	justify-content: center;
 }
 
 button {
-    padding: 10px 15px;
-    background-color: #ff8000;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+	padding: 5px 15px;
+	background-color: #ff8000;
+	color: #fff;
+	border: none;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	font-weight: bold;
 }
 
 button:hover {
-    background-color: #cc6600;
+	background-color: #cc6600;
 }
 
 .google-map-button {
-    background-color: #ff8000; /* ボタンの背景色 */
-    color: #fff; /* テキスト色 */
-    border: none; /* ボーダーをなしにする */
-    border-radius: 4px; /* 角を丸くする */
-    padding: 4px 12px; /* ボタン内の余白 */
-    cursor: pointer; /* マウスカーソルを指アイコンに変更 */
-    transition: background-color 0.3s; /* 背景色の変更をアニメーションする */
-    margin-left: 10px;
+	background-color: #ff8000; /* ボタンの背景色 */
+	color: #fff; /* テキスト色 */
+	border: none; /* ボーダーをなしにする */
+	border-radius: 4px; /* 角を丸くする */
+	padding: 4px 12px; /* ボタン内の余白 */
+	cursor: pointer; /* マウスカーソルを指アイコンに変更 */
+	transition: background-color 0.3s; /* 背景色の変更をアニメーションする */
+	margin-left: 10px;
 }
 
 .google-map-button:hover {
-    background-color: #cc6600; /* ホバー時の背景色 */
+	background-color: #cc6600; /* ホバー時の背景色 */
 }
 
 .ad-area {
 	position: fixed;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    width: 300px;
-/*    background-color: #fff; */
-/*    height: 0;*/
-    z-index: 0;
-    padding-top: 0%;
-    padding-left: 0px;
-    margin: 5px;
-    }
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
+	width: 300px;
+/*	background-color: #fff; */
+/*	height: 0;*/
+	z-index: 0;
+	padding-top: 0%;
+	padding-left: 0px;
+	margin: 5px;
+}
+
 .content-wrapper {
-    display: flex;
-/*    max-width: 1200px;*/
-    margin: 0 auto;
-    padding: 0px 10px;
-    box-sizing: border-box;
-    padding-top: 60px;
-    }
-    
+	display: flex;
+/*	max-width: 1200px;*/
+	margin: 0 auto;
+	padding: 0px 10px;
+	box-sizing: border-box;
+	padding-top: 60px;
+}
+
 .main-content {
-    flex: 1;
-    margin-right: 300px;
-    margin-bottom: 50px;
-   }
+	flex: 1;
+	margin-right: 300px;
+	margin-bottom: 50px;
+}
