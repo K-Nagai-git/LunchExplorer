@@ -64,9 +64,38 @@ public class DetailController {
 	/**画面表示*/
 	//店舗データなし
 	@GetMapping()
-	public String showDetail(@ModelAttribute DetailForm form, StoresForm storesForm, Model model) {
+	public String showDetail(@ModelAttribute DetailForm form, StoresForm storesForm, Model model,@AuthenticationPrincipal LoginUser user) {
 		//login.htmlに遷移
 		//return "/lunchexplorer";
+		
+//--↓ログイン判定処理　深田さんコード参照　2024/11/08　糸山----------------------------
+		List<Stores> storeList;
+		List<LoginUser> userList = new ArrayList<>(); // ユーザー情報を格納するためのリスト
+
+		// ユーザー情報が存在するか確認を行う。
+		//ユーザー情報が存在する場合はこちらのListを渡す
+		if (user != null) {
+			storeList = mapper.selectStoreListPickDt();
+
+			userList.add(user); // ログインしているユーザー情報をリストに追加
+
+			String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
+			Users loginUser=usersMapper.getUserByMail(loginEmail);
+			String loginNickname=loginUser.getUser_nickname();            
+			model.addAttribute("login_nickname",loginNickname);
+			System.out.println("★"+loginNickname); // 削除可
+
+		} 
+		// ユーザー情報がない場合はこちらのListを渡す
+		else {storeList = mapper.selectStoreListPickDt();
+		}
+
+		//判別が終了したLisｔををモデルにぶち込む
+		model.addAttribute("stores", storeList);
+		model.addAttribute("users",userList);
+		
+//--↑ログイン判定処理　深田さんコード参照　2024/11/08　糸山----------------------------
+		
 		model.addAttribute("storesForm", new StoresForm()); // StoreFormはデータクラス
 		return "detail";
 	}
