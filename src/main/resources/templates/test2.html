@@ -26,7 +26,7 @@
             padding: 10px;
             background-color: #fff;
             border-radius: 10px;
-            max-width: 80%;
+            max-width: 600px;
 			height: fit-content;
 			width: fit-content;
             position: relative;
@@ -78,8 +78,7 @@
 				
 			<div class="search-bar">
 					<form th:action="@{/detail/detailSearch}" method="get">
-						<input type="text"name="storeName" placeholder="店舗名で検索"required>
-						<button type="submit">検索</button>
+						<input type="text"name="storeName" placeholder="店舗名で検索"required><button type="submit">検索</button>
 					</form>
 					</div>
 					
@@ -189,7 +188,7 @@
 					<div id="myModal" class="modal" onclick="closeModal()">
 						<div class="modal-content">
 							<span class="close" onclick="closeModal()">&times;</span>
-							<img id="modalImage" src="" alt="レビュー画像" style="width: 100%; height: auto;" />
+							<img id="modalImage" src="" alt="レビュー画像" style="width: 100%; height: auto; max-height: 500px;" />
 							<div id="modalReviewText" class="review-text">
 								<p class="icon-text menu-name">
 									<img src="/icons/menu_icon.svg" width="25" height="25">
