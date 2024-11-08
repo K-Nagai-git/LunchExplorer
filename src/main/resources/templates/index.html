@@ -19,16 +19,14 @@
 		<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;"><img src="/material_img/logo_mtt.svg" alt="LunchExplorer"></h1> <!-- ロゴをクリックするとトップページに戻る -->
 		<div class="search-bar">
 			<form th:action="@{/lunchexplorer/topSearch}" method="get">
-			<input type="text" name="storeName" placeholder="店舗名で検索"required>
-			<button type="submit">検索</button>
-		</form>
-		</div>
-		
-		<!-- エラーメッセージ表示エリア -->
+				<input type="text" name="storeName" placeholder="店舗名で検索"required><button type="submit">検索</button><div>
+<!-- エラーメッセージ表示エリア -->
 		<div class="error-message" th:if="${errorMessage != null}">
-		    <p th:text="${errorMessage}">エラーメッセージがここに表示されます</p>
+		    <span th:text="${errorMessage}">エラーメッセージがここに表示されます</span>
 		</div>
-
+		</form>
+	</div>
+		</div>
 		<nav>
 			<ul>
 				<span th:if="${login_nickname == null}"> <!-- ログインしていない場合の表示 -->
@@ -37,7 +35,6 @@
 					<li><a th:href="@{/users}">ユーザー登録</a></li>
 				</span>
 				<span th:if="${login_nickname != null}">
-<!--					<span th:text="${login_nickname}">User</span>さん  -->
 					<span th:text="${login_nickname}" style="font-size: 1.2em; font-weight: bold;">User</span>さん　　  
 					<li><a th:href="@{/detail}">新規店舗登録＆レビュー</a></li>
 					<!-- ログアウト -->
