@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>HIRU-DOKO</title>
+		<title>HIRU-DOKO - 店舗情報登録</title>
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 		<link rel="icon" href="/material_img/favicon.ico" type="image/x-icon">
 		<link rel="shortcut icon" href="/material_img/favicon.ico" type="image/x-icon">
@@ -13,31 +13,35 @@
 </head>
 <body>
 		<header>
-			<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;"><img src="/material_img/logo_mtt.svg" alt="LunchExplorer"></h1> <!-- ロゴをクリックするとトップページに戻る -->
-			<div class="search-bar">
-				<form th:action="@{/lunchexplorer/topSearch}" method="get">
-					<input type="text" name="storeName" placeholder="店舗名で検索"required><button type="submit">検索</button><div>
-	<!-- エラーメッセージ表示エリア -->
-			<div class="error-message" th:if="${errorMessage != null}">
-			    <span th:text="${errorMessage}">エラーメッセージがここに表示されます</span>
-			</div>
-			</form>
-		</div>
-			</div>
+			<h1 onclick="location.href='/lunchexplorer'" style="cursor: pointer;">
+				<img src="/material_img/logo_mtt.svg" alt="LunchExplorer"></h1>
+					
+				<div class="search-bar">
+						<form th:action="@{/detail/detailSearch}" method="get">
+							<input type="text"name="storeName" placeholder="店舗名で検索"required><button type="submit">検索</button>
+						</form>
+						</div>
+						
+						<!-- エラーメッセージ表示エリア -->
+								<div class="error-message" th:if="${errorMessage != null}">
+								    <p th:text="${errorMessage}">エラーメッセージがここに表示されます</p>
+								</div>
+
 			<nav>
 				<ul>
-					<span th:if="${login_nickname == null}"> <!-- ログインしていない場合の表示 -->
-						<li><a th:href="@{/login}">ログイン　</a></li>
-						<li><a th:href="@{/login}">レビュー投稿　</a></li>
+					<span th:if="${login_nickname == null}">
+						<li><a th:href="@{/login}">ログイン</a></li>
+						<li><a th:href="@{/login}">レビュー投稿</a></li>
 						<li><a th:href="@{/users}">ユーザー登録</a></li>
 					</span>
 					<span th:if="${login_nickname != null}">
+	<!--					<span th:text="${login_nickname}">User</span>さん-->
 						<span th:text="${login_nickname}" style="font-size: 1.2em; font-weight: bold;">User</span>さん　　  
 						<li><a th:href="@{/detail}">新規店舗登録＆レビュー</a></li>
 						<!-- ログアウト -->
 						    <form th:action="@{/logout}" method="post">
 						        <input type="submit" value="ログアウト">
-						    </form>
+						    </form>									
 					</span>
 				</ul>
 			</nav>
@@ -51,24 +55,24 @@
     <!-- 店舗情報の登録フォーム -->
     <form th:action="@{/detail/detailsave}" method="get">
         <!--<input type="hidden" name="storeId" th:field="*{storeId}">-->
-        <div th:object="${storesForm}">
+        <div th:object="${storesForm}" style="padding: 5px 0px;">
             <label for="storeName">店舗名</label>
             <input type="text" id="storeName"th:field="*{storeName}" 
 					th:disabled="${not #fields.hasErrors('storeName') and storesForm.storeName != null}" 
 					required>
         </div>
-        <div th:object="${storesForm}">
+        <div th:object="${storesForm}" style="padding: 5px 0px;">
             <label for="storeTel">電話番号:</label>
             <input type="text" th:field="*{storeTel}" 
 			th:disabled="${not #fields.hasErrors('storeTel') and storesForm.storeTel != null}" 
 			required>
         </div>
-        <div th:object="${storesForm}">
+        <div th:object="${storesForm}" style="padding: 5px 0px;">
             <label for="storeAddress">店舗住所:</label>
             <input type="text" th:field="*{storeAddress}"
 			th:disabled="${not #fields.hasErrors('storeAddress') and storesForm.storeAddress != null}" >
         </div>
-        <div th:object="${storesForm}">
+        <div th:object="${storesForm}"		style="padding: 5px 0px;">
             <label for="storeUrl">店舗ホームページ:</label>
             <input type="text" th:field="*{storeUrl}"
 			th:disabled="${not #fields.hasErrors('storeUrl') and storesForm.storeUrl != null}" >
@@ -84,7 +88,7 @@
 		     <label for="storeId">店舗ID</label>
 		     <input type="text" th:field="*{			 storeId}" required>
 		 </div>-->
-		 <div th:object="${detailForm}">
+		 <div th:object="${detailForm}"		 style="padding: 5px 0px;">
 			<label for="detailPostdt">投稿日:</label>
 			<input type="date" id="detailPostdt" name="detailPostdt" required>
 		 </div>
@@ -93,23 +97,23 @@
 		       <!--<label for="	ditailUserMail">ユーザーメールアドレス</label>-->
 		       <input type="hidden" th:field="*{ditailUserMail}" required>
 		 </div>
-		 <div th:object="${detailForm}">
+		 <div th:object="${detailForm}"		 style="padding: 5px 0px;">
 		        <label for="detailMenu">メニュー名</label>
 		        <input type="text" th:field="*{detailMenu}" required>
 		 </div>
-		 <div th:object="${detailForm}">
+		 <div th:object="${detailForm}"		 style="padding: 5px 0px;">
 			     <label for="detailPrice">金額</label>
 			     <input type="text" th:field="*{detailPrice}" required>
 		 </div>
-		 <div th:object="${detailForm}">
+		 <div th:object="${detailForm}"		 style="padding: 5px 0px;">
 			     <label for="detailRating">評価</label>
 			     <input type="text" th:field="*{detailRating}" required>
 		</div>
-		<div th:object="${detailForm}">
+		<div th:object="${detailForm}"		style="padding: 5px 0px;">
 		    <label for="detailReviewFlag">レビュー表示フラグ</label>
 		    <input type="checkbox" th:field="*{detailReviewFlag}" id="detailReviewFlag" th:checked="true">
 		</div>
-		<div th:object="${detailForm}">
+		<div th:object="${detailForm}"		style="padding: 5px 0px;">
 			     <label for="detailReview">レビュー</label>
 			     <input type="text" th:field="*{detailReview}">
 		</div>
@@ -117,11 +121,11 @@
 				 <label for="detailImage">レビュー用画像</label>
 				 <input type="text" th:field="*{detailImage}">
 		</div>-->
-		<div th:object="${detailForm}">
+		<div th:object="${detailForm}"		style="padding: 5px 0px;">
 				 <label for="detailMemo">メモ</label>
 				 <input type="text" th:field="*{detailMemo}">
 		</div>
-		<div th:object="${detailForm}">
+		<div th:object="${detailForm}"		style="padding: 5px 0px;">
 		    <label for="detailUsedt">利用付日</label>
 		    <input type="date" id="detailUsedt" th:field="*{detailUsedt}" required>
 		</div>
@@ -131,12 +135,12 @@
 		        document.getElementById('detailUsedt').value = today;
 		    };
 		</script>
-		<div th:object="${detailForm}">
+		<div th:object="${detailForm}"		style="padding: 5px 0px;">
 				 <label for="detailVisits">来店回数</label>
 				 <input type="text" th:field="*{detailVisits}" required>
 		</div>
 
-        <button type="submit">登録</button>
+        <button type="submit"		style="padding: 5px 0px; width: 150px;">登録</button>
     </form>
 	<!--<form method="post" action="/upload" enctype="multipart/form-data">
 	    <input type="file" name="file" />
