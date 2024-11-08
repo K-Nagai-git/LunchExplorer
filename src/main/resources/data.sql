@@ -76,6 +76,14 @@ VALUES ('鶏と牛のお店 火澄屋 （かすみや）', '0662433328', '大阪
 INSERT INTO stores (store_name, store_tel, store_address, store_url, user_mail)
 VALUES ('よってや', '0662416115', '大阪府大阪市中央区島之内1-21-32', 'https://tabelog.com/osaka/A2701/A270201/27022234/', 'gonda@gmail.com');
 
+-- 9件目のデータ登録
+INSERT INTO stores (store_name, store_tel, store_address, store_url, user_mail)
+VALUES ('なか卯 堺筋周防町店', '0120-295-770', '大阪府大阪市中央区 島之内 2丁目 13-25 ', 'https://maps.nakau.co.jp/jp/detail/2250.html', 'gonda@gmail.com');
+
+-- 10件目のデータ登録
+INSERT INTO stores (store_name, store_tel, store_address, store_url, user_mail)
+VALUES ('ほっかほっか亭　島之内店', '06-6484-2662', '大阪府大阪市中央区島之内2-6-26', 'https://store.hokkahokka-tei.jp/store/271122', 'gonda@gmail.com');
+
 -- 詳細画面
 -- 1件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
@@ -119,8 +127,16 @@ VALUES (7, '2024-10-08', 'honda@gmail.com', '火澄屋定食', 800, 5, TRUE, '�
 
 -- 11件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
-VALUES (8, '2024-10-08', 'gonda@gmail.com', 'とりマヨ定食', 700, 5, TRUE, 'まじ安い', NULL, '量も多い', '2024-10-08', 1);
+VALUES (8, '2024-10-08', 'gonda@gmail.com', 'とりマヨ定食', 700, 5, TRUE, 'まじ安い', 'IMG_5957.jpeg', '量も多い', '2024-10-08', 1);
 
 -- 12件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
 VALUES (2, '2024-10-05', 'wada@gmail.com', '日替わりステーキ L', 1200, 3, TRUE, 'がちうま', NULL, 'Sサイズは少し物足りない', '2024-10-05', 1);
+
+-- 13件目のデータ登録
+INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
+VALUES (9, '2024-11-08', 'wada@gmail.com', '親子丼', 450, 3, TRUE, '定番', 'IMG_1577.jpeg', '早い', '2024-11-08', 1);
+
+-- 14件目のデータ登録
+INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
+VALUES (10, '2024-11-08', 'kuwata@gmail.com', '海鮮中華丼', 590, 3, TRUE, '期間限定','IMG_1576.jpeg', 'アプリ注文がお勧め', '2024-11-08', 1);
