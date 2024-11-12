@@ -212,33 +212,34 @@ public class DetailController {
 		storesID = storesService.getStoreByName(storesDate.getStoreName());
 		
 		//htmlフォームから取得した詳細データを格納
-		DetailForm detailDate = new DetailForm();
+		DetailForm detailData = new DetailForm();
 		
-		detailDate.setStoreId(storesID.getStore_id());
-		detailDate.setDetailPostdt(detailForm.getDetailPostdt());
-		//detailDate.setDitailUserMail(detailForm.getDitailUserMail());
-		detailDate.setDitailUserMail(user.getUsername());
-		detailDate.setDetailMenu(detailForm.getDetailMenu());
-		detailDate.setDetailPrice(detailForm.getDetailPrice());
-		detailDate.setDetailRating(detailForm.getDetailRating());
-		detailDate.setDetailReviewFlag(detailForm.getDetailReviewFlag());
-		detailDate.setDetailReview(detailForm.getDetailReview());
-		detailDate.setDetailImage(detailForm.getDetailImage());
-		detailDate.setDetailMemo(detailForm.getDetailMemo());
-		detailDate.setDetailUsedt(detailForm.getDetailUsedt());
-		detailDate.setDetailVisits(detailForm.getDetailVisits());
+		detailData.setStoreId(storesID.getStore_id());
+		detailData.setDetailPostdt(detailForm.getDetailPostdt());
+		//detailData.setDitailUserMail(detailForm.getDitailUserMail());
+		detailData.setDitailUserMail(user.getUsername());
+		detailData.setDetailMenu(detailForm.getDetailMenu());
+		detailData.setDetailPrice(detailForm.getDetailPrice());
+		detailData.setDetailRating(detailForm.getDetailRating());
+		detailData.setDetailReviewFlag(detailForm.getDetailReviewFlag());
+		detailData.setDetailReview(detailForm.getDetailReview());
+		//detailData.setDetailImage(detailForm.getDetailImage());
+		detailData.setDetailImage(UploadFileName);
+		detailData.setDetailMemo(detailForm.getDetailMemo());
+		detailData.setDetailUsedt(detailForm.getDetailUsedt());
+		detailData.setDetailVisits(detailForm.getDetailVisits());
 
-		if(UploadFileName != null) {
-			System.out.println("★ファイル名" + getFileName());
-			detailDate.setDetailImage(UploadFileName);
-			System.out.println("★画像イメージファイル名" + getFileName());
-		}else {
-			System.out.println("★アップロードファイルなし");
-			//detailDate.setDetailImage(detailForm.getDetailImage());
-		}
+//		if(UploadFileName != null) {
+//			System.out.println("★ファイル名" + getFileName());
+//			detailData.setDetailImage(UploadFileName);
+//			System.out.println("★画像イメージファイル名" + getFileName());
+//		}else {
+//			System.out.println("★アップロードファイルなし");
+//			//detailData.setDetailImage(detailForm.getDetailImage());
+//		}
 		
 		//詳細情報登録(新規)
-		newDetail(detailDate);
+		newDetail(detailData);
 				
 		// 画像の保存処理が終わるまで待機(Eclipseで保存にタイムラグが出るため)
 		try {
@@ -246,7 +247,7 @@ public class DetailController {
 		} catch (Exception e) {
 		}
 		
-		return "redirect:/lunchexplorer/details/" + detailDate.getStoreId();
+		return "redirect:/lunchexplorer/details/" + detailData.getStoreId();
 	}
 	/** 店舗登録*/
 	//登録されていない店舗は新規登録、すでに登録されている店舗は更新として登録する
