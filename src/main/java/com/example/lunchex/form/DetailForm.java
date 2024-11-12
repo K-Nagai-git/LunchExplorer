@@ -4,6 +4,8 @@ package com.example.lunchex.form;
 
 import java.time.LocalDate;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -40,6 +42,8 @@ public class DetailForm {
         private String detailReview; // コメント（任意）
     	//レビュー用画像
         private String detailImage; // 写真投稿（任意）
+        //画像ファイル
+        private MultipartFile file;
     	//メモ
         private String detailMemo; 
     	//利用日付
