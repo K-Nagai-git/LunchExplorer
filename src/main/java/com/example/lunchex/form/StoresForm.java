@@ -26,6 +26,8 @@ public class StoresForm {
     //投稿者ID（メールアドレス）
 	@NotEmpty(message = "あなたのメールアドレスを入力してください")
 	private String storeUserMail;
+	//画像ファイル
+    //private MultipartFile file;
 }
 	/**木和田さん作成コード*/
 //    // 新規店舗登録フォームのデータクラス

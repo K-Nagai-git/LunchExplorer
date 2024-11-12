@@ -26,6 +26,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -60,6 +61,7 @@ public class DetailController {
 	private final DetailService detailService;
 	private final UsersMapper usersMapper;  // ログインニックネーム取得用
 	private final LunchexListMapper mapper;
+	private final FileUploadController fileUploadController;
 	
 	/**画面表示*/
 	//店舗データなし
@@ -160,8 +162,11 @@ public class DetailController {
 	}
 	
 	/** 店舗・詳細登録*/
-	@GetMapping("/detailsave")
+	@PostMapping("/detailsave")
 	public String newStoresDetailRegister(StoresForm storesForm, DetailForm detailForm ,@AuthenticationPrincipal LoginUser user) {
+		
+		//画像のアップロード処理
+		String UploadFileName = fileUploadController.handleFileUpload(detailForm.getFile());
 		
 		//ｈｔｍｌフォームから取得した店舗データを格納
 		StoresForm storesDate = new StoresForm();
@@ -171,9 +176,6 @@ public class DetailController {
 		storesDate.setStoreUrl(storesForm.getStoreUrl());
 		//storesDate.setStoreUserMail(storesForm.getStoreUserMail());
 		
-		System.out.println("★店舗ID変数チェック：" + storeId);
-		System.out.println("★店舗IDチェック：" + storesDate.getStoreId());
-		System.out.println("★店舗名チェック：" + storesDate.getStoreName());
 		
 		if (this.storeId != null) {
 			if(storesDate.getStoreName() == null) {
@@ -221,26 +223,29 @@ public class DetailController {
 		detailDate.setDetailRating(detailForm.getDetailRating());
 		detailDate.setDetailReviewFlag(detailForm.getDetailReviewFlag());
 		detailDate.setDetailReview(detailForm.getDetailReview());
-		//detailDate.setDetailImage(detailForm.getDetailImage());
+		detailDate.setDetailImage(detailForm.getDetailImage());
 		detailDate.setDetailMemo(detailForm.getDetailMemo());
 		detailDate.setDetailUsedt(detailForm.getDetailUsedt());
 		detailDate.setDetailVisits(detailForm.getDetailVisits());
 
-		//ファイル名の取得
-		if(getFileName() != null) {
+		if(UploadFileName != null) {
 			System.out.println("★ファイル名" + getFileName());
-			detailDate.setDetailImage(getFileName());
+			detailDate.setDetailImage(UploadFileName);
 			System.out.println("★画像イメージファイル名" + getFileName());
 		}else {
 			System.out.println("★アップロードファイルなし");
-			detailDate.setDetailImage(detailForm.getDetailImage());
+			//detailDate.setDetailImage(detailForm.getDetailImage());
 		}
 		
 		//詳細情報登録(新規)
 		newDetail(detailDate);
+				
+		// 画像の保存処理が終わるまで待機(Eclipseで保存にタイムラグが出るため)
+		try {
+			Thread.sleep(3000);
+		} catch (Exception e) {
+		}
 		
-		System.out.println("最終チェック" + detailDate.getStoreId());
-		//return "redirect:/detail/";
 		return "redirect:/lunchexplorer/details/" + detailDate.getStoreId();
 	}
 	/** 店舗登録*/
@@ -284,12 +289,6 @@ public class DetailController {
 			Detail detail = DetailHelper.convertRecorder(form);
 			System.out.println("エンティティへの変換通過");
 			
-//			//ファイル名の取得
-//			if(getFileName() != null) {
-//			System.out.println("★ファイル名" + getFileName());
-//			detail.setDetail_image(getFileName());
-//			System.out.println("★画像イメージファイル名" + getFileName());
-//			}
 			//登録実行
 			detailService.addDetail(detail);
 			
@@ -355,21 +354,7 @@ public class DetailController {
 				return "index";
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 }	
 //深田さんが書いたコード
 ////レビューする内容を登録する

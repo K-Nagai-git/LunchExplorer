@@ -53,8 +53,8 @@
     <h1>メニュー情報を入力してください</h1>
 
     <!-- 店舗情報の登録フォーム -->
-    <form th:action="@{/detail/detailsave}" method="get">
-        <!--<input type="hidden" name="storeId" th:field="*{storeId}">-->
+    <form th:action="@{/detail/detailsave}" method="post" enctype="multipart/form-data" th:object="${storesForm}">
+	<!--<form th:action="@{/upload}" method="post" enctype="multipart/form-data" th:object="${storesForm}">-->
         <div th:object="${storesForm}" style="padding: 5px 0px;">
             <label for="storeName">店舗名</label>
             <input type="text" id="storeName"th:field="*{storeName}" 
@@ -139,57 +139,41 @@
 				 <label for="detailVisits">来店回数</label>
 				 <input type="text" th:field="*{detailVisits}" required>
 		</div>
+		<!--正常に動くHTML-->
+<!--		<div style="padding: 5px 0px;">-->
+<!--				<label for="file">画像ファイル</label>-->
+<!--		        <input type="file" name="file"/>-->
+<!--		</div>-->
 
-        <button type="submit"		style="padding: 5px 0px; width: 150px;">登録</button>
+		<div th:object="${detailForm}" style="padding: 5px 0px;">
+				<label for="file">画像ファイル</label>
+		        <input type="file" name="file"/>
+		</div>
+		
+<!--		<div th:object="${detailForm}" style="padding: 5px 0px;">-->
+<!--				<label for="file">画像ファイル</label>-->
+<!--				<input type="file" id="fileInput" th:field="*{detailImage}" name="file"/>-->
+<!--		</div>-->
+				<br>
+		 		<button type="submit" style="padding: 5px 0px; width: 150px;">登録</button>
+				<!-- Flash Attributeメッセージを表示 -->
+				<p th:if="${message}" th:text="${message}"></p>
     </form>
 	<!--<form method="post" action="/upload" enctype="multipart/form-data">
 	    <input type="file" name="file" />
 	    <button type="submit">Upload</button>
 	</form>-->
-<!-- ↓ローカルへ入力データ保持用　うまくいかなければ消す-->
-	<!-- 入力データのローカルストレージ保存と復元用スクリプト -->
-	 <script>
-	     // ページ読み込み時にローカルストレージからデータを取得して表示
-	     document.addEventListener("DOMContentLoaded", function() {
-	         const storedData = localStorage.getItem("menuFormData");
-	         if (storedData) {
-	             const formData = JSON.parse(storedData);
-	             document.getElementById("storeName").value = formData.storeName || '';
-	             document.getElementById("storeTel").value = formData.storeTel || '';
-	             // 他の入力フィールドも同様に復元
-	         }
-	     });
-	
-	     // フォームのデータをローカルストレージに保存する関数
-	     function saveFormData() {
-	         const formData = {
-	             storeName: document.getElementById("storeName").value,
-	             storeTel: document.getElementById("storeTel").value,
-	             // 他の入力フィールドも同様に取得
-	         };
-	         localStorage.setItem("menuFormData", JSON.stringify(formData));
-	     }
-	
-	     // フォームの各入力フィールドに変更があったときに自動的にデータを保存
-	     document.getElementById("menuForm").addEventListener("input", saveFormData);
-	
-	     // フォーム送信時にローカルストレージのデータを削除
-	     document.getElementById("menuForm").addEventListener("submit", function() {
-	         localStorage.removeItem("menuFormData");
-	     });
-	 </script>
-<!-- ↑ローカルへ入力データ保持用　うまくいかなければ消す-->
-	<form action="/upload" method="post" enctype="multipart/form-data" th:action="@{/upload}" th:object="${file}">
-	    <input type="file" name="file"/>
-	    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <!-- CSRFトークン -->
-	    <button type="submit">アップロード</button>
-		<h1 th:text="${message}"></h1> <!-- メッセージを表示 -->
-	</form>
+
+
 	<script>
 	    window.onload = function() {
 	        // 当日日付を取得し、"YYYY-MM-DD"の形式に整形
 	        const today = new Date().toISOString().split('T')[0];
 	        
+			document.getElementById('detailPostdt').value = today;
+			document.getElementById('detailUsedt').min = today;
+			document.getElementById('detailUsedt').max = today;
+			
 	        // 当日日付のみ入力可能に設定
 	        const dateInput = document.getElementById('detailPostdt');
 	        dateInput.min = today;
