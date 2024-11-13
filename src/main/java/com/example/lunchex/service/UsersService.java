@@ -5,9 +5,6 @@ import com.example.lunchex.entity.Users;
 
 public interface UsersService {
 
-//	    // 全ユーザーを取得する
-//	    List<Users> getAllUsers();
-
 	    // メールアドレスで指定されたユーザー情報を取得する
 	    Users getUserByMail(String user_mail);
 

@@ -54,7 +54,7 @@ import lombok.RequiredArgsConstructor;
 public class DetailController {
 	private final AuthenticationMapper authenticationMapper;
 	//店舗情報が判明してる場合の店舗ID一時保存用変数
-	Integer storeId = null;	//時間がないための緊急処置　別の方法があるはずなのでのちに確認：糸山
+	Integer storeId = null;	
 	
 	/** DI */
 	private final StoresService storesService; 
@@ -106,12 +106,8 @@ public class DetailController {
 	@GetMapping("/{id}")
 	public String showStoresDetail(@PathVariable("id") int id, @ModelAttribute DetailForm form, StoresForm storesForm, Model model) {
 		model.addAttribute("storesForm", new StoresForm()); // StoreFormはデータクラス
-		System.out.println("通過チェック");
-		System.out.println("IDチェック" + id);
 		//店舗情報を取得
 		Stores stores = storesService.getStoreById(id);
-		
-		System.out.println("データ取得チェック1" + stores.getStore_name());
 		
 		//DBから取得した店舗データを格納
 		Stores storesData = new Stores();
@@ -124,11 +120,8 @@ public class DetailController {
 		//既に登録されている場合の現在ID
 		storeId =id;
 		
-		System.out.println("登録済みデータ表示");
 		//対象のある場合はFormへの変換
 		StoresForm dataform = StoresHelper.convertStoresForm(storesData);
-				
-		System.out.println("データ取得チェック2" + dataform.getStoreName());
 		
 		//対象データがある場合はモデルにFormを追加
         model.addAttribute("storesForm", dataform);
@@ -139,12 +132,12 @@ public class DetailController {
 	
 	@GetMapping("/newView")
 	public String newDetailView(@RequestParam("stores_id") Integer stores_id , Model model,RedirectAttributes attributes) {
-		System.out.println("IDは" + stores_id);
+
 		//記録者IDに対する情報を取得
 		Stores stores = storesService.getStoreById(stores_id);
-		System.out.println("店舗登録済み有無を確認");
+
 		if(stores != null) {
-			System.out.println("登録済みデータ表示");
+
 			//対象のある場合はFormへの変換
 			StoresForm form = StoresHelper.convertStoresForm(stores);
 
@@ -192,19 +185,16 @@ public class DetailController {
 		Stores stores = storesService.getStoreByName(storesDate.getStoreName());
 		//店舗登録がすでにある
 		if(stores != null) {
-			System.out.println("通過チェックストアユーザーID" + storesDate.getStoreUserMail());
+
 			storesDate.setStoreUserMail(stores.getUser_mail());
 		}
 		//店舗登録がない場合
 		else {
-			System.out.println("通過チェックログインユーザーID" + user.getUsername());
+
 			storesDate.setStoreUserMail(user.getUsername());
 		}
 		
-		//DetailForm detailform = new DetailForm();
-		System.out.println("★登録処理入り口" + storesDate);
 		//店舗情報登録（新規・更新）
-		System.out.println("★メールアドレス" + storesDate.getStoreUserMail());
 		newStoresInsert(storesDate);
 		
 		//店舗ID取得
@@ -216,34 +206,23 @@ public class DetailController {
 		
 		detailData.setStoreId(storesID.getStore_id());
 		detailData.setDetailPostdt(detailForm.getDetailPostdt());
-		//detailData.setDitailUserMail(detailForm.getDitailUserMail());
 		detailData.setDitailUserMail(user.getUsername());
 		detailData.setDetailMenu(detailForm.getDetailMenu());
 		detailData.setDetailPrice(detailForm.getDetailPrice());
 		detailData.setDetailRating(detailForm.getDetailRating());
 		detailData.setDetailReviewFlag(detailForm.getDetailReviewFlag());
 		detailData.setDetailReview(detailForm.getDetailReview());
-		//detailData.setDetailImage(detailForm.getDetailImage());
 		detailData.setDetailImage(UploadFileName);
 		detailData.setDetailMemo(detailForm.getDetailMemo());
 		detailData.setDetailUsedt(detailForm.getDetailUsedt());
 		detailData.setDetailVisits(detailForm.getDetailVisits());
-
-//		if(UploadFileName != null) {
-//			System.out.println("★ファイル名" + getFileName());
-//			detailData.setDetailImage(UploadFileName);
-//			System.out.println("★画像イメージファイル名" + getFileName());
-//		}else {
-//			System.out.println("★アップロードファイルなし");
-//			//detailData.setDetailImage(detailForm.getDetailImage());
-//		}
 		
 		//詳細情報登録(新規)
 		newDetail(detailData);
 				
 		// 画像の保存処理が終わるまで待機(Eclipseで保存にタイムラグが出るため)
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 		} catch (Exception e) {
 		}
 		
@@ -252,32 +231,21 @@ public class DetailController {
 	/** 店舗登録*/
 	//登録されていない店舗は新規登録、すでに登録されている店舗は更新として登録する
 	public void newStoresInsert(StoresForm form) {
-		System.out.println("店舗登録ユーザー" + form.getStoreUserMail());
-		System.out.println("★" +form);
-		System.out.println("通過チェック(店舗)");
 		//登録されているIDかどうか確認
 		Stores stores = storesService.getStoreByName(form.getStoreName());
-		System.out.println("店舗登録済み有無を確認");
+
 		if(stores != null) {
-			System.out.println("すでに登録されている店舗IDです");
-			//attributes.addFlashAttribute("errorMessage", "すでに登録されているIDです");
-			//form.setIsNew(true);
-			
-			System.out.println("店舗更新登録");
-		    System.out.println("店舗名: " + form.getStoreName());
-		    System.out.println("★ユーザーメールアドレス: " + form.getStoreUserMail());
+
 			//エンティティへの変換
 			stores = StoresHelper.convertNewStores(form);
-			System.out.println("エンティティへの変換通過");
+
 			//登録実行
 			storesService.updateStore(stores);
 		}else {
-			System.out.println("登録されていない店舗IDです");
-			System.out.println("店舗新規登録");
-			System.out.println("店舗名: " + form.getStoreName());
+
 			//エンティティへの変換
 			stores = StoresHelper.convertNewStores(form);
-			System.out.println("エンティティへの変換通過");
+
 			//登録実行
 			storesService.addStore(stores);
 		}
@@ -285,10 +253,10 @@ public class DetailController {
 	/** 詳細登録*/
 		//詳細登録はすべて新規（時間が出きれな更新処理も追加）
 		public void newDetail(DetailForm form) {
-			System.out.println("通過チェック(詳細)");
+
 			//エンティティへの変換
 			Detail detail = DetailHelper.convertRecorder(form);
-			System.out.println("エンティティへの変換通過");
+
 			
 			//登録実行
 			detailService.addDetail(detail);
@@ -305,7 +273,7 @@ public class DetailController {
 		    return fileService.getUploadedFileName();
 		}
 	
-//詳細ページの店舗検索機能　深田///////すごく長い！！！！！！！！！！！！！！！！！！！！！！！！		
+//詳細ページの店舗検索機能　深田	
 		@GetMapping("/detailSearch")
 		public String topSearch(StoresForm storesForm ,Model model,RedirectAttributes attributes,@AuthenticationPrincipal LoginUser user) {	
 		
@@ -357,113 +325,3 @@ public class DetailController {
 		}
 
 }	
-//深田さんが書いたコード
-////レビューする内容を登録する
-////	@GetMapping("/search")
-//	public String newDetailRegister() {
-//		
-//		
-//		
-//		
-//		return null;
-//		
-//	}
-//}
-
-
-
-
-
-
-//避難用　深田
-//import java.util.List;
-//
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.validation.BindingResult;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//
-//import com.example.lunchex.entity.Detail;
-//import com.example.lunchex.form.StoresForm.ReviewForm;
-//import com.example.lunchex.helper.StoresHelper;
-//import com.example.lunchex.service.DetailService;
-//
-//import jakarta.validation.Valid;
-//
-//@Controller
-//@RequestMapping("/details")
-//public class DetailController {
-//    
-//    private final DetailService detailService;
-//    
-//    public DetailController(DetailService detailService) {
-//        this.detailService = detailService;
-//    }
-//
-//    //  全ての詳細情報を表示する
-//    @GetMapping
-//    public String listDetails(Model model) {
-//        List<Detail> detailsList = detailService.getAllDetails();
-//        model.addAttribute("detailsList", detailsList);
-//        return "details/list"; // 詳細一覧のページを表示する
-//    }
-//
-//    // 新規詳細情報登録フォームを表示する
-//    @GetMapping("/register")
-//    public String showRegisterForm(Model model) {
-//        model.addAttribute("reviewForm", new ReviewForm());
-//        return "details/register"; // 登録フォームのページを表示する
-//    }
-//
-//    // 新しい詳細情報を登録する
-//    @PostMapping("/register")
-//    public String registerDetail(@Valid @ModelAttribute("reviewForm") ReviewForm reviewForm, 
-//                                 BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "details/register"; // エラーがあれば再度フォームを表示
-//        }
-//        Detail detail = StoresHelper.convertToDetail(reviewForm); // フォームをエンティティに変換
-//        detailService.addDetail(detail); // サービスを使って新しい詳細情報を保存
-//        return "redirect:/details"; // 登録後、一覧ページにリダイレクト
-//    }
-//
-//    // 特定の詳細情報を表示する
-//    @GetMapping("/{detail_id}")
-//    public String showDetail(@PathVariable("detail_id") int detailId, Model model) {
-//        Detail detail = detailService.getDetailById(detailId);
-//        model.addAttribute("detail", detail); // 詳細情報をモデルに追加
-//        return "details/details"; // 詳細ページを表示する
-//    }
-//
-//    //  詳細情報の編集フォームを表示する
-//    @GetMapping("/edit/{detail_id}")
-//    public String showEditForm(@PathVariable("detail_id") int detailId, Model model) {
-//        Detail detail = detailService.getDetailById(detailId);
-//        ReviewForm reviewForm = StoresHelper.convertToReviewForm(detail);
-//        model.addAttribute("reviewForm", reviewForm);
-//        return "details/edit"; // 編集フォームを表示
-//    }
-//
-//    //  詳細情報を更新する
-//    @PostMapping("/edit")
-//    public String updateDetail(@Valid @ModelAttribute("reviewForm") ReviewForm reviewForm, 
-//                               BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "details/edit"; // エラーがあれば再度編集フォームを表示
-//        }
-//        Detail detail = StoresHelper.convertToDetail(reviewForm);
-//        detailService.updateDetail(detail); // データベース内の情報を更新
-//        return "redirect:/details"; // 更新後、一覧ページにリダイレクト
-//    }
-//
-//    //  詳細情報を削除する
-//    @PostMapping("/delete/{detail_id}")
-//    public String deleteDetail(@PathVariable("detail_id") int detailId) {
-//        detailService.deleteDetail(detailId); // 指定されたレビューを削除
-//        return "redirect:/details"; // 削除後、一覧ページにリダイレクト
-//    }
-//}

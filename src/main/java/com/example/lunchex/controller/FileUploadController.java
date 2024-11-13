@@ -25,7 +25,6 @@ public class FileUploadController {
 	private FileService fileService;
 	
 	@PostMapping("/upload")
-    //public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 	public String handleFileUpload(@RequestParam("file") MultipartFile file) {
 		String newFileName = null;
 		String updataOriginalFilename = file.getOriginalFilename();
@@ -48,7 +47,6 @@ public class FileUploadController {
 	        }
 	
 	        // 新しいファイル名を生成（タイムスタンプを使用）
-	        //String newFileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + originalFileName + fileExtension;
 	        newFileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + "_" + originalFileName;
 	        System.out.println("アップロードしたファイル名: " + newFileName);
 	
