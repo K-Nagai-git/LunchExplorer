@@ -51,6 +51,7 @@
 
 <!-- トップページ -->
 <!-- 一覧表示 -->
+<!-- ↓表示フラグ対応SQL 2024/11/12：糸山修正-->
 	<select id = "selectStoreListPickDt" resultMap="StoresListResult">
 		SELECT 
 		    d.detail_id,
@@ -66,7 +67,10 @@
 		    d.detail_price,
 		    d.detail_rating,
 		    d.detail_review_flag,
-		    d.detail_review,
+		    CASE 
+		        WHEN d.detail_review_flag = false THEN ''
+		        ELSE d.detail_review
+		    END AS detail_review,
 		    d.detail_image,
 		    d.detail_memo,
 		    d.detail_usedt,
@@ -81,40 +85,39 @@
 		)
 		ORDER BY s.store_id DESC;
 	</select>
-<!-- 一時保存修正検証完了後削除
-	<select id = "selectStoreListPickDt" resultMap="StoresListResult">
-		SELECT 
-			d.detail_id ,
-			s.store_id ,
-			s.store_name,
-			s.store_tel,
-			s.store_address,
-			s.store_url,
-			d.detail_postdt,
-			d.user_mail,
-			u.user_nickname,
-			d.detail_menu ,
-			d.detail_price ,
-			d.detail_rating ,
-			d.detail_review_flag ,
-			d.detail_review ,
-			d.detail_image ,
-			d.detail_memo ,
-			d.detail_usedt ,
-			d.detail_visits 
-		FROM detail AS d
-		INNER JOIN stores AS s ON s.store_id = d.store_id
-		INNER JOIN users AS u ON d.user_mail = u.user_mail
-		WHERE 
-    			d.detail_postdt = (
-        		SELECT MAX(d2.detail_postdt)
-        		FROM detail AS d2
-        		WHERE d2.store_id = d.store_id
-    			)
-		ORDER BY s.store_id;
-	</select>
- -->
+<!-- ↓表示フラグ非対応SQL(第２フェーズ中止時に戻すために保存) -->
+<!--	<select id = "selectStoreListPickDt" resultMap="StoresListResult">-->
+<!--		SELECT -->
+<!--		    d.detail_id,-->
+<!--		    s.store_id,-->
+<!--		    s.store_name,-->
+<!--		    s.store_tel,-->
+<!--		    s.store_address,-->
+<!--		    s.store_url,-->
+<!--		    d.detail_postdt,-->
+<!--		    d.user_mail,-->
+<!--		    u.user_nickname,-->
+<!--		    d.detail_menu,-->
+<!--		    d.detail_price,-->
+<!--		    d.detail_rating,-->
+<!--		    d.detail_review_flag,-->
+<!--		    d.detail_review,-->
+<!--		    d.detail_image,-->
+<!--		    d.detail_memo,-->
+<!--		    d.detail_usedt,-->
+<!--		    d.detail_visits-->
+<!--		FROM detail AS d-->
+<!--		INNER JOIN stores AS s ON s.store_id = d.store_id-->
+<!--		INNER JOIN users AS u ON d.user_mail = u.user_mail-->
+<!--		WHERE d.detail_id = (-->
+<!--		    SELECT MAX(d2.detail_id)-->
+<!--		    FROM detail AS d2-->
+<!--		    WHERE d2.store_id = d.store_id -->
+<!--		)-->
+<!--		ORDER BY s.store_id DESC;-->
+<!--	</select>-->
 <!-- 対象店舗一覧検索 --><!-- 24/10/22：ditail主のSQLからStores主のSQLへ修正 -->
+<!-- ↓表示フラグ対応SQL 2024/11/12：糸山修正-->
 	<select id = "selectPickStoreList" resultMap="StoresListResult">
 		SELECT 
 			s.store_id ,
@@ -130,7 +133,10 @@
 			d.detail_price ,
 			d.detail_rating ,
 			d.detail_review_flag ,
-			d.detail_review ,
+			CASE 
+				WHEN d.detail_review_flag = false THEN ''
+			    ELSE d.detail_review
+			END AS detail_review,
 			d.detail_image ,
 			d.detail_memo ,
 			d.detail_usedt ,
@@ -142,5 +148,33 @@
     			s.store_id = #{store_id}
 		ORDER BY d.detail_id DESC;
 	</select>
+<!-- ↓表示フラグ非対応SQL (第２フェーズ中止時に戻すために保存)-->
+<!--	<select id = "selectPickStoreList" resultMap="StoresListResult">-->
+<!--		SELECT -->
+<!--			s.store_id ,-->
+<!--			s.store_name,-->
+<!--			s.store_tel,-->
+<!--			s.store_address,-->
+<!--			s.store_url,-->
+<!--			d.detail_id ,-->
+<!--			d.detail_postdt,-->
+<!--			d.user_mail,-->
+<!--			u.user_nickname,-->
+<!--			d.detail_menu ,-->
+<!--			d.detail_price ,-->
+<!--			d.detail_rating ,-->
+<!--			d.detail_review_flag ,-->
+<!--			d.detail_review ,-->
+<!--			d.detail_image ,-->
+<!--			d.detail_memo ,-->
+<!--			d.detail_usedt ,-->
+<!--			d.detail_visits -->
+<!--		FROM stores AS s-->
+<!--		RIGHT JOIN detail AS d ON s.store_id = d.store_id-->
+<!--		INNER JOIN users AS u ON d.user_mail = u.user_mail-->
+<!--		WHERE -->
+<!--    			s.store_id = #{store_id}-->
+<!--		ORDER BY d.detail_id DESC;-->
+<!--	</select>-->
 </mapper>
 <!--</mapper> -->

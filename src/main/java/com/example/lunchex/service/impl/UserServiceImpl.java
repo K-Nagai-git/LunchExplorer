@@ -26,13 +26,6 @@ public class UserServiceImpl implements UsersService {
     /** DI (UserMapperを依存注入) */
     private final UsersMapper usersMapper;
 
-    //全ユーザーを取得する
-//    @Override
-//    public List<Users> getAllUsers() {
-//        return usersMapper.getAllUsers(); 
-//    
-//    }
-
     //メールアドレスで指定されたユーザー情報を取得する
     @Override
     public Users getUserByMail(String user_mail) {

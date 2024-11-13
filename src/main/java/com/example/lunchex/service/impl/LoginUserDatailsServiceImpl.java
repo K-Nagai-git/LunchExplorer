@@ -47,19 +47,3 @@ public class LoginUserDatailsServiceImpl implements UserDetailsService {
 		}
 	}
 }
-
-//		//もともとあったコード
-//		// 「ユーザー名：tarou」が入力されると、UserDetailsの実装クラスを返す
-//		if (username.equals("tarou")) {
-//		// 対象データが存在する
-//		// UserDetailsの実装クラスを返す
-//		return new LoginUser("tarou",
-//		"pass",
-//		Collections.emptyList());
-//		} else {
-//		// 対象データが存在しない
-//		throw new UsernameNotFoundException(
-//		username + " => 指定しているユーザー名は存在しません");
-//		}
-//	}
-//}

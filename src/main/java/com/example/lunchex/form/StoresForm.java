@@ -26,29 +26,5 @@ public class StoresForm {
     //投稿者ID（メールアドレス）
 	@NotEmpty(message = "あなたのメールアドレスを入力してください")
 	private String storeUserMail;
-	//画像ファイル
-    //private MultipartFile file;
-}
-	/**木和田さん作成コード*/
-//    // 新規店舗登録フォームのデータクラス
-//    public static class StoreRegisterForm {
-//        @NotEmpty(message = "店舗名を入力してください")
-//        private String storeName; // 店舗名
-//
-//        @NotEmpty(message = "電話番号を入力してください")
-//        private String storeTel; // 店舗の電話番号
-//
-//		public String getStoreName() {
-//			// TODO 自動生成されたメソッド・スタブ
-//			return null;
-//		}
-//
-//		public String getStoreTel() {
-//			// TODO 自動生成されたメソッド・スタブ
-//			return null;
-//		}
-//        // 他のオプションフィールドをここに追加可能
-//    }
-//
-//}
 
+}

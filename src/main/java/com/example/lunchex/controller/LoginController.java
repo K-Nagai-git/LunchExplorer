@@ -31,10 +31,9 @@ public class LoginController {
 	@GetMapping
 	public String showLogin(@ModelAttribute LoginForm form,Model model) {
 		//login.htmlに遷移
-		//return "/lunchexplorer";
 		//LoginFormをモデルに追加
 		model.addAttribute("loginForm", new LoginForm());
-		System.out.println("★★　/loginを経由");
+
 		return "login";
 	}
 	
