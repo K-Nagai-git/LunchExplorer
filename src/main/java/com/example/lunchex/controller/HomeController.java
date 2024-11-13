@@ -27,7 +27,6 @@ import com.example.lunchex.entity.LoginUser;
 import com.example.lunchex.entity.Stores;
 import com.example.lunchex.entity.Users;
 import com.example.lunchex.form.StoresForm;
-import com.example.lunchex.repository.AuthenticationMapper;
 import com.example.lunchex.repository.LunchexListMapper;
 import com.example.lunchex.repository.UsersMapper;
 import com.example.lunchex.service.StoresService;
@@ -37,59 +36,33 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/lunchexplorer")
 @RequiredArgsConstructor
-
 public class HomeController {
 
 	/** DI */
 	private final LunchexListMapper mapper;
-	private final AuthenticationMapper authenticationMapper;
 	private final UsersMapper usersMapper;  // ログインニックネーム取得用
 	private final StoresService storesService; 
 
-	//	
-	//	テストまち！！！！！！！！！！！！！！！！！！！！！！！深田
-	//	
-	//	//
-	//トップページ表示のコントローラー（このコントローラー内でログインか未ログインか判別してHTMLに渡す
-	//@AuthenticationPrincipalでログインした人の情報をuserに格納	
+	// トップページ表示のコントローラー
+	// @AuthenticationPrincipalでログインした人の情報をuserに格納	
 	@GetMapping()
 	public String showIndex(Model model,@AuthenticationPrincipal LoginUser user) {
 
-		//		　　テスト用深田
-		System.out.println("------------------------------------通過チェック------------------------------------");
-		System.out.println(user);//ログインの情報なのでニックネームは格納されていない
-
-
-
 		List<Stores> storeList;
-		List<LoginUser> userList = new ArrayList<>(); // ユーザー情報を格納するためのリスト
+		storeList = mapper.selectStoreListPickDt();
 
-		// ユーザー情報が存在するか確認を行う。
-		//ユーザー情報が存在する場合はこちらのListを渡す
-		if (user != null) {
-			storeList = mapper.selectStoreListPickDt();
-
-			userList.add(user); // ログインしているユーザー情報をリストに追加
-
-			String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
-			Users loginUser=usersMapper.getUserByMail(loginEmail);
-			String loginNickname=loginUser.getUser_nickname();            
-			model.addAttribute("login_nickname",loginNickname);
-			System.out.println("★"+loginNickname); // 削除可
-
+		// ログインしている場合
+		if (user != null) {    // ログイン者のニックネームを取得
+			String loginEmail=user.getUsername();                  // ログイン者のe-mailを取得
+			Users loginUser=usersMapper.getUserByMail(loginEmail); // ログイン者のユーザー情報を取得
+			String loginNickname=loginUser.getUser_nickname();     // ログイン者のニックネームを取得            
+			model.addAttribute("login_nickname",loginNickname);     // ログイン者のニックネームをmodelへ格納
 		} 
-		// ユーザー情報がない場合はこちらのListを渡す
-		else {storeList = mapper.selectStoreListPickDt();
-		}
 
-		//判別が終了したLisｔををモデルにぶち込む
+		// モデルにぶち込む
 		model.addAttribute("stores", storeList);
-		model.addAttribute("users",userList);
+		model.addAttribute("users",user);
 		// HTMLのテンプレートをそっと返す
-
-		//			テスト用　深田
-		//			System.out.println(userList);
-
 		return "index";
 	}
 
@@ -173,70 +146,3 @@ public class HomeController {
 		}
 	}
 }
-
-//	//トップページ表示のコントローラー（一旦非表示　避難用に　実行：深田　）
-//	@GetMapping()
-//	public String showIndex(Model model) {
-//		
-//		
-//		List<Stores> storeList = mapper.selectStoreListPickDt();//深田慶太郎　追記
-//	
-//		
-//		
-//		
-//		 model.addAttribute("stores", storeList);
-//		
-//		return "index";
-//	}
-//	
-//	//詳細画面表示のコントローラー 
-//		@GetMapping("/details/2")
-//		public String showDetail(  Model model) {
-//			
-//			System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
-//			
-//			
-//			List<Stores> detailList=mapper.selectPickStoreList(2);
-//			
-//			model.addAttribute("stores",detailList);
-//			System.out.println(detailList);
-//			
-//			return "test2";
-//		}
-
-	
-	
-	
-	
-
-//@GetMapping("/lunchexplorer")
-//public String home(Model model) {
-//	model.addAttribute("lunchexList" , lunchexListMapper.selectStoreListAll());
-//	 return "index";
-//}
-/**作成中他機能を作成の為一時作業停止　エラーになるのでコメントアウト：2024/10/17：糸山*/
-////店舗検索
-//@GetMapping("/storesSearch")
-//public String storeSearch(@RequestParam("store_id") Integer store_id , Model model,RedirectAttributes attributes) {
-////記録者IDに対する情報を取得
-//		Stores store = StoreService.findByIdRecorder(store_id);
-//
-//		if(store != null) {
-//			System.out.println("登録済みデータ表示");
-//			//対象のある場合はFormへの変換
-//			StoreForm form = StorsHelper.convertStoresForm(store);
-//			form.setIsNew(false);
-//			//対象データがある場合はモデルにFormを追加
-//	        model.addAttribute("storesForm", form);
-//
-//			return "index";
-//			
-//		}else {
-//			System.out.println("データなし");
-//			//対象データがない場合はフラッシュメッセージを設定
-//			attributes.addFlashAttribute("errorMessage", "対象データはありません");
-//			return "redirect:/HomeController/lunchexplorer";
-//		}
-//	}
-
-//}
