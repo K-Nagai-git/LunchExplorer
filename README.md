@@ -8,9 +8,6 @@
   設計書の画像
 </details>
 
-------------------------------
-
-
 ## 機能：未ログインの場合
   ### ログイン、ログアウト
   <details><summary>ログイン、ログアウト画面</summary>
@@ -61,6 +58,7 @@
    #### 一覧にて登録されている店舗一覧を確認可能
  ![image](https://github.com/user-attachments/assets/6b67ade4-6f04-4b6d-9e00-22e6fad0b575)
   </details>
+  
 ### 店舗名検索機能
   <details><summary>検索機能</summary>
 
@@ -68,13 +66,9 @@
   ![image](https://github.com/user-attachments/assets/204017fe-06ea-447f-bfb6-80ab473ee6c0)
   </details>
   
-  ### レビュー投稿機能
+### レビュー投稿機能
   <details><summary>レビュー投稿・店舗新規登録</summary>
 
   #### ログインすることでレビュー投稿・新規店舗登録が可能
 ![image](https://github.com/user-attachments/assets/27b5ce43-3f05-4c07-b459-672e1a222e46)
   </details>
-
-  
-  
-    
