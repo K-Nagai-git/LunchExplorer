@@ -46,7 +46,7 @@
   ### 店舗名検索機能
   <details><summary>検索機能画面</summary>
 
-   #### 店舗の検索が可能
+   #### 店舗の検索が可能　もし検索でヒットしなければトップ画面に戻る
   ![image](https://github.com/user-attachments/assets/204017fe-06ea-447f-bfb6-80ab473ee6c0)
   </details>
 
@@ -76,5 +76,6 @@
   <details><summary>レビュー投稿・店舗新規登録</summary>
 
   #### ログインすることでレビュー投稿・新規店舗登録が可能
+  #### 店舗一覧のレビューボタン・店舗詳細のレビューボタンから投稿できる
 ![image](https://github.com/user-attachments/assets/27b5ce43-3f05-4c07-b459-672e1a222e46)
   </details>
