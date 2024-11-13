@@ -1,4 +1,4 @@
-# HIRU-DOKO
+# 「HIRU-DOKO」
 ![昼どこ壁紙](https://github.com/user-attachments/assets/7e057cfb-e2ce-4b92-96d0-25fcf194c13f)
 ## アプリ概要
 **キャルITカレッジ大阪校生徒を対象とした飲食店レビュー投稿サイト** 
