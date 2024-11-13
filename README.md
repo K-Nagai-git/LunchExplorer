@@ -66,16 +66,26 @@
   </details>
   
 ### 店舗名検索機能
-  <details><summary>検索機能</summary>
+  <details><summary>検索機能画面</summary>
 
   #### 店舗の検索が可能
   ![image](https://github.com/user-attachments/assets/204017fe-06ea-447f-bfb6-80ab473ee6c0)
   </details>
   
 ### レビュー投稿機能
-  <details><summary>レビュー投稿・店舗新規登録</summary>
+  <details><summary>レビュー投稿・店舗新規登録画面</summary>
 
   #### ログインすることでレビュー投稿・新規店舗登録が可能
   #### 店舗一覧のレビューボタン・店舗詳細のレビューボタンから投稿できる
 ![image](https://github.com/user-attachments/assets/27b5ce43-3f05-4c07-b459-672e1a222e46)
   </details>
+  
+### その他
+ <details><summary>その他</summary>
+   
+  #### 開発人数 ：5人   
+  #### 開発期間　2024/10/19～2024/11/7　19日
+  #### 開発環境　Eclipse・pgadmin4
+  #### 使用言語　Java、HTML
+ </details>
+ 
