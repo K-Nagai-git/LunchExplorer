@@ -1,4 +1,4 @@
-# 「HIRU-DOKO」
+# HIRU-DOKO
 ![昼どこ壁紙](https://github.com/user-attachments/assets/7e057cfb-e2ce-4b92-96d0-25fcf194c13f)
 ## アプリ概要
 **キャルITカレッジ大阪校生徒を対象とした飲食店レビュー投稿サイト** 
@@ -14,26 +14,32 @@
     
    #### ユーザのログイン、ログアウトが可能
 <img width="375" alt="image" src="https://github.com/user-attachments/assets/44243fce-79e3-4708-bd1a-0351d5cf9826">
+  
+   #### ログイン失敗時
+![image](https://github.com/user-attachments/assets/3041938d-2041-4d1c-bf6e-0d35ed7105ae)
 </details>
-   
+
   ### ユーザ登録機能 
   <details><summary>ユーザ登録画面</summary>  
 
-   #### ユーザのログイン、ログアウトが可能
+   #### ユーザの登録が可能　ニックネームはレビュー投稿の際に表示
     ![image](https://github.com/user-attachments/assets/2b38d115-2cd1-4dbd-90e9-f881a2fe1d93)
+
+   #### ユーザ情報がすでに登録されている場合は登録を許可しない
+    ![image](https://github.com/user-attachments/assets/6d1e6507-0ac7-43ad-b9b6-081780c4bf7d)
   </details>
   
   ### 店舗一覧
   <details><summary>店舗一覧表示画面</summary>
 
-   #### 一覧にて登録されている店舗一覧を確認可能
+   #### 一覧にて登録されている店舗一覧を確認可能　投稿が新しい順に表示
  <img width="800" alt="image" src="https://github.com/user-attachments/assets/ad47b068-6ba6-4ffb-b9c3-c4451c9ca8ff">
   </details>
  
   ### 店舗詳細 
   <details><summary>店舗詳細表示画面</summary>
 
-   #### 一覧にて投稿されている商品詳細を確認可能
+   #### 一覧にて投稿されている商品詳細を確認可能　投稿が新しい順に表示
 　![image](https://github.com/user-attachments/assets/21399d30-cebc-4a53-ad94-0bbf41dc91a0)
   </details>
   
