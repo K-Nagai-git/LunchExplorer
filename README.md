@@ -84,8 +84,9 @@
  <details><summary>その他</summary>
    
   #### 開発人数 ：5人   
-  #### 開発期間　2024/10/19～2024/11/7　19日
-  #### 開発環境　Eclipse・pgadmin4
-  #### 使用言語　Java、HTML
+  #### 開発期間 ：2024/10/19～2024/11/7　１９日間
+  #### 開発環境 ：Eclipse・pgadmin4
+  #### 使用言語 ：Java、HTML
+  #### フレームワーク ：Spring Framework　
  </details>
  
