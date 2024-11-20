@@ -12,11 +12,11 @@
 
 package com.example.lunchex.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/lunchexplorer")
 @RequiredArgsConstructor
+@Service
 public class HomeController {
 
 	/** DI */
@@ -51,98 +52,83 @@ public class HomeController {
 		List<Stores> storeList;
 		storeList = mapper.selectStoreListPickDt();
 
-		// ログインしている場合
-		if (user != null) {    // ログイン者のニックネームを取得
-			String loginEmail=user.getUsername();                  // ログイン者のe-mailを取得
-			Users loginUser=usersMapper.getUserByMail(loginEmail); // ログイン者のユーザー情報を取得
-			String loginNickname=loginUser.getUser_nickname();     // ログイン者のニックネームを取得            
-			model.addAttribute("login_nickname",loginNickname);     // ログイン者のニックネームをmodelへ格納
-		} 
+		String loginNickname=loginNicknameGet(user);  // ログイン者のニックネーム取得
 
-		// モデルにぶち込む
+		//モデルにぶち込む
 		model.addAttribute("stores", storeList);
-		model.addAttribute("users",user);
+		model.addAttribute("login_nickname",loginNickname);
 		// HTMLのテンプレートをそっと返す
 		return "index";
 	}
 
 	//詳細画面表示のコントローラー 
-	//店舗一覧から詳細ページの遷移確率OK　1030　深田
+	//店舗一覧から詳細ページの遷移　1030　深田
 	@GetMapping("/details/{id}")
 	public String showDetail
 	( @PathVariable("id") int id,Model model,@AuthenticationPrincipal LoginUser user)//ストアIDを受け取ってint型のidに格納			
 	{		
-		//コンソールのテスト用　深田
-		//				System.out.println("lllllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
-
-		if (user != null) {
-			String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
-			Users loginUser=usersMapper.getUserByMail(loginEmail);
-			String loginNickname=loginUser.getUser_nickname();            
-			model.addAttribute("login_nickname",loginNickname);
-			System.out.println("★"+loginNickname); // 削除可
-		} 
 
 		//idに対応した店舗のレビュー情報を格納
 		List<Stores> detailList=mapper.selectPickStoreList(id);
 
-		//モデルに追加
-		model.addAttribute("stores",detailList);				
+		String loginNickname=loginNicknameGet(user);  // ログイン者のニックネーム取得
 
-		//コンソールのテスト用　深田
-		//				System.out.println(detailList);
+		//モデルに追加
+		model.addAttribute("stores",detailList);
+		model.addAttribute("login_nickname",loginNickname);
 
 		return "test2";
 	}
 
-//トップページの店舗検索機能　深田///////すごく長い！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+	//トップページの店舗検索機能　深田
 	@GetMapping("/topSearch")
-	public String topSearch(StoresForm storesForm ,Model model,RedirectAttributes attributes,@AuthenticationPrincipal LoginUser user) {	
-	
-			//ｈｔｍｌフォームから取得した店舗データを格納
-			StoresForm storesDate = new StoresForm();
-			Stores storesID = new Stores();
-			storesDate.setStoreName(storesForm.getStoreName());
-		    storesID = storesService.getStoreByName(storesDate.getStoreName());	
-   
-    //トップページの店舗検索コントローラー		
-	//分岐！店舗情報があるときはこれを渡す
-			if(storesID!=null) {
-				if (user != null) {
-					String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
-					Users loginUser=usersMapper.getUserByMail(loginEmail);
-					String loginNickname=loginUser.getUser_nickname();            
-					model.addAttribute("login_nickname",loginNickname);
-					System.out.println("★"+loginNickname); // 削除可
-				} 
-				int id=storesID.getStore_id();
+	public String topSearch(StoresForm storesForm ,Model model,RedirectAttributes attributes,
+			@AuthenticationPrincipal LoginUser user) {	
+
+		// htmlフォームから取得した店舗データを格納
+		Stores storesID = storesService.getStoreByName(storesForm.getStoreName());	
+
+		//分岐！店舗情報があるときはこれを渡す
+		if(storesID!=null) {
+			int id=storesID.getStore_id();
 			//idに対応した店舗のレビュー情報を格納
 			List<Stores> detailList=mapper.selectPickStoreList(id);
-				//モデルに追加して渡す
+
+			String loginNickname=loginNicknameGet(user);  // ログイン者のニックネーム取得
+
+			//モデルに追加して渡す
 			model.addAttribute("stores",detailList);
+			model.addAttribute("login_nickname",loginNickname);
+
 			return  "test2";
-			}
-			
-	//トップページの店舗検索コントローラー		
-	//分岐！店舗情報がないときはこれを渡す
-			else {
-				model.addAttribute("errorMessage", "該当する店舗が見つかりませんでした。");
+		}
+
+		//分岐！店舗情報がないときはこれを渡す
+		else {
+			model.addAttribute("errorMessage", "該当する店舗が見つかりませんでした。");
 			List<Stores> storeList;
-			List<LoginUser> userList = new ArrayList<>(); // ユーザー情報を格納するためのリスト
-			if (user != null) {
-				storeList = mapper.selectStoreListPickDt();
-				userList.add(user); // ログインしているユーザー情報をリストに追加
-				String loginEmail=user.getUsername();  // ログイン者のニックネーム取得（この３行）永井
-				Users loginUser=usersMapper.getUserByMail(loginEmail);
-				String loginNickname=loginUser.getUser_nickname();            
-				model.addAttribute("login_nickname",loginNickname);
-				System.out.println("★"+loginNickname); // 削除可
-			} 
-			else {storeList = mapper.selectStoreListPickDt();
-			}
+
+			storeList = mapper.selectStoreListPickDt();
+
+			String loginNickname=loginNicknameGet(user);  // ログイン者のニックネーム取得
+
 			model.addAttribute("stores", storeList);
-			model.addAttribute("users",userList);
+			model.addAttribute("login_nickname",loginNickname);
+
 			return "index";
 		}
 	}
+
+	// ログイン者のニックネームを取得（複数個所で使用）	
+	public String loginNicknameGet(@AuthenticationPrincipal LoginUser user) {
+		if (user != null) {    // ログインしている場合
+			String loginEmail=user.getUsername();                  // ログイン者のe-mailを取得
+			Users loginUser=usersMapper.getUserByMail(loginEmail); // ログイン者のユーザー情報を取得
+			String loginNickname=loginUser.getUser_nickname();     // ログイン者のニックネームを取得            
+			return loginNickname;     // ログイン者のニックネームを呼び出し元へ返す
+		} else {    //  ログインしていない場合
+			return null;
+		}
+	}
+
 }
