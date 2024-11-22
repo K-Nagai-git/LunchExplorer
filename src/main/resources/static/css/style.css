@@ -274,7 +274,7 @@ nav a:hover {
 
 .store-cards {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
 	gap: 10px;
 	margin: 10px;
 	margin-bottom: 50px;
@@ -457,4 +457,52 @@ button:hover {
 
 .error-message {
 	color: #c76400;
+}
+
+@media (max-width: 768px) {
+	.ad-area {
+		display: flex;
+		position: fixed;
+		bottom: 35px;
+		z-index: 2;
+		width: 100%;
+		height: fit-content;
+		top:auto;
+		transform: none;
+		}
+	header {
+		background-color: #fff;
+		padding: 10px 30px;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		display: block;
+		place-items: center;
+		align-items: center;
+		z-index: 3;
+		position: relative;
+		position: fixed;
+		width: -webkit-fill-available;
+		font-size: 12px;
+		height: fit-content;
+	}
+	.search-bar {
+	    margin: 5px auto;
+	    display: inline-block;
+	}
+	.content-wrapper {
+		padding-top: 130px;
+		padding-bottom: 110px;
+		padding-inline: 0px;
+	}
+	.main-content {
+	    margin-right: 0px;
+    }
+    .form-card{
+		gap: 10px;
+	}
+    .form-card input[type="text"], .form-card input[type="date"], .form-card input[type="checkbox"], .form-card input[type="password"] {
+    width: 140px;
+    }
+    .form-card label {
+       font-size: .5em;
+    }
 }
