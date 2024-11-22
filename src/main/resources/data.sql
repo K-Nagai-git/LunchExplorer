@@ -70,7 +70,7 @@ VALUES ('家系ラーメン 頂喜家 長堀橋店', '0661216447', '大阪府大
 
 -- 7件目のデータ登録
 INSERT INTO stores (store_name, store_tel, store_address, store_url, user_mail)
-VALUES ('鶏と牛のお店 火澄屋 （かすみや）', '0662433328', '大阪府大阪市中央区道頓堀1丁目7-25', 'https://tabelog.com/osaka/A2701/A270201/27108863/', 'honda@gmail.com');
+VALUES ('鶏と牛のお店 火澄屋 （かすみや）', '0662433328', '大阪府大阪市中央区道頓堀1丁目7-25', null, 'honda@gmail.com');
 
 -- 8件目のデータ登録
 INSERT INTO stores (store_name, store_tel, store_address, store_url, user_mail)
@@ -99,31 +99,31 @@ VALUES (3, '2024-10-03', 'kiwada@gmail.com', '四川風麻婆豆腐定食B', 125
 
 -- 4件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
-VALUES (4, '2024-10-04', 'okada@gmail.com', '野菜いっぱいラーメン', 1040, 4, TRUE, 'まじうま', NULL, '野菜も多い', '2024-10-02', 1);
+VALUES (4, '2024-10-04', 'okada@gmail.com', '野菜いっぱいラーメン', 1040, 4, TRUE, 'まじうま', 'kamizayasai.jpg', '野菜も多い', '2024-10-02', 1);
 
 -- 5件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
-VALUES (5, '2024-10-04', 'sawada@gmail.com', 'ねぎ玉牛丼 並盛', 620, 4, TRUE, '致死量レベルのネギ', NULL, 'コスパ最高', '2024-10-04', 1);
+VALUES (5, '2024-10-04', 'sawada@gmail.com', 'ねぎ玉牛丼 並盛', 620, 4, TRUE, '致死量レベルのネギ', 'sukiya1.jpg', 'コスパ最高', '2024-10-04', 1);
 
 -- 6件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
-VALUES (4, '2024-10-05', 'maeda@gmail.com', 'おいしいラーメン', 790, 4, TRUE, '優しい味', NULL, '太りにくい', '2024-10-05', 1);
+VALUES (4, '2024-10-05', 'maeda@gmail.com', 'おいしいラーメン', 790, 4, TRUE, '優しい味', 'kamuku.jpg', '太りにくい', '2024-10-05', 1);
 
 -- 7件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
-VALUES (2, '2024-10-05', 'wada@gmail.com', '日替わりステーキ S', 800, 3, TRUE, 'がちうま', 'IMG_3354.jpeg', 'Sサイズは少し物足りない', '2024-10-05', 1);
+VALUES (2, '2024-10-05', 'wada@gmail.com', '日替わりステーキ S', 800, 3, TRUE, 'がちうま', 'burian_S.jpg', 'Sサイズは少し物足りない', '2024-10-05', 1);
 
 -- 8件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
-VALUES (5, '2024-10-06', 'kisida@gmail.com', '高菜明太マヨ牛丼 メガ', 1120, 3, TRUE, '高菜と明太マヨの相性最強', NULL, 'メガは午後眠たくなる', '2024-10-05', 1);
+VALUES (5, '2024-10-06', 'kisida@gmail.com', '高菜明太マヨ牛丼 メガ', 1120, 3, TRUE, '高菜と明太マヨの相性最強', 'sukiya2.jpg', 'メガは午後眠たくなる', '2024-10-05', 1);
 
 -- 9件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
-VALUES (6, '2024-10-07', 'kuwata@gmail.com', 'デラックスラーメン', 1050, 4, TRUE, '味ガッツリ系', NULL, 'ごはん無料', '2024-10-05', 1);
+VALUES (6, '2024-10-07', 'kuwata@gmail.com', 'デラックスラーメン', 1050, 4, TRUE, '味ガッツリ系', 'choukiya', 'ごはん無料', '2024-10-05', 1);
 
 -- 10件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
-VALUES (7, '2024-10-08', 'honda@gmail.com', '火澄屋定食', 800, 5, TRUE, 'からあげでかい', NULL, 'ごはん大盛り無料', '2024-10-06', 1);
+VALUES (7, '2024-10-08', 'honda@gmail.com', '火澄屋定食', 800, 5, TRUE, 'からあげでかい', 'kasumi.webp', 'ごはん大盛り無料', '2024-10-06', 1);
 
 -- 11件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
@@ -131,7 +131,7 @@ VALUES (8, '2024-10-08', 'gonda@gmail.com', '焼き魚定食', 700, 5, TRUE, '�
 
 -- 12件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
-VALUES (2, '2024-10-05', 'wada@gmail.com', '日替わりステーキ L', 1200, 3, TRUE, 'がちうま','IMG_3354.jpeg', 'Sサイズは少し物足りない', '2024-10-05', 1);
+VALUES (2, '2024-10-05', 'wada@gmail.com', '日替わりステーキ L', 1200, 3, TRUE, 'がちうま','burian_L.jpg', 'Sサイズは少し物足りない', '2024-10-05', 1);
 
 -- 13件目のデータ登録
 INSERT INTO detail (store_id, detail_postdt, user_mail, detail_menu, detail_price, detail_rating, detail_review_flag, detail_review, detail_image, detail_memo, detail_usedt, detail_visits)
