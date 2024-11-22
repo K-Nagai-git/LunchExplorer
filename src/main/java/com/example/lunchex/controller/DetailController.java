@@ -102,7 +102,7 @@ public class DetailController {
 			// 既存のデータに、同店名がある場合（データを更新）
 			Stores stores = storesService.getStoreByName(storesForm.getStoreName());
 			if (stores != null) {  // 同名店がある場合の処理（更新）
-				storesForm.setStoreId(stores.getStore_id());  // 既存登録のIDを取得
+				storesForm.setStoreId(stores.getStore_id());  // 既存登録のIDを取得しセット
 				stores = StoresHelper.convertNewStores(storesForm);
 				storesService.updateStore(stores);  // 既存の登録を差し替え
 
